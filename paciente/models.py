@@ -39,10 +39,13 @@ class Paciente(models.Model):
     email = models.EmailField(
         verbose_name='correo electronico', blank=True, null=True)
     empresa = models.CharField(max_length=150, blank=True, null=True)
+    
+    def __str__(self):
+        return f'Usuario: {self.nombre}'
 
 
 class DatosGeneral(models.Model):
-    propietario = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    propietario = models.OneToOneField(Paciente ,on_delete=models.CASCADE)
     fecha_nacimiento = models.DateField(blank=True, null=True)
     telefono = models.CharField(max_length=10, blank=True, null=True)
     celular = models.CharField(max_length=10, blank=True, null=True)
@@ -58,13 +61,14 @@ class DatosGeneral(models.Model):
         upload_to='datofiscal/%Y/%m/%d', null=True, blank=True, verbose_name='Curriculum vitae')
 
 
-class Preferencias(models.Model):
-    propietario = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+class Preferencia(models.Model):
+    propietario = models.OneToOneField(Paciente ,on_delete=models.CASCADE)
     nombre_pareja = models.CharField(max_length=25, blank=True, null=True)
     fecha_aniversario = models.DateField(blank=True, null=True)
     nombre_hijos = models.CharField(max_length=25, blank=True, null=True)
     fecha_hijo = models.DateField(blank=True, null=True)
     nombre_empresa = models.CharField(max_length=50, blank=True, null=True)
+    puesti = models.CharField(max_length=50, blank=True, null=True)
     fecha_empresa = models.DateField(blank=True, null=True)
     deportes = models.CharField(max_length=150, blank=True, null=True)
     pelicula_serie = models.CharField(max_length=150, blank=True, null=True)
@@ -74,7 +78,7 @@ class Preferencias(models.Model):
 
 
 class NotaPaciente(models.Model):
-    propietario = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    propietario = models.OneToOneField(Paciente ,on_delete=models.CASCADE)
     alergias = models.CharField(max_length=250, blank=True, null=True)
     expectativas = models.CharField(max_length=250, blank=True, null=True)
     pade_actual = models.CharField(max_length=250, blank=True, null=True)
@@ -84,7 +88,7 @@ class NotaPaciente(models.Model):
         return f'{self.propietario}'
 
 
-class AntecednetePersonal(models.Model):
+class AntecedentePersonal(models.Model):
     propietario = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     casa = models.CharField(max_length=25, blank=True, null=True)
     lav_dientes = models.CharField(max_length=25, blank=True, null=True)
@@ -101,7 +105,7 @@ class AntecednetePersonal(models.Model):
 
 
 class AntecedenteFamiliar(models.Model):
-    propietario = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    propietario = models.OneToOneField(Paciente ,on_delete=models.CASCADE)
     hermanos = models.PositiveIntegerField(default=0)
     diabetes = models.CharField(max_length=25, blank=True, null=True)
     hip_arterial = models.CharField(max_length=25, blank=True, null=True)
@@ -124,8 +128,8 @@ class AntecedenteFamiliar(models.Model):
         return f'{self.propietario}'
 
 
-class AntecedentesPatologico(models.Model):
-    propietario = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+class AntecedentePatologico(models.Model):
+    propietario = models.OneToOneField(Paciente ,on_delete=models.CASCADE)
     enf_infancia = models.CharField(max_length=25, blank=True, null=True)
     diabetes = models.CharField(max_length=25, blank=True, null=True)
     hip_arterial = models.CharField(max_length=25, blank=True, null=True)
@@ -157,8 +161,49 @@ class AntecedentesPatologico(models.Model):
         return f'{self.propietario}'
 
 
-class Expliracion(models.Model):
-    propietario = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+class AntecedenteAlimenticio(models.Model):
+    propietario = models.OneToOneField(Paciente ,on_delete=models.CASCADE)
+    comidas = models.CharField(max_length=50, blank=True, null=True)
+    tortillas = models.CharField(max_length=25, blank=True, null=True)
+    pan = models.CharField(max_length=25, blank=True, null=True)
+    cereales = models.CharField(max_length=25, blank=True, null=True)
+    refrescos = models.CharField(max_length=25, blank=True, null=True)
+    jugos = models.CharField(max_length=25, blank=True, null=True)
+    aguas_frescas = models.CharField(max_length=25, blank=True, null=True)
+    frutas = models.CharField(max_length=25, blank=True, null=True)
+    frutos_secos = models.CharField(max_length=25, blank=True, null=True)
+    verduras = models.CharField(max_length=25, blank=True, null=True)
+    agua_natural = models.CharField(max_length=25, blank=True, null=True)
+    golosinas = models.CharField(max_length=25, blank=True, null=True)
+    carnes_rojas = models.CharField(max_length=25, blank=True, null=True)
+    pollo = models.CharField(max_length=25, blank=True, null=True)
+    pescado = models.CharField(max_length=25, blank=True, null=True)
+    mariscos = models.CharField(max_length=25, blank=True, null=True)
+    leche = models.CharField(max_length=25, blank=True, null=True)
+    derivados = models.CharField(max_length=25, blank=True, null=True)
+    huevos = models.CharField(max_length=25, blank=True, null=True)
+    arroz = models.CharField(max_length=25, blank=True, null=True)
+    legumbres = models.CharField(max_length=25, blank=True, null=True)
+    miel = models.CharField(max_length=25, blank=True, null=True)
+    aceite = models.CharField(max_length=25, blank=True, null=True)
+    sal = models.CharField(max_length=25, blank=True, null=True)
+    azucar = models.CharField(max_length=25, blank=True, null=True)
+    cafe = models.CharField(max_length=25, blank=True, null=True)
+    te = models.CharField(max_length=25, blank=True, null=True)
+    sazonadores = models.CharField(max_length=25, blank=True, null=True)
+    embutidos = models.CharField(max_length=25, blank=True, null=True)
+    enlatados = models.CharField(max_length=25, blank=True, null=True)
+    pastas = models.CharField(max_length=25, blank=True, null=True)
+    sumplementos_energe = models.CharField(
+        max_length=25, blank=True, null=True)
+    otros = models.CharField(max_length=25, blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.propietario}'
+
+
+class Exploracion(models.Model):
+    propietario = models.OneToOneField(Paciente ,on_delete=models.CASCADE)
     cerebro = models.CharField(max_length=150, blank=True, null=True)
     nervioso = models.CharField(max_length=150, blank=True, null=True)
     ocular = models.CharField(max_length=150, blank=True, null=True)
