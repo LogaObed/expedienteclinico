@@ -1,5 +1,9 @@
 from django.urls import path
 from paciente import views
 urlpatterns = [
-    path('ver/',views.paciente,name='paciente')
+    path('',views.inicio,name='paciente'),
+    path('registro-general/',views.formGeneral,name='verpaciente'),
+    path('consulta/',views.consultaPacientes,name='consultapaciente'),
+    path('nuevo/', views.nuevoPaciente,name='nuevopaciente'),
+    path('editar/<int:dato>', views.editarPaciente,name='editarpaciente'),
 ]

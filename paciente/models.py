@@ -7,7 +7,7 @@ class TipoUsuario(models.Model):
     nombre = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
-        return f'Tipo usuario: {self.nombre}'
+        return f'Tipo usuario: {self.nombre} id: {self.id}'
 
 
 class TipoSangre(models.Model):
@@ -39,13 +39,13 @@ class Paciente(models.Model):
     email = models.EmailField(
         verbose_name='correo electronico', blank=True, null=True)
     empresa = models.CharField(max_length=150, blank=True, null=True)
-    
+
     def __str__(self):
-        return f'Usuario: {self.nombre}'
+        return f'id: {self.id} Usuario: {self.nombre} tipo usuario: {self.tipo_usuario}'
 
 
 class DatosGeneral(models.Model):
-    propietario = models.OneToOneField(Paciente ,on_delete=models.CASCADE)
+    propietario = models.OneToOneField(Paciente, on_delete=models.CASCADE)
     fecha_nacimiento = models.DateField(blank=True, null=True)
     telefono = models.CharField(max_length=10, blank=True, null=True)
     celular = models.CharField(max_length=10, blank=True, null=True)
@@ -60,9 +60,12 @@ class DatosGeneral(models.Model):
     datofiscal = models.FileField(
         upload_to='datofiscal/%Y/%m/%d', null=True, blank=True, verbose_name='Curriculum vitae')
 
+    def __str__(self):
+        return f'Id: {self.id}'
+
 
 class Preferencia(models.Model):
-    propietario = models.OneToOneField(Paciente ,on_delete=models.CASCADE)
+    propietario = models.OneToOneField(Paciente, on_delete=models.CASCADE)
     nombre_pareja = models.CharField(max_length=25, blank=True, null=True)
     fecha_aniversario = models.DateField(blank=True, null=True)
     nombre_hijos = models.CharField(max_length=25, blank=True, null=True)
@@ -78,7 +81,7 @@ class Preferencia(models.Model):
 
 
 class NotaPaciente(models.Model):
-    propietario = models.OneToOneField(Paciente ,on_delete=models.CASCADE)
+    propietario = models.OneToOneField(Paciente, on_delete=models.CASCADE)
     alergias = models.CharField(max_length=250, blank=True, null=True)
     expectativas = models.CharField(max_length=250, blank=True, null=True)
     pade_actual = models.CharField(max_length=250, blank=True, null=True)
@@ -105,7 +108,7 @@ class AntecedentePersonal(models.Model):
 
 
 class AntecedenteFamiliar(models.Model):
-    propietario = models.OneToOneField(Paciente ,on_delete=models.CASCADE)
+    propietario = models.OneToOneField(Paciente, on_delete=models.CASCADE)
     hermanos = models.PositiveIntegerField(default=0)
     diabetes = models.CharField(max_length=25, blank=True, null=True)
     hip_arterial = models.CharField(max_length=25, blank=True, null=True)
@@ -129,7 +132,7 @@ class AntecedenteFamiliar(models.Model):
 
 
 class AntecedentePatologico(models.Model):
-    propietario = models.OneToOneField(Paciente ,on_delete=models.CASCADE)
+    propietario = models.OneToOneField(Paciente, on_delete=models.CASCADE)
     enf_infancia = models.CharField(max_length=25, blank=True, null=True)
     diabetes = models.CharField(max_length=25, blank=True, null=True)
     hip_arterial = models.CharField(max_length=25, blank=True, null=True)
@@ -162,7 +165,7 @@ class AntecedentePatologico(models.Model):
 
 
 class AntecedenteAlimenticio(models.Model):
-    propietario = models.OneToOneField(Paciente ,on_delete=models.CASCADE)
+    propietario = models.OneToOneField(Paciente, on_delete=models.CASCADE)
     comidas = models.CharField(max_length=50, blank=True, null=True)
     tortillas = models.CharField(max_length=25, blank=True, null=True)
     pan = models.CharField(max_length=25, blank=True, null=True)
@@ -203,7 +206,7 @@ class AntecedenteAlimenticio(models.Model):
 
 
 class Exploracion(models.Model):
-    propietario = models.OneToOneField(Paciente ,on_delete=models.CASCADE)
+    propietario = models.OneToOneField(Paciente, on_delete=models.CASCADE)
     cerebro = models.CharField(max_length=150, blank=True, null=True)
     nervioso = models.CharField(max_length=150, blank=True, null=True)
     ocular = models.CharField(max_length=150, blank=True, null=True)

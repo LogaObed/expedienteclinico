@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from paciente import views
 urlpatterns = [
+    path('',views.inicio),
     path('admin/', admin.site.urls),
-    path('paciente/',include('paciente.urls'))
+    path('busca-general/<int:dato>/<int:propietario>',views.consultaDatoGeneral,name='bucatageneral'),
+    path('paciente/',include('paciente.urls')),
 ]
