@@ -31,8 +31,8 @@ class Paciente(models.Model):
         TipoSangre, verbose_name='Tipo de sangre', on_delete=models.PROTECT)
     tipo_sexo = models.ForeignKey(
         TipoSexo, verbose_name='Tipo de sexo', on_delete=models.PROTECT)
-    nombre = models.CharField(max_length=25, blank=True, null=True)
-    apellido = models.CharField(max_length=100, blank=True, null=True)
+    nombre = models.CharField(max_length=25)
+    apellido = models.CharField(max_length=100)
     telefono = models.CharField(max_length=10, blank=True, null=True)
     foto = models.ImageField(
         upload_to='fotopaciente/%Y/%m/%d', null=True, blank=True)
@@ -61,7 +61,7 @@ class DatosGeneral(models.Model):
         upload_to='datofiscal/%Y/%m/%d', null=True, blank=True, verbose_name='Curriculum vitae')
 
     def __str__(self):
-        return f'Id: {self.id}'
+        return f'Id: {self.id} {self.propietario}'
 
 
 class Preferencia(models.Model):

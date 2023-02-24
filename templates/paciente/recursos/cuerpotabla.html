@@ -1,0 +1,71 @@
+<div id="cargaPacientes">
+    <table class="table table-hover table-responsive-sm table-fixed mt-2">
+        <thead class="blue lighten-4 ">
+            <tr>
+                <th width="62px;"></th>
+                <th style="font-size: 13px;">Contactos</th>
+                <th style="font-size: 13px;" width="25%;">Cita</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for paciente in pacientes %}
+            <tr>
+
+                <td style="padding-left: 0; padding-right: 0;padding-top: 4px; padding-bottom: 1px;">
+                    <a href="{% url 'editarpaciente' paciente.id %}" target="_self">
+
+                        {% if paciente.foto == "" %}
+                        <i class="fas fa-image text-muted fa-4x"></i>
+                        {% else %}
+                        <img src="{{paciente.foto}}" class="img-fluid z-depth-1 rounded">
+                        {% endif %}
+                    </a>
+                </td>
+
+                <td style="font-size: 13px;">
+                    <div class="row">
+                        <div class="col-12 col-md-4" style="cursor: pointer;">
+
+                            {{paciente.nombre}} {{paciente.apellido}}
+                            <!--</a>-->
+                            <br>
+                            {% if paciente.telefono != none %}
+                            <a href="https://api.whatsapp.com/send?phone=+52{{paciente.telefono}}&amp;text=Hola, Obed, te contactamos de Clínica Cambrón"
+                                target="_blank">
+                                <i class="fab fa-whatsapp"></i>&nbsp;
+                                {{paciente.telefono}} </a>
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <!-- Acapulco Guerrero <br> -->
+                            {% if paciente.email != none %}
+                            <a href="mailto:{{paciente.email}} ">
+                                <i class="far fa-envelope"></i>
+                                {{paciente.email}} </a>
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-md-4">
+                            {% if paciente.telefono != none %}
+                            <a href="tel:+52{{paciente.telefono}}">
+                                <i class="fas fa-phone-volume"></i>&nbsp;
+                                {{paciente.telefono}} </a>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </td>
+                <!-- <td style="font-size: 13px;">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            "citadia" </div>
+                        <div class="col-12 col-md-6">
+                            "citahota"</div>
+                    </div>
+                </td> -->
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

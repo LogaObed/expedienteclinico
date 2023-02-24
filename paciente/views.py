@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from paciente.forms import *
 from paciente.models import *
+from django.template.context_processors import csrf
+from crispy_forms.utils import render_crispy_form
 # Create your views here.
 
 
@@ -12,11 +14,12 @@ def inicio(request):
 def consultaPacientes(request):
     # 2. paciente 3. personal 4. contacto
     form = FormNuevoPaciente()
-    paciente = Paciente.objects.filter(tipo_usuario=2)
+    paciente = Paciente.objects.filter(tipo_usuario=2).order_by('-id')
     return render(request, 'paciente/consultapaciente.html', {'pacientes': paciente, 'form': form})
 
 
 def nuevoPaciente(request):
+    response_data = {}
     if request.method == 'GET':
         form = FormNuevoPaciente()
         paciente = Paciente.objects.filter(tipo_usuario=2)
@@ -30,7 +33,7 @@ def nuevoPaciente(request):
             idpropietario = contulataPropietario.id
             # DatosGeneral(propietario=idpropietario)
             # DatosGeneral(propietario=Paciente(id=idpropietario))
-            propie = Paciente.objects.get(pk = idpropietario)
+            propie = Paciente.objects.get(pk=idpropietario)
             # datos generales
             datosdeneral = DatosGeneral()
             datosdeneral.propietario = propie
@@ -63,9 +66,15 @@ def nuevoPaciente(request):
             exploracion = Exploracion()
             exploracion.propietario = propie
             exploracion.save()
-            return redirect('consultapaciente')
+            # return redirect('consultapaciente')
+            response_data['tipo'] = 'success'
+            return JsonResponse(response_data)
         else:
-            return redirect('paciente')
+            # return redirect('paciente')
+            ctx = {}
+            ctx.update(csrf(request))
+            form_html = render_crispy_form(form, context=ctx)
+            return {'success': False, 'form_html': form_html}
 
 
 def editarPaciente(request, dato):
@@ -73,7 +82,17 @@ def editarPaciente(request, dato):
     if request.method == 'GET':
         paciente = Paciente.objects.filter(id=dato)
         form = FormNuevoPaciente(instance=userdata)
-        return render(request, 'paciente/editarpaciente.html', {'pacientes': paciente, 'form': form})
+        # datos generales
+        cnsgeneral = DatosGeneral.objects.get(propietario=dato)
+        dtid= cnsgeneral.id
+        dtgeneral = get_object_or_404(DatosGeneral, pk=dtid)
+        formgeneral = FormPacienteGeneral(instance=dtgeneral)
+        # Preferencia
+        cnpref = Preferencia.objects.get(propietario=dato)
+        prefid= cnpref.id
+        dtpref = get_object_or_404(Preferencia, pk=prefid)
+        formpref = FormPreferencia(instance=dtpref)
+        return render(request, 'paciente/editarpaciente.html', {'pacientes': paciente,'formpref':formpref,'formgeneral':formgeneral ,'form': form})
     else:
         form = FormNuevoPaciente(request.POST, instance=userdata)
         if form.is_valid():
