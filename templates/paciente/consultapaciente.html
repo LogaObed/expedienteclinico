@@ -6,6 +6,7 @@ consulta pacientes
 
 {% block cuerpo %}
 {% load crispy_forms_tags %}
+
 <div class="col-12 col-md-12 col-lg-8" id="divPacientes">
     {% include 'paciente/recursos/modalnuevapaciente.html' %}
     <div class="card">
@@ -13,13 +14,14 @@ consulta pacientes
             <!-- menu nuevo dato de la card -->
             {% include 'paciente/recursos/menucard.html' %}
             <!-- menu nuevo dato de la card -->
-            <!-- div del paciente  -->
             {% include 'paciente/recursos/cuerpotabla.html' %}
+            <!-- div del paciente  -->
+            <div id="cargaPacientes">
+            </div>
             <!-- div del paciente  -->
         </div>
     </div>
 </div>
-
 
 {% endblock cuerpo %}
 
@@ -28,8 +30,79 @@ consulta pacientes
     function nuevoPaciente() {
         $('#id_nombre').focus();
         $('#modalNuevoPaciente').modal('toggle');
-
     }
+
+    function solicitudPacientes() {
+        fetch('http://127.0.0.1:8000/paciente/consulta-ajax/').then(response => response.json()).then(response => {
+            //console.log(response.datos);
+            cargaPacientes.innerHTML = `
+            <table class="table table-hover table-responsive-sm table-fixed mt-2">
+                <thead class="blue lighten-4 ">
+                    <tr>
+                        <th width="62px;"></th>
+                        <th style="font-size: 13px;">Contactos</th>
+                        <th style="font-size: 13px;" width="25%;">Cita</th>
+                    </tr>
+                </thead>
+                <tbody>      
+            `
+            response.datos.forEach((paciente, index) => {
+                console.log('Indice: ' + index + ' Valor: ' + paciente.nombre + paciente.apellido);
+                cargaPacientes.innerHTML += `
+                <tr>
+                    <td style="padding-left: 0; padding-right: 0;padding-top: 4px; padding-bottom: 1px;">
+                        <a href="" target="_self">
+    
+                            <i class="fas fa-image text-muted fa-4x"></i>
+    
+                        </a>
+                    </td>
+    
+                    <td style="font-size: 13px;">
+                        <div class="row">
+                            <div class="col-12 col-md-4" style="cursor: pointer;">
+    
+                                ${paciente.nombre} ${paciente.apellido}
+                                <!--</a>-->
+                                <br>
+                                <a href="https://api.whatsapp.com/send?phone=+52{{paciente.telefono}}&amp;text=Hola, Obed, te contactamos de Clínica Cambrón"
+                                    target="_blank">
+                                    <i class="fab fa-whatsapp"></i>&nbsp;
+                                    ${paciente.telefono} </a>
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <!-- Acapulco Guerrero <br> -->
+                                <a href="mailto:${paciente.email}">
+                                    <i class="far fa-envelope"></i>
+                                    ${paciente.email} </a>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <a href="tel:+52${paciente.telefono}">
+                                    <i class="fas fa-phone-volume"></i>&nbsp;
+                                    {{paciente.telefono}} </a>
+                            </div>
+                        </div>
+    
+                    </td>
+                    <!-- <td style="font-size: 13px;">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                "citadia" </div>
+                            <div class="col-12 col-md-6">
+                                "citahota"</div>
+                        </div>
+                    </td> -->
+    
+                </tr>
+            `
+
+            });
+        })
+        cargaPacientes.innerHTML += `  </tbody>
+    </table>
+    `
+    }
+
     function guardaNuevoPaciente() {
         var action = document.getElementById('formhola').action;
         fetch(`${action}`, {
@@ -47,12 +120,12 @@ consulta pacientes
                 })
                 return false;
             }
-          /*
-            else if(response.success == false){
-                var example_form = document.getElementById('formhola');
-                $(example_form).find('.error-message').show()
-            }
-          */
+            /*
+              else if(response.success == false){
+                  var example_form = document.getElementById('formhola');
+                  $(example_form).find('.error-message').show()
+              }
+            */
         })
 
     }

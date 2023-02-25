@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponse
+import json
 from paciente.forms import *
+from django.core import serializers
 from paciente.models import *
 from django.template.context_processors import csrf
 from crispy_forms.utils import render_crispy_form
@@ -10,6 +12,12 @@ from crispy_forms.utils import render_crispy_form
 def inicio(request):
     return render(request, 'index.html')
 
+
+def consultaPacientesajax(request):
+    # 2. paciente 3. personal 4. contacto
+    # people = serializers.serialize("json", Person.objects.all())
+    data = list(Paciente.objects.filter(tipo_usuario=2).order_by('-id').values())  # wrap in list(), because QuerySet is not JSON serializable
+    return JsonResponse({'datos':data}, safe=False) 
 
 def consultaPacientes(request):
     # 2. paciente 3. personal 4. contacto
@@ -84,15 +92,15 @@ def editarPaciente(request, dato):
         form = FormNuevoPaciente(instance=userdata)
         # datos generales
         cnsgeneral = DatosGeneral.objects.get(propietario=dato)
-        dtid= cnsgeneral.id
+        dtid = cnsgeneral.id
         dtgeneral = get_object_or_404(DatosGeneral, pk=dtid)
         formgeneral = FormPacienteGeneral(instance=dtgeneral)
         # Preferencia
         cnpref = Preferencia.objects.get(propietario=dato)
-        prefid= cnpref.id
+        prefid = cnpref.id
         dtpref = get_object_or_404(Preferencia, pk=prefid)
         formpref = FormPreferencia(instance=dtpref)
-        return render(request, 'paciente/editarpaciente.html', {'pacientes': paciente,'formpref':formpref,'formgeneral':formgeneral ,'form': form})
+        return render(request, 'paciente/editarpaciente.html', {'pacientes': paciente, 'formpref': formpref, 'formgeneral': formgeneral, 'form': form})
     else:
         form = FormNuevoPaciente(request.POST, instance=userdata)
         if form.is_valid():
@@ -109,8 +117,8 @@ def consultaIndividualPaciente(request, dato):
 
 
 def formGeneral(request):
-    form = FormPaciente()
-    return render(request, 'paciente/consultapaciente.html', {'form': form})
+    # form = FormPaciente()
+    return render(request, 'paciente/consultapaciente.html',)
 
 
 def consultaUsuario(request):
