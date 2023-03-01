@@ -1,0 +1,211 @@
+{% load static %}
+
+<div id="divModalJitsi"></div>
+
+<div class="modal fade right" id="modalGoogle" tabindex="-1" role="dialog" aria-labelledby="mGoogle"
+    aria-hidden="true" data-backdrop="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mGoogle">Búsqueda en Google</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="modalGoogleBody"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="card mt-0">
+    <div class="card-header" role="tab" id="tabcitaHoy">
+        <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroFoto"
+            aria-expanded="false" aria-controls="tableroFichaIdentificacion">
+            <h5 class="mb-0 h6 text-muted text-left">
+                Paciente 
+            </h5>
+        </a>
+    </div>
+    <div id="tableroFoto" class="collapse show" role="tabpanel" data-parent="#tableroFichaIdentificacion">
+        <div class="card-body">
+            <form method="post" action="#" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-4 col-md-3">
+                        <div class="row">
+                            <div class="col-12" id="divFoto">
+                                {% if pacientes.propietario.foto != ""  %}
+                                <img src="{{pacientes.propietario.foto.url}}" alt="sindato"
+                                    class="img-fluid z-depth-1 rounded" onclick="activaEdicionDeFoto();"
+                                    data-toggle="tooltip" data-placement="top" title=""
+                                    data-original-title="Click en la foto para iniciar la modificación">
+                                {% else %}
+                                <i class="fas fa-image text-muted fa-4x" onclick="activaEdicionDeFoto();"
+                                    data-toggle="tooltip" data-placement="top" title=""
+                                    data-original-title="Click en la foto para iniciar la modificación"></i>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-8 col-md-9">
+                        <h6 class="h6 text-muted" id="txtPacienteNombres" onclick="cargaEdicionNombre();"
+                            data-toggle="tooltip" data-placement="right" title=""
+                            data-original-title="Click en el Nombre para iniciar la Modificación">
+                            {{pacientes.propietario.apellido}} {{pacientes.propietario.nombre}}</h6>
+                        <div class="row" id="divEditaPacienteNombres" style="display: none;">
+                            <div class="col-12">
+                                <input type="text" id="editaPacientePaterno" class="form-control form-control-sm"
+                                    placeholder="Apellidos del Paciente" value="Chavez Ayona"
+                                    onblur="guardacampo('paciente','paterno','editaPacientePaterno','idpaciente','6890','res1')"
+                                    data-toggle="tooltip" data-placement="right" title=""
+                                    data-original-title="Apellidos del Paciente">
+
+                            </div>
+                            <div class="col-12 mt-1">
+                                <input type="text" id="editaPacienteNombres" class="form-control form-control-sm"
+                                    placeholder="Nombre(s) del Paciente" value="Jose Armando"
+                                    onblur="guardacampo('paciente','nombre','editaPacienteNombres','idpaciente','6890','res1')"
+                                    data-toggle="tooltip" data-placement="right" title=""
+                                    data-original-title="Nombre(s) del Paciente">
+                            </div>
+
+                            <div class="col-12 mt-1">
+                                <button type="button" class="btn btn-sm btn-block btn-primary"
+                                    id="btnCierraEdicionPaciente" onclick="cierraEdicionNombrePaciente();">Cerrar
+                                    Edición</button>
+                            </div>
+
+                        </div>
+
+                        <small class="text-muted">
+                            Edad: <span id="calculaEdad">0 años</span>
+                        </small>
+                        <br>
+                        <small class="text-muted">
+                            Estado Civil: <span id="divEdoCivil"> <img src="{% static 'img/' %}ficha/sinAsignar.svg"
+                                    width="26px"></span>
+                        </small>
+
+                        <br>
+                        <small class="text-muted">
+                            Escolaridad: <span id="divEscolaridad"> </span>
+                        </small>
+
+                        <br>
+                        <small class="text-muted">
+                            <img src="{% static 'img/' %}ico/sangre.png" width="17px;"> <span id="divSangreFicha">
+                                <span class="text-danger">AB+</span><i class="fas fa-edit ml-1"
+                                    style="cursor:pointer;" onclick="modificaSangre();"></i>
+                            </span>
+                        </small>
+                        <small text-primary="">
+
+                            <i class="fas fa-head-side-cough ml-2 text-primary"></i>
+                            <span class="text-danger"></span> </small>
+
+                        <small class="text-muted">
+                            {% if pacientes.propietario.telefono != None %}
+                            <span id="divCargaCelularFicha"><br><a
+                                    href="https://api.whatsapp.com/send?phone={{pacientes.propietario.telefono}}&amp;text=Hola, Jose Armando"
+                                    target="_blank"><span class="text-success"><i class="fab fa-whatsapp"></i>
+                                    </span><span
+                                        class="text-muted">{{pacientes.propietario.telefono}}</span></a></span>
+                            {% endif %}
+                        </small>
+
+
+
+                        <br>
+                        <small class="text-muted">
+
+                            {% if  pacientes.propietario.email != None %}
+                            <a href="mailto:{{pacientes.propietario.email}}" target="_blank" class="text-muted">
+                                <i class="far fa-envelope text-info"></i> {{pacientes.propietario.email}}
+                            </a>
+                            {% endif %}
+
+                        </small>
+
+
+
+
+
+
+                    </div>
+
+                    <div class="col-12 mt-1" id="divCargaFoto" style="display: none;">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input " id="seleccionaNuevaFoto"
+                                name="seleccionaNuevaFoto" lang="es" onchange="seleccionDeFoto();">
+                            <label class="custom-file-label" for="customFileLang">Seleccionar
+                                Foto</label>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-block btn-primary" id="btnSubeNuevaFoto"
+                            onclick="subeFoto();" style="display: none;">Subir
+                            Foto</button>
+                        <button type="button" class="btn btn-sm btn-block btn-grey"
+                            onclick="cancelaSubida();">Cancelar</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row mt-2">
+                <div class="col-12 col-md-6">
+                    <p class="text-muted" id="txtCumple"
+                        onclick="cargaEdicion('txtCumple','divEditaNacimiento','editaNacimiento');">
+                        <small id="cumpleTexto" data-toggle="tooltip" data-placement="top" title=""
+                            data-original-title="click para modificar la fecha de nacimiento">
+                            <div class="spinner-grow text-secondary" role="status">
+                                <span class="sr-only">Cumpleaños...</span>
+                            </div>
+
+                            <i class="fas fa-birthday-cake text-secondary"></i>
+
+                            26 de Febrero
+                        </small>
+                    </p>
+
+                    <div class="col-12 mt-1" id="divEditaNacimiento" style="display: none;">
+                        <input type="date" id="editaNacimiento" class="form-control form-control-sm"
+                            value="2023-02-26" data-toggle="tooltip" data-placement="top" title=""
+                            onblur="cierraEditaEdad('paciente','fechanac','editaNacimiento','idpaciente','6890','res1');"
+                            data-original-title="Fecha de Nacimiento">
+
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-12 text-left text-muted">
+                    <div id="divcargaSexo">
+                        <label>
+                            <input type="radio" name="sexo" id="M" onclick="setSexo('M');" checked="">
+                            <img src="{% static 'img/' %}ficha/hombre.svg?id=1" width="30px">
+                        </label>
+                        <label>
+                            <input type="radio" name="sexo" id="F" onclick="setSexo('F');">
+                            <img src="{% static 'img/' %}ficha/mujerDes.svg" width="30px"
+                                style="opacity:0.2;"></label>
+                        <label>
+                            <input type="radio" name="sexo" id="I" onclick="setSexo('I');">
+                            <img src="{% static 'img/' %}ficha/indefinidoDes.svg?id=2" width="30px"
+                                style="opacity:0.2;"></label>
+                    </div>
+                    <div id="resSexo"></div>
+                    <div id="resPatologiaBase"><span style="font-size: 14px;">
+                            <img src="{% static 'img/' %}ico/padecimiento.svg" height="18px">Patología
+                            Base Sin Agregados</span></div>
+
+                </div>
+
+                <div class="container mb-1">
+                    <div class="row">
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

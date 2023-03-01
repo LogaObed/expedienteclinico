@@ -1,96 +1,1038 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block titulo %}
 consulta
 {% endblock titulo %}
 
 {% block cuerpo %}
 {% load crispy_forms_tags %}
-<div class="container">
-    <div class="row mt-3">
-        <div class="col-12">
-            <h1 class="text-center">Paciente {{pacientes.nombre}}</h1>
+
+<div class="col-12 col-md-4" id="divFichaPaciente">
+
+    <!-- paciente cabecera -->
+    {% include 'paciente/recursos/cabecerapaciente.html' %}
+    <!-- paciente cabecera -->
+    <div class="accordion md-accordion" id="tableroFichaIdentificacion" role="tablist" aria-multiselectable="true">
+        <!-- form datos generales paciente -->
+        {% include 'paciente/recursos/formdatogenerales.html' %}
+        <!-- form datos generales paciente -->
+
+        <!-- Cuerpo Experiencia paciene  -->
+        <div class="card">
+            {% include 'paciente/recursos/formpreferencia.html' %}
         </div>
-        <div class="col-8  text-center mt-2">
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" onclick="consultapaciente();" type="radio" name="inlineRadioOptions"
-                    id="inlineRadio1" value="option1">
-                <label class="form-check-label" for="inlineRadio1">Paciente</label>
+        <!-- Cuerpo Experiencia paciene  -->
+        <div class="card">
+            <!-- Alergias -->
+
+
+            <div class="card-header" role="tab" id="tabAlergias">
+                <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroAlergias"
+                    aria-expanded="false" aria-controls="tableroAlergias">
+                    <h5 class="mb-0 h6 text-muted text-left">
+                        <i class="fas fa-head-side-cough text-danger"></i>Alergias <small class="text-danger"
+                            id="divCargaAlergias"></small>
+                    </h5>
+                </a>
             </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" onclick="consultapersonal();" name="inlineRadioOptions"
-                    id="inlineRadio2" value="option2">
+            <div id="tableroAlergias" class="collapse" role="tabpanel" data-parent="#tableroFichaIdentificacion">
+                <div class="card-body">
+                    <textarea class="form-control form-control-sm" rows="4" placeholder="Alergias del Paciente ..."
+                        id="alergias"
+                        onblur="guardaAlergias('historia','ppat_alergias','alergias','idpaciente','6890','resDatosPaciente')"></textarea>
 
-                <label class="form-check-label" for="inlineRadio2">Personal</label>
+                </div>
             </div>
-            <div class="form-check form-check-inline">
+            <!-- Alergias -->
 
-                <input class="form-check-input" onclick="consultacontacto();" type="radio" name="inlineRadioOptions"
-                    id="inlineRadio3" value="option2">
-                <label class="form-check-label" for="inlineRadio3">Contacto</label>
+        </div>
+        <div class="card">
+            <!-- espextativas -->
+            <div class="card-header" role="tab" id="tabEspectativas">
+                <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroEspectativas"
+                    aria-expanded="false" aria-controls="tableroEspectativas">
+                    <h5 class="mb-0 h6 text-muted text-left" id="textoEspectativas">
+                        <i class="fas fa-hospital-user text-success"></i>
+                        Expectativas del Paciente
+                    </h5>
+                </a>
+            </div>
+
+            <div id="tableroEspectativas" class="collapse" role="tabpanel" data-parent="#tableroFichaIdentificacion">
+                <div class="card-body">
+                    <textarea class="form-control form-control-sm" rows="4" placeholder="Expectativas del Paciente ..."
+                        id="editaEspectativas"
+                        onblur="guardacampo('historia','espectativa','editaEspectativas','idpaciente','6890','res1')"></textarea>
+
+                </div>
+            </div>
+            <!-- espectativas -->
+        </div>
+
+        <div class="card">
+            <!-- pdecimeint -->
+            <div class="card-header" role="tab" id="tabPadecimiento">
+                <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroPadecimiento"
+                    aria-expanded="false" aria-controls="tableroPadecimiento">
+                    <h5 class="mb-0 h6 text-muted text-left">
+                        <img src="{% static 'img/' %}ico/padecimiento.svg" height="18px">Padecimiento
+                        Actual
+                    </h5>
+                </a>
+            </div>
+
+            <div id="tableroPadecimiento" class="collapse" role="tabpanel" data-parent="#tableroFichaIdentificacion">
+                <div class="card-body">
+                    <textarea class="form-control form-control-sm" rows="8" placeholder="Padecimiento Actual ..."
+                        id="editaPadecimiento"
+                        onblur="guardacampo('historia','padecimientoactual','editaPadecimiento','idhistoria','4364','res1')"></textarea>
+
+                </div>
+            </div>
+            <!-- pdecimeint -->
+
+        </div>
+        <div class="card">
+
+            <!-- observaciones -->
+            <div class="card-header" role="tab" id="tabObservaciones">
+                <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroObservaciones"
+                    aria-expanded="false" aria-controls="tableroObservaciones">
+                    <h5 class="mb-0 h6 text-muted text-left">
+                        <i class="fas fa-notes-medical text-primary"></i>Observaciones del
+                        Paciente
+                    </h5>
+                </a>
+            </div>
+
+            <div id="tableroObservaciones" class="collapse" role="tabpanel" data-parent="#tableroFichaIdentificacion">
+                <div class="card-body">
+                    <textarea class="form-control form-control-sm" rows="4" placeholder="Observaciones del Paciente ..."
+                        id="editaObservaciones"
+                        onblur="guardacampo('paciente','observaciones','editaObservaciones','idpaciente','6890','res1')"></textarea>
+
+                </div>
+            </div>
+            <!-- observaciones -->
+
+
+        </div>
+        <div class="card">
+
+            <div class="card-header" role="tab" id="tabLigas">
+                <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroLigas"
+                    aria-expanded="false" aria-controls="tableroLigas">
+                    <h5 class="mb-0 h6 text-muted text-left" onclick="cargaLigas('6890','');">
+                        <i class="far fa-folder text-info mr-2"></i>Documentos
+                    </h5>
+                </a>
             </div>
         </div>
-        <div class="col-8  text-center mt-2">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">nombre</th>
-                        <th scope="col">apellido</th>
-                        <th scope="col">telefono</th>
-                        <th scope="col">email</th>
-                        <th scope="col">editar</th>
-                    </tr>
-                </thead>
-                <tbody>
+    </div>
+</div>
+<div class="col-12 col-md-8" id="divDetallePaciente">
+    <div class="accordion md-accordion" id="tableroDetallePacientes" role="tablist" aria-multiselectable="true">
+        <!-- forms historial medico-->
+        <div class="card mt-0">
+            <div class="card-header" role="tab" id="tabHistoria">
+                <a data-toggle="collapse" data-parent="#tableroDetallePacientes" href="#tableroHistoria"
+                    aria-expanded="false" aria-controls="tableroHistoria" class="collapsed">
+                    <h5 class="mb-0 h6 text-muted text-left">
 
-                    {% for paciente in pacientes %}
-                    <tr>
-                        <td>{{paciente.nombre}}</td>
-                        <td>{{paciente.apellido}}</td>
-                        <td>{{paciente.telefono}}</td>
-                        <td>{{paciente.email}}</td>
+                        <img src="{% static 'img/' %}ico/historiaClinica.png" height="16px;"> Historia
+                        Clínica
+                    </h5>
+                </a>
+            </div>
+            <div id="tableroHistoria" class="collapse" role="tabpanel" aria-labelledby="tabFicha"
+                data-parent="#tableroDetallePacientes">
+                <div class="card-body">
+                    <div id="divTableroHistoria">
+                        <div id="resHistoria" style="display: none;"></div>
+                        <div class="row">
+                        <!-- form heredo familiares  -->
+                        {% include 'paciente/recursos/formheredofamiliares.html' %}
+                        <!-- form heredo familiares  -->
 
-                        <td><a href="{% url 'editarpaciente' paciente.id %}">{{paciente.id}}</a></td>
-                    </tr>
-                    {% endfor %}
+                            <div class="col-12 col-md-12 mt-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h6 class="h6 text-muted text-center">Antecedentes
+                                                    Personales Patológicos</h6>
+                                            </div>
+                                            <div class="col-12">
+                                                <div id="patologicos">
 
-                </tbody>
-            </table>
+                                                    <div class="row">
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Enf. Prop. Infancia</small>
+                                                            <input type="text" placeholder=""
+                                                                id="ppat_enfpropiasinfancia" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_enfpropiasinfancia','ppat_enfpropiasinfancia','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Enfermedades Propias de la Infancia">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Diabetes</small>
+                                                            <input type="text" placeholder="" id="ppat_diabetes"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_diabetes','ppat_diabetes','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Diabetes">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Hipertensión</small>
+                                                            <input type="text" placeholder="" id="ppat_hipertension"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_hipertension','ppat_hipertension','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Hipertensión">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Respiratorias</small>
+                                                            <input type="text" placeholder="" id="ppat_respiratorias"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_respiratorias','ppat_respiratorias','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Respiratorias">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Oftálmico</small>
+                                                            <input type="text" placeholder="" id="ppat_oftalmico"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_oftalmico','ppat_oftalmico','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Oftálmico">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Cardiovasculares</small>
+                                                            <input type="text" placeholder="" id="ppat_cardiovasculares"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_cardiovasculares','ppat_cardiovasculares','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Cardiovasculares">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Neurológicos</small>
+                                                            <input type="text" placeholder="" id="ppat_neurologicos"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_neurologicos','ppat_neurologicos','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Neurológicos">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Gastro Intestinales</small>
+                                                            <input type="text" placeholder=""
+                                                                id="ppat_gastrointestinales" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_gastrointestinales','ppat_gastrointestinales','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Gastro-Intestinales">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Hepatopatías</small>
+                                                            <input type="text" placeholder="" id="ppat_hepatopatias"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_hepatopatias','ppat_hepatopatias','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Hepatopatías">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Metabólicas</small>
+                                                            <input type="text" placeholder="" id="ppat_metabolicas"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_metabolicas','ppat_metabolicas','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Metabólicas">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Urológicos</small>
+                                                            <input type="text" placeholder="" id="ppat_urologicos"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_urologicos','ppat_urologicos','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Urológicos">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Circulatorio</small>
+                                                            <input type="text" placeholder="" id="ppat_circulatorio"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_circulatorio','ppat_circulatorio','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Circulatorio">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Traumáticas</small>
+                                                            <input type="text" placeholder="" id="ppat_traumaticas"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_traumaticas','ppat_traumaticas','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Traumáticas">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Articulares</small>
+                                                            <input type="text" placeholder="" id="ppat_articulares"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_articulares','ppat_articulares','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Articulares">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Dermatológicas</small>
+                                                            <input type="text" placeholder="" id="ppat_dermatologicas"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_dermatologicas','ppat_dermatologicas','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Dermatológicas">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Quirúrgicos</small>
+                                                            <input type="text" placeholder="" id="ppat_quirurgicos"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_quirurgicos','ppat_quirurgicos','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Quirúrgicos">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Transfusionales</small>
+                                                            <input type="text" placeholder="" id="ppat_transfusionales"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_transfusionales','ppat_transfusionales','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Transfusionales">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Alergias</small>
+                                                            <input type="text" placeholder="" id="ppat_alergias"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_alergias','ppat_alergias','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Alergias">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Vectores</small>
+                                                            <input type="text" placeholder="" id="ppat_vectores"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_vectores','ppat_vectores','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Vectores">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Autoinmunes</small>
+                                                            <input type="text" placeholder="" id="ppat_autoinmunes"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_autoinmunes','ppat_autoinmunes','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Autoinmunes">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Emocionales</small>
+                                                            <input type="text" placeholder="" id="ppat_emocionales"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_emocionales','ppat_emocionales','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Emocionales">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Adicciones</small>
+                                                            <input type="text" placeholder="" id="ppat_adicciones"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_adicciones','ppat_adicciones','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Adicciones">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Hosp. Previas</small>
+                                                            <input type="text" placeholder=""
+                                                                id="ppat_hospitalizaciones" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_hospitalizaciones','ppat_hospitalizaciones','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Hospitalizaciones Previas">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Pesticidas</small>
+                                                            <input type="text" placeholder="" id="ppat_pesticidas"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_pesticidas','ppat_pesticidas','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Pesticidas">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Dx.Ca</small>
+                                                            <input type="text" placeholder="" id="ppat_dxca" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_dxca','ppat_dxca','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Dx.CA.">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Otros</small>
+                                                            <input type="text" placeholder="" id="ppat_otros" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','ppat_otros','ppat_otros','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Otros">
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <script type="text/javascript">
+                                                        $(document).ready(function () {
+
+                                                        });
+                                                        $(function () {
+                                                            $('[data-toggle="tooltip"]')
+                                                                .tooltip()
+                                                        })
+                                                    </script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-12 mt-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h6 class="h6 text-muted text-center">Antecedentes No
+                                                    Patológicos</h6>
+                                            </div>
+                                            <div class="col-12">
+                                                <div id="noPatologicos">
+                                                    <div class="row">
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Casa Habitación</small>
+                                                            <input type="text" placeholder="" id="pnopat_casa" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','pnopat_casa','pnopat_casa','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Casa-Habitación">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Lav. Dientes Diario</small>
+                                                            <input type="text" placeholder="" id="pnopat_lavadodientes"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','pnopat_lavadodientes','pnopat_lavadodientes','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Lavado de dientes Diario">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Tipo Pasta Dental</small>
+                                                            <input type="text" placeholder="" id="pnopat_pasta" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','pnopat_pasta','pnopat_pasta','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Tipo de Pasta Dental">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Amalgamas o Puentes</small>
+                                                            <input type="text" placeholder="" id="pnopat_amalgamas"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','pnopat_amalgamas','pnopat_amalgamas','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Amalgamas o Puentes">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Uso de Brakets</small>
+                                                            <input type="text" placeholder="" id="pnopat_brakets"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','pnopat_brakets','pnopat_brakets','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Brakets">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Actividad Física</small>
+                                                            <input type="text" placeholder="" id="pnopat_actfisica"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','pnopat_actfisica','pnopat_actfisica','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Actividad Física">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Inmunizaciones</small>
+                                                            <input type="text" placeholder="" id="pnopat_inmunizaciones"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','pnopat_inmunizaciones','pnopat_inmunizaciones','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Inmunizaciones">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Últ. Desparasitación</small>
+                                                            <input type="text" placeholder=""
+                                                                id="pnopat_ultimadesparasitacion" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','pnopat_ultimadesparasitacion','pnopat_ultimadesparasitacion','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Última Desparasitación">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>CheckUp</small>
+                                                            <input type="text" placeholder="" id="pnopat_checkup"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','pnopat_checkup','pnopat_checkup','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="CheckUp Integral">
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <script type="text/javascript">
+                                                        $(document).ready(function () {
+
+                                                        });
+                                                        $(function () {
+                                                            $('[data-toggle="tooltip"]')
+                                                                .tooltip()
+                                                        })
+                                                    </script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-12 mt-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h6 class="h6 text-muted text-center">Hábitos
+                                                    Alimenticios</h6>
+                                            </div>
+                                            <div class="col-12">
+                                                <div id="habitosAlimenticios">
+
+                                                    <div class="row">
+
+                                                        <div class="col-4 col-lg-2 col-md-3 mt-1">
+                                                            <label>
+                                                                <input type="checkbox" id="desayuno"
+                                                                    onclick="setComidas('desayuno');">
+                                                                <small class="text-muted">Desayuno</small>
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="col-4 col-lg-2 col-md-3 mt-1">
+                                                            <label>
+                                                                <input type="checkbox" id="almuerzo"
+                                                                    onclick="setComidas('almuerzo');">
+                                                                <small class="text-muted">Almuerzo</small>
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="col-4 col-lg-2 col-md-3 mt-1">
+                                                            <label>
+                                                                <input type="checkbox" id="mcomida"
+                                                                    onclick="setComidas('mcomida');">
+                                                                <small class="text-muted">Comida</small>
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="col-4 col-lg-2 col-md-3 mt-1">
+                                                            <label>
+                                                                <input type="checkbox" id="cena"
+                                                                    onclick="setComidas('cena');">
+                                                                <small class="text-muted">Cena</small>
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="col-8 col-lg-2 col-md-3 mt-1">
+                                                            <label>
+                                                                <input type="checkbox" id="colaciones"
+                                                                    onclick="setComidas('colaciones');">
+                                                                <small class="text-muted">Colaciones</small>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Tortillas</small>
+                                                            <input type="text" placeholder="" id="habal_tortillas"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_tortillas','habal_tortillas','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Tortillas">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Pan</small>
+                                                            <input type="text" placeholder="" id="habal_pan" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_pan','habal_pan','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Pan">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Cereales</small>
+                                                            <input type="text" placeholder="" id="habal_cereal" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_cereal','habal_cereal','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Cereal">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Refrescos</small>
+                                                            <input type="text" placeholder="" id="habal_refresco"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_refresco','habal_refresco','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Refrescos">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Jugos</small>
+                                                            <input type="text" placeholder="" id="habal_jugos" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_jugos','habal_jugos','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Jugos">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Aguas Frescas</small>
+                                                            <input type="text" placeholder="" id="habal_aguafresca"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_aguafresca','habal_aguafresca','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Aguas Frescas">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Frutas</small>
+                                                            <input type="text" placeholder="" id="habal_frutas" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_frutas','habal_frutas','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Frutas">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Frutos Secos</small>
+                                                            <input type="text" placeholder="" id="habal_frutosSecos"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_frutosSecos','habal_frutosSecos','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Frutos Secos">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Verduras</small>
+                                                            <input type="text" placeholder="" id="habal_verduras"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_verduras','habal_verduras','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Verduras">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Agua Natural</small>
+                                                            <input type="text" placeholder="" id="habal_aguas" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_aguas','habal_aguas','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Agua Natural">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Golosinas</small>
+                                                            <input type="text" placeholder="" id="habal_golosinas"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_golosinas','habal_golosinas','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Golosinas">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Carnes Rojas</small>
+                                                            <input type="text" placeholder="" id="habal_carneroja"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_carneroja','habal_carneroja','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Carne Roja">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Pollo</small>
+                                                            <input type="text" placeholder="" id="habal_pollo" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_pollo','habal_pollo','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Pollo">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Pescado</small>
+                                                            <input type="text" placeholder="" id="habal_pescado"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_pescado','habal_pescado','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Pescado">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Mariscos</small>
+                                                            <input type="text" placeholder="Mariscos" id="habal_marisco"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_marisco','habal_marisco','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Mariscos">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Leche</small>
+                                                            <input type="text" placeholder="" id="habal_leche" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_leche','habal_leche','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Leche">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Derivados</small>
+                                                            <input type="text" placeholder="" id="habal_derivados"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_derivados','habal_derivados','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Derivados">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Huevo</small>
+                                                            <input type="text" placeholder="" id="habal_huevo" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_huevo','habal_huevo','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Huevo">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Arroz</small>
+                                                            <input type="text" placeholder="" id="habal_arroz" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_arroz','habal_arroz','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Arroz">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Legumbres</small>
+                                                            <input type="text" placeholder="" id="habal_frijol" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_frijol','habal_frijol','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Legumbres">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Miel</small>
+                                                            <input type="text" placeholder="" id="habal_miel" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_miel','habal_miel','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Miel">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Aceite</small>
+                                                            <input type="text" placeholder="" id="habal_aceite" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_aceite','habal_aceite','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Aceite">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Sal</small>
+                                                            <input type="text" placeholder="" id="habal_sal" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_sal','habal_sal','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Sal">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Azucar</small>
+                                                            <input type="text" placeholder="" id="habal_azucar" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_azucar','habal_azucar','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Azucar">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Café</small>
+                                                            <input type="text" placeholder="" id="habal_cafe" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_cafe','habal_cafe','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Café">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Té</small>
+                                                            <input type="text" placeholder="" id="habal_te" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_te','habal_te','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Té">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Sazonadores</small>
+                                                            <input type="text" placeholder="" id="habal_knorsuiza"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_knorsuiza','habal_knorsuiza','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Sazonadores">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Embutidos</small>
+                                                            <input type="text" placeholder="" id="habal_embutidos"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_embutidos','habal_embutidos','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Embutidos">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Enlatados</small>
+                                                            <input type="text" placeholder="" id="habal_enlatados"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_enlatados','habal_enlatados','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Enlatados">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Pastas</small>
+                                                            <input type="text" placeholder="" id="habal_pastas" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_pastas','habal_pastas','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Pastas">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Suplementos y Energéticos</small>
+                                                            <input type="text" placeholder="" id="habal_suplementos"
+                                                                value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_suplementos','habal_suplementos','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Suplementos y Energéticos">
+                                                        </div>
+
+                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                                            <small>Otros</small>
+                                                            <input type="text" placeholder="" id="habal_otras" value=""
+                                                                class="form-control form-control-sm text-center"
+                                                                onblur="guardacampoConsulta('historia','habal_otras','habal_otras','idhistoria','4475','resHistoria','7148');"
+                                                                data-toggle="tooltip" data-placement="left" title=""
+                                                                data-original-title="Otros">
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                    <div id="resHabitos"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="col-12">
-            <form action="" method="post">
-                {% csrf_token %}
-                {{form}}
-                <button type="submit" class="btn btn-success">Insertar </button>
-            </form>
-        </div>
-        <div class="col-12">
+        <!-- forms historial medico-->
+        {% include 'paciente/recursos/formexploracion.html' %}
+        <!-- form exploracion -->
 
-            {{formgeneral}}
-        </div>
-        <div class="col-12">
-
-            {{formpref}}
-        </div>
 
     </div>
 </div>
-
+{% block scriptss %}
 <script>
-    function solicitud() {
-
+    function guardarprefe() {
+        var action = document.getElementById('formpreferencia').action;
+        fetch(`${action}`, {
+            method: 'POST',
+            body: new FormData(formpreferencia),
+        }).then(response => response.json()).then(response => {
+            /*
+ if (response.tipo === "success") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registrado correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                return false;
+            };
+            if (response.tipo === "success") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registrado correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                    return false;
+                })
+            }
+              else if(response.success == false){
+                  var example_form = document.getElementById('formhola');
+                  $(example_form).find('.error-message').show()
+              }
+            */
+        })
     }
 
-    function consultapaciente() {
-        alert('paciente');
+    function guardardatosgenerales() {
+        var action = document.getElementById('formdatosgenerales').action;
+        fetch(`${action}`, {
+            method: 'POST',
+            body: new FormData(formdatosgenerales),
+        }).then(response => response.json()).then(response => {
+            /*
+            if (response.tipo === "success") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registrado correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                return false;
+            };
+            if (response.tipo === "success") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registrado correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                    return false;
+                })
+            }
+              else if(response.success == false){
+                  var example_form = document.getElementById('formhola');
+                  $(example_form).find('.error-message').show()
+              }
+            */
+        })
     }
 
-    function consultapersonal() {
-        alert('personal');
-    }
-
-    function consultacontacto() {
-        alert('contacto');
+    function eliminardatosgenerales() {
+        Swal.fire({
+            title: '¡Alerta!',
+            text: "¿Desea confirmar la eliminación definitiva el paciente?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Confirmar Elimina'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Datos eliminados',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        })
     }
 </script>
+{% endblock scriptss %}
+
 {% endblock cuerpo %}

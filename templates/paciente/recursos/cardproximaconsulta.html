@@ -1,0 +1,69 @@
+<div class="card-header" role="tab" id="tabProximaConsulta">
+    <a class="collapsed" data-toggle="collapse" data-parent="#tablerosPacientes" href="#tableroProximaConsulta"
+        aria-expanded="false" aria-controls="tableroProximaConsulta">
+        <h5 class="mb-0 h6 text-muted text-left">
+            <i class="far fa-calendar-check"></i> Próximas Consultas
+        </h5>
+    </a>
+</div>
+<div id="tableroProximaConsulta" class="collapse" role="tabpanel" aria-labelledby="tabProximaConsulta"
+    data-parent="#tablerosPacientes">
+    <div class="card-body">
+        <div id="divProximaConsulta">
+            <table class="table table-hover table-responsive-sm table-fixed">
+                <tbody>
+                    {% for paciente in pacientes %}
+                    <tr>
+                        <td style="padding-left: 0; padding-right: 0;padding-top: 4px; padding-bottom: 1px;">
+                            <a href="{% url 'editarpaciente' paciente.id %}" target=" _self">
+                                {% if paciente.foto == "" %}
+                                <i class="fas fa-image text-muted fa-4x"></i>
+                                {% else %}
+                                <img src="{{paciente.foto.url}}" class="img-fluid z-depth-1 rounded">
+                                {% endif %}
+                            </a>
+                        </td>
+                        <td style="font-size: 13px;">
+                            <div class="row">
+                                <div class="col-12">
+                                    <a href="{% url 'editarpaciente' paciente.id %}" target="_self">
+                                        {{paciente.nombre}} {{paciente.apellido}} </a>
+                                </div>
+                                <div class="col-12 text-danger ">
+                                    <strong>
+                                        Última Consulta 24/02/2023 </strong>
+                                </div>
+                                <div class="col-12">
+                                    {% if paciente.email != none %}
+                                    <a href="mailto:{{paciente.email}}">
+                                        <i class="far fa-envelope"></i>
+                                        {{paciente.email}} </a>
+                                    {% endif %}
+                                </div>
+                                <div class="col-12">
+                                    {% if paciente.telefono != none %}
+                                    <a href="https://api.whatsapp.com/send?phone=+52{{paciente.telefono}}&amp;text=Hola, Abigail, queremos recordarte que tienes un saldo pendiente de $0.00"
+                                        target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                        {{paciente.telefono}} </a>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+                <thead class="lighten-3">
+                    <tr>
+                        <th width="62px;"></th>
+                        <th style="font-size: 13px;">Paciente</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+    </div>
+</div>

@@ -22,6 +22,32 @@ consulta pacientes
         </div>
     </div>
 </div>
+<!-- tarjeta paciente -->
+<div class="col-12 col-md-12 col-lg-4" id="divTarjetasPacientes">
+    <div class="accordion md-accordion" id="tablerosPacientes" role="tablist" aria-multiselectable="true">
+        <!-- Ultimas consultas -->
+        <div class="card">
+            {% include 'paciente/recursos/cardultimasconsultas.html' %}
+        </div>
+        <!-- Ultimas consultas -->
+        <!-- proximas consutlas -->
+        <div class="card">
+            {% include 'paciente/recursos/cardproximaconsulta.html' %}
+        </div>
+        <!-- proximas consutlas -->
+        <!-- cumpleaños -->
+        <div class="card">
+            {% include 'paciente/recursos/cardcumple.html' %}
+        </div>
+        <!-- cumpleaños -->
+
+    </div>
+
+    <div id="divDetalleContacto"></div>
+
+
+</div>
+<!-- tarjeta paciente -->
 
 {% endblock cuerpo %}
 
@@ -109,7 +135,9 @@ consulta pacientes
             method: 'POST',
             body: new FormData(formhola),
         }).then(response => response.json()).then(response => {
-            if (response.tipo === "success") {
+           
+            /*
+             if (response.tipo === "success") {
                 document.getElementById('formhola').reset();
                 $('#modalNuevoPaciente').modal('hide')
                 Swal.fire({
@@ -120,7 +148,6 @@ consulta pacientes
                 })
                 return false;
             }
-            /*
               else if(response.success == false){
                   var example_form = document.getElementById('formhola');
                   $(example_form).find('.error-message').show()

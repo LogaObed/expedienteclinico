@@ -1,0 +1,88 @@
+{% load static %}
+<div class="card-header" role="tab" id="tabCumpleanios">
+    <a class="collapsed" data-toggle="collapse" data-parent="#tablerosPacientes" href="#tableroCumpleanios"
+        aria-expanded="false" aria-controls="tableroCumpleanios">
+        <h5 class="mb-0 h6 text-muted text-left">
+            <i class="fas fa-birthday-cake"></i> Cumpleaños
+        </h5>
+    </a>
+</div>
+
+<div id="tableroCumpleanios" class="collapse" role="tabpanel" aria-labelledby="tabCumpleanios"
+    data-parent="#tablerosPacientes">
+    <div class="card-body">
+        <div id="divCumpleanios">
+
+            {% for paciente in pacientes %}
+            <div class="row mt-2" style="border-bottom-style: solid; border-width: thin; border-color: #ccc;">
+                <div class="col-4 col-md-4">
+                    <a href="{% url 'editarpaciente' paciente.id %}" target="_self">
+                        {% if paciente.foto == "" %}
+                        <!-- <img src="../../img/sinfoto.png" class="img-fluid z-depth-1 rounded"> -->
+                        <img src="{% static 'img/' %}sinfoto.png" class="img-fluid z-depth-1 rounded">
+                        {% else %}
+                        <img src="{{paciente.foto.url}}" class="img-fluid z-depth-1 rounded">
+                        {% endif %}
+                        <div class="spinner-grow text-secondary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-8 col-md-8 ">
+                    <a href="{% url 'editarpaciente' paciente.id %}" target="_self" class="text-dark">
+
+                        <b>
+                            {{paciente.nombre}} {{paciente.apellido}}
+                        </b>
+
+                    </a>
+                    <br>
+
+                    {% if paciente.telefono != none %}
+                    <a href="https://api.whatsapp.com/send?phone=+52{{paciente.telefono }}&amp;text=Felíz cumpleaños, Obed, hoy es tu gran día y solo quiero desearte felicidad y alegría"
+                        target="_blank" class="text-dark">
+                        <small>
+                            <i class="fas fa-birthday-cake text-secondary"></i>
+                            26 de Febrero<span class="ml-3">0 años</span> <br>
+                            <i class="fas fa-home text-danger mr-2"></i>Jardin Mangos
+                            <br>
+                        </small>
+                    </a>
+                    {% else %}
+                    <small>
+                        <i class="fas fa-birthday-cake text-secondary"></i>
+                        26 de Febrero<span class="ml-3">0 años</span> <br>
+                        <i class="fas fa-home text-danger mr-2"></i>Jardin Mangos
+                        <br>
+                    </small>
+                    {% endif %}
+
+                    <small>
+                        {% if paciente.telefono != none %}
+                        <a href="tel:+52{{paciente.telefono}}" class="text-dark mr-3">
+                            <i class="fas fa-phone-volume text-info mr-2"></i>
+                            {{paciente.telefono}} </a>
+                        {% endif %}
+
+                        {% if paciente.telefono != none %}
+                        <a href="https://api.whatsapp.com/send?phone=+52{{paciente.telefono}}&amp;text=Felíz cumpleaños, Obed, hoy es tu gran día y solo quiero desearte felicidad y alegría"
+                            target="_blank" class="text-dark mr-3">
+                            <i class="fab fa-whatsapp text-success mr-2"></i>
+                            {{paciente.telefono}} </a>
+                        {% endif %}
+                        <br>
+                        {% if paciente.email != none %}
+                        <a href="mailto:{{paciente.email}}" class="text-dark">
+                            <i class="far fa-envelope text-info mr-2"></i>
+                            {{paciente.email}} </a>
+                        {% endif %}
+
+                    </small>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>

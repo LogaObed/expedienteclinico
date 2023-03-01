@@ -1,0 +1,93 @@
+{% load crispy_forms_tags %}
+
+<div class="card-header" role="tab" id="tabExperiencia">
+    <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroExperiencia"
+        aria-expanded="false" aria-controls="tableroExperiencia">
+        <h5 class="mb-0 h6 text-muted text-left" id="textoExperiencia">
+            <i class="far fa-star text-warning"></i>
+            Experiencia del Paciente
+        </h5>
+    </a>
+</div>
+<div id="tableroExperiencia" class="collapse" role="tabpanel" data-parent="#tableroFichaIdentificacion">
+    <form action="{% url 'editarprefe' pacientes.propietario.id %}" method="POST" id="formpreferencia">
+        {% csrf_token %}
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <small class="text-center">Experiencia</small>
+                    {{formpref.experiencia|as_crispy_field}}
+                </div>
+                <!-- pareja -->
+                <div class="col-12 col-md-8">
+                    <small>Nombre de Pareja</small>
+                    {{formpref.nombre_pareja|as_crispy_field}}
+                </div>
+                <div class="col-12 col-md-4">
+                    <small>Aniversario</small>
+                    {{formpref.fecha_aniversario|as_crispy_field}}
+                </div>
+                <!-- pareja -->
+            </div>
+            <div class="row">
+                <!-- hijos -->
+                <div class="col-12 col-md-8">
+                    <small>Hijo</small>
+                    {{formpref.nombre_hijos|as_crispy_field}}
+                </div>
+                <div class="col-12 col-md-4">
+                    <small>Cumpleaños</small>
+                    {{formpref.fecha_hijo|as_crispy_field}}
+                </div>
+                <!-- hijos -->
+
+            </div>
+            <div class="row">
+                <!-- empresa  -->
+                <div class="col-12 col-md-8">
+                    <small>Empresa</small>
+                    {{formpref.nombre_empresa|as_crispy_field}}
+                </div>
+                <div class="col-12 col-md-4">
+                    <small>Aniversario de Empresa</small>
+                    {{formpref.fecha_empresa|as_crispy_field}}
+                </div>
+                <!-- empresa  -->
+                <div class="col-12 text-center">
+                    <small>- Hobbies -</small>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <small>Gustos y Preferencias</small>
+                    {{formpref.gustos|as_crispy_field}}
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <small>Series y Películas</small>
+                    {{formpref.pelicula_serie|as_crispy_field}}
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <small>Música</small>
+                    {{formpref.musica|as_crispy_field}}
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <small>Deportes</small>
+                    {{formpref.deportes|as_crispy_field}}
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <small>Comida</small>
+                    {{formpref.comida|as_crispy_field}}
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <small>Vehículos</small>
+                    {{formpref.vehiculo|as_crispy_field}}
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,114 @@
+{% load static %}
+<div class="card">
+    <div class="card-header" role="tab" id="tabDatoGenerales">
+        <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroDatosGenerales"
+            aria-expanded="false" aria-controls="tableroDatosGenerales">
+            <h5 class="mb-0 h6 text-muted text-left" id="textoDatosPaciente">
+                <img src="{% static 'img/' %}ico/ficha.svg" width="25px;">
+                Modificar Datos del Paciente </h5>
+        </a>
+    </div>
+
+
+    <div id="tableroDatosGenerales" class="collapse" role="tabpanel" data-parent="#tableroFichaIdentificacion">
+        <div class="card-body">
+            <form action="{% url 'editardatogeneral' pacientes.propietario.id %}" method="POST" id="formdatosgenerales">
+                {% csrf_token %}
+                <div id="divTableroDatosGenerales">
+                    <div id="resDatosPaciente" style="display: none;"></div>
+                    <div class="row">
+                        <div class="col-12 col-md-8 ">
+                            <small>Domicilio</small>
+                            {{formgeneral.domicilio}}
+                        </div>
+
+                        <div class="col-6 col-md-4">
+                            <small>Ciudad</small>
+                            {{formgeneral.ciudad}}
+                        </div>
+
+                        <div class="col-6 col-md-4">
+                            <small>Estado</small>
+                            {{formgeneral.estado}}
+                        </div>
+
+                        <div class="col-6 col-md-4">
+                            <small>Código Postal</small>
+                            {{formgeneral.cp}}
+                            <!-- <input type="number" placeholder="Código Postal" id="cp" value="562389"
+                           type="number" placeholder="Código Postal" class="form-control form-control-sm text-left"
+                            onblur="guardacampo('paciente','cp','cp','idpaciente','6866','resDatosPaciente');"
+                            onchange="guardacampo('paciente','cp','cp','idpaciente','6866','resDatosPaciente')"
+                            data-toggle="tooltip" data-placement="left" title="Código Postal"> -->
+                        </div>
+                    </div>
+
+                    <!-- DATOS DE CONTACTO -->
+                    <div class="row">
+                        <div class="col-6 col-md-4 ">
+                            <small>Celular</small>
+
+                        </div>
+
+                        <div class="col-6 col-md-4 ">
+                            <small>Teléfono</small>
+                            {{formgeneral.celular}}
+
+                        </div>
+
+                        <div class="col-6 col-md-4 ">
+                            <small>Teléfono</small>
+                            {{formgeneral.telefono}}
+
+                        </div>
+
+                        <div class="col-6 col-md-6">
+                            <small>EMail</small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-12 col-md-12">
+                            <small>Lugar de Nacimiento</small>
+                            {{formgeneral.lugar_nacimiento}}
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <small>Ocupación</small>
+                            {{formgeneral.ocupacion}}
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <small>Religión</small>
+                            {{formgeneral.region}}
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <small>Clave APP</small>
+                            {{formgeneral.clave_app}}
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            <button class="btn btn-link p-0 text-muted" style="text-transform:none !important;"
+                                data-toggle="modal" data-target="#modalDatosFacturacionPaciente">
+                                <i class="fas fa-file-invoice-dollar text-secondary"></i> Datos fiscales
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="col-12 text-center">
+                <button type="button" class="btn btn-sm btn-danger mt-5" onclick="eliminardatosgenerales();">Eliminar
+                    Contacto Definitivamente</button>
+            </div>
+        </div>
+    </div>
+
+</div>
