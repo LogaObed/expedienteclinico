@@ -4,9 +4,11 @@
 consulta pacientes
 {% endblock titulo %}
 
+{% block cabeza %}
+{% include 'paciente/menu.html' %}
+{% endblock cabeza %}
 {% block cuerpo %}
 {% load crispy_forms_tags %}
-
 <div class="col-12 col-md-12 col-lg-8" id="divPacientes">
     {% include 'paciente/recursos/modalnuevapaciente.html' %}
     <div class="card">
@@ -135,7 +137,18 @@ consulta pacientes
             method: 'POST',
             body: new FormData(formhola),
         }).then(response => response.json()).then(response => {
-           
+            if (response.tipo === "success") {
+                document.getElementById('formhola').reset();
+                $('#modalNuevoPaciente').modal('hide')
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registrado correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                location.reload()
+                return false;
+            }
             /*
              if (response.tipo === "success") {
                 document.getElementById('formhola').reset();

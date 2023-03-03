@@ -19,16 +19,16 @@ class FormPacienteGeneral(ModelForm):
         model = DatosGeneral
         exclude = ['propietario']
         widgets = {
-            'domicilio': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left','placeholder':'Domicilio','data-placement':'left'}),
-            'ciudad': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left','placeholder':'Ciudad','data-placement':'left'}),
-            'estado': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left','placeholder':'Estado','data-placement':'left'}),
-            'lugar_nacimiento': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left','placeholder':'Lugar de Nacimiento','data-placement':'left'}),
-            'ocupacion': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left','placeholder':'Ocupación','data-placement':'left'}),
-            'region': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left','placeholder':'Religión','data-placement':'left'}),
-            'clave_app': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left','placeholder':'Clave de la APP','data-placement':'left'}),
-            'cp': NumberInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder':'Código Postal','data-placement':'left'}),
-            'celular': NumberInput(attrs={'type': 'tel','onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder':'Teléfono Celular','data-placement':'left'}),
-            'telefono': NumberInput(attrs={'type': 'tel','onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder':'Teléfono Principal','data-placement':'left'}),
+            'domicilio': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Domicilio', 'data-placement': 'left'}),
+            'ciudad': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Ciudad', 'data-placement': 'left'}),
+            'estado': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Estado', 'data-placement': 'left'}),
+            'lugar_nacimiento': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Lugar de Nacimiento', 'data-placement': 'left'}),
+            'ocupacion': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Ocupación', 'data-placement': 'left'}),
+            'region': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Religión', 'data-placement': 'left'}),
+            'clave_app': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Clave de la APP', 'data-placement': 'left'}),
+            'cp': NumberInput(attrs={'min':'0','onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Código Postal', 'data-placement': 'left'}),
+            'celular': NumberInput(attrs={'type': 'tel', 'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Teléfono Celular', 'data-placement': 'left'}),
+            'telefono': NumberInput(attrs={'type': 'tel', 'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Teléfono Principal', 'data-placement': 'left'}),
         }
 
 
@@ -59,21 +59,38 @@ class FormNota(ModelForm):
         exclude = ['propietario']
 
 
+class FormAntecedenteFamiliar(ModelForm):
+    class Meta:
+        exclude = ['propietario']
+        model = AntecedenteFamiliar
+        widgets = {
+            'hermanos': NumberInput(attrs={'min':'0','class':'form-control form-control-sm text-center','onblur':'guardarheredofamiliar();','data-placement':'left'}),
+            'diabetes': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
+            'hip_arterial': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
+            'cardiopatias': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
+            'hepatopatias': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
+            'urologicos': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
+            'neurologicos': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
+            'respiratorios': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
+            'cancer': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
+            'alergias': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
+            'metabolicas': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
+            'sanguineas': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
+            'articulares': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
+            'inmunologicas': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
+            'malformaciones': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
+            'dermatologicas': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
+            'otros': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
+
+        }
+
+
 class FormAntecedentePersonal(ModelForm):
     class Meta:
         model = AntecedentePersonal
         exclude = ['propietario']
         widgets = {
             'ultima_desparacita': DateInput(attrs={'type': 'date'}),
-        }
-
-
-class FormAntecedenteFamiliar(ModelForm):
-    class Meta:
-        exclude = ['propietario']
-        model = AntecedenteFamiliar
-        widgets = {
-            'hermanos': NumberInput(attrs={'type': 'number'})
         }
 
 

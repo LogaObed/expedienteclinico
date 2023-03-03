@@ -66,19 +66,30 @@ class DatosGeneral(models.Model):
 
 class Preferencia(models.Model):
     propietario = models.OneToOneField(Paciente, on_delete=models.CASCADE)
-    experiencia = models.TextField(max_length=200,null=True,blank=True,verbose_name='')
-    nombre_pareja = models.CharField(max_length=25, blank=True, null=True,verbose_name="")
-    fecha_aniversario = models.DateField(blank=True, null=True, verbose_name='')
-    nombre_hijos = models.CharField(max_length=25, blank=True, null=True,verbose_name="")
-    fecha_hijo = models.DateField(blank=True, null=True,verbose_name="")
-    nombre_empresa = models.CharField(max_length=50, blank=True, null=True,verbose_name="")
-    gustos = models.CharField(max_length=50, blank=True, null=True,verbose_name="")
-    fecha_empresa = models.DateField(blank=True, null=True,verbose_name="")
-    deportes = models.CharField(max_length=150, blank=True, null=True,verbose_name="")
-    pelicula_serie = models.CharField(max_length=150, blank=True, null=True,verbose_name="")
-    musica = models.CharField(max_length=150, blank=True, null=True,verbose_name="")
-    vehiculo = models.CharField(max_length=150, blank=True, null=True,verbose_name="")
-    comida = models.CharField(max_length=150, blank=True, null=True,verbose_name="")
+    experiencia = models.TextField(
+        max_length=200, null=True, blank=True, verbose_name='')
+    nombre_pareja = models.CharField(
+        max_length=25, blank=True, null=True, verbose_name="")
+    fecha_aniversario = models.DateField(
+        blank=True, null=True, verbose_name='')
+    nombre_hijos = models.CharField(
+        max_length=25, blank=True, null=True, verbose_name="")
+    fecha_hijo = models.DateField(blank=True, null=True, verbose_name="")
+    nombre_empresa = models.CharField(
+        max_length=50, blank=True, null=True, verbose_name="")
+    gustos = models.CharField(
+        max_length=50, blank=True, null=True, verbose_name="")
+    fecha_empresa = models.DateField(blank=True, null=True, verbose_name="")
+    deportes = models.CharField(
+        max_length=150, blank=True, null=True, verbose_name="")
+    pelicula_serie = models.CharField(
+        max_length=150, blank=True, null=True, verbose_name="")
+    musica = models.CharField(
+        max_length=150, blank=True, null=True, verbose_name="")
+    vehiculo = models.CharField(
+        max_length=150, blank=True, null=True, verbose_name="")
+    comida = models.CharField(
+        max_length=150, blank=True, null=True, verbose_name="")
 
 
 class NotaPaciente(models.Model):

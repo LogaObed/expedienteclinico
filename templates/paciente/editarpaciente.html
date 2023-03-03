@@ -3,12 +3,12 @@
 {% block titulo %}
 consulta
 {% endblock titulo %}
-
+{% block cabeza %}
+{% include 'paciente/menu.html' %}
+{% endblock cabeza %}
 {% block cuerpo %}
 {% load crispy_forms_tags %}
-
 <div class="col-12 col-md-4" id="divFichaPaciente">
-
     <!-- paciente cabecera -->
     {% include 'paciente/recursos/cabecerapaciente.html' %}
     <!-- paciente cabecera -->
@@ -150,9 +150,9 @@ consulta
                     <div id="divTableroHistoria">
                         <div id="resHistoria" style="display: none;"></div>
                         <div class="row">
-                        <!-- form heredo familiares  -->
-                        {% include 'paciente/recursos/formheredofamiliares.html' %}
-                        <!-- form heredo familiares  -->
+                            <!-- form heredo familiares  -->
+                            {% include 'paciente/recursos/formheredofamiliares.html' %}
+                            <!-- form heredo familiares  -->
 
                             <div class="col-12 col-md-12 mt-2">
                                 <div class="card">
@@ -1009,6 +1009,15 @@ consulta
                   $(example_form).find('.error-message').show()
               }
             */
+        })
+    }
+
+    function guardarheredofamiliar() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Datos Heredo familiares',
+            showConfirmButton: false,
+            timer: 1500
         })
     }
 

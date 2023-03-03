@@ -27,7 +27,9 @@ def consultaPacientes(request):
     form = FormNuevoPaciente()
     # paciente = DatosGeneral.objects.filter(tipo_usuario=2).order_by('-id')
     paciente = DatosGeneral.objects.filter().order_by('-id')
+    # paciente = DatosGeneral.objects.select_related()
     return render(request, 'paciente/consultapaciente.html', {'pacientes': paciente, 'form': form})
+    # return render(request, 'ejemplodivcartpaciente.html', {'pacientes': paciente, 'form': form})
 
 
 def nuevoPaciente(request):
@@ -89,40 +91,6 @@ def nuevoPaciente(request):
             return {'success': False, 'form_html': form_html}
 
 
-def editarPreferencia(request, prefe):
-    if request.method == "POST":
-        response_data = {}
-        # actualizar preferencia
-        cnpref = Preferencia.objects.get(propietario=prefe)
-        prefid = cnpref.id
-        busca_prefe = get_object_or_404(Preferencia, pk=prefid)
-        form = FormPreferencia(request.POST, instance=busca_prefe)
-        if form.is_valid():
-            form.save()
-            response_data['tipo'] = 'success'
-            return JsonResponse(response_data)
-    else:
-        response_data['tipo'] = 'get'
-        return JsonResponse(response_data)
-
-
-def editarDatoGeneral(request, datogeneral):
-    if request.method == "POST":
-        response_data = {}
-        #
-        cnsgeneral = DatosGeneral.objects.get(propietario=datogeneral)
-        dtid = cnsgeneral.id
-        busca_general = get_object_or_404(DatosGeneral, pk=dtid)
-        form = FormPacienteGeneral(request.POST, instance=busca_general)
-        if form.is_valid():
-            form.save()
-            response_data['tipo'] = 'success'
-            return JsonResponse(response_data)
-    else:
-        response_data['tipo'] = 'get'
-        return JsonResponse(response_data)
-
-
 def editarPaciente(request, dato):
     userdata = get_object_or_404(Paciente, pk=dato)
     if request.method == 'GET':
@@ -178,6 +146,40 @@ def editarPaciente(request, dato):
             return redirect('consultapaciente')
         else:
             return redirect('paciente')
+
+
+def editarPreferencia(request, prefe):
+    if request.method == "POST":
+        response_data = {}
+        # actualizar preferencia
+        cnpref = Preferencia.objects.get(propietario=prefe)
+        prefid = cnpref.id
+        busca_prefe = get_object_or_404(Preferencia, pk=prefid)
+        form = FormPreferencia(request.POST, instance=busca_prefe)
+        if form.is_valid():
+            form.save()
+            response_data['tipo'] = 'success'
+            return JsonResponse(response_data)
+    else:
+        response_data['tipo'] = 'get'
+        return JsonResponse(response_data)
+
+
+def editarDatoGeneral(request, datogeneral):
+    if request.method == "POST":
+        response_data = {}
+        #
+        cnsgeneral = DatosGeneral.objects.get(propietario=datogeneral)
+        dtid = cnsgeneral.id
+        busca_general = get_object_or_404(DatosGeneral, pk=dtid)
+        form = FormPacienteGeneral(request.POST, instance=busca_general)
+        if form.is_valid():
+            form.save()
+            response_data['tipo'] = 'success'
+            return JsonResponse(response_data)
+    else:
+        response_data['tipo'] = 'get'
+        return JsonResponse(response_data)
 
 
 def consultaIndividualPaciente(request, dato):
