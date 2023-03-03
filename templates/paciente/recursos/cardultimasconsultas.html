@@ -16,37 +16,37 @@
                          {% for paciente in pacientes %}
                          <tr>
                              <td style="padding-left: 0; padding-right: 0;padding-top: 4px; padding-bottom: 1px;">
-                                 <a href="{% url 'editarpaciente' paciente.id %}" target=" _self">
-                                     {% if paciente.foto == "" %}
+                                 <a href="{% url 'editarpaciente' paciente.propietario.id %}" target=" _self">
+                                     {% if paciente.propietario.foto == "" %}
                                      <i class="fas fa-image text-muted fa-4x"></i>
                                      {% else %}
-                                     <img src="{{paciente.foto.url}}" class="img-fluid z-depth-1 rounded">
+                                     <img src="{{paciente.propietario.foto.url}}" class="img-fluid z-depth-1 rounded">
                                      {% endif %}
                                  </a>
                              </td>
                              <td style="font-size: 13px;">
                                  <div class="row">
                                      <div class="col-12">
-                                         <a href="{% url 'editarpaciente' paciente.id %}" target="_self">
-                                             {{paciente.nombre}} {{paciente.apellido}} </a>
+                                         <a href="{% url 'editarpaciente' paciente.propietario.id %}" target="_self">
+                                             {{paciente.propietario.nombre}} {{paciente.propietario.apellido}} </a>
                                      </div>
                                      <div class="col-12 text-danger ">
                                          <strong>
                                              Última Consulta 24/02/2023 </strong>
                                      </div>
                                      <div class="col-12">
-                                         {% if paciente.email != none %}
-                                         <a href="mailto:{{paciente.email}}">
+                                         {% if paciente.propietario.email != none %}
+                                         <a href="mailto:{{paciente.propietario.email}}">
                                              <i class="far fa-envelope"></i>
-                                             {{paciente.email}} </a>
+                                             {{paciente.propietario.email}} </a>
                                          {% endif %}
                                      </div>
                                      <div class="col-12">
-                                         {% if paciente.telefono != none %}
-                                         <a href="https://api.whatsapp.com/send?phone=+52{{paciente.telefono}}&amp;text=Hola, Abigail, queremos recordarte que tienes un saldo pendiente de $0.00"
+                                         {% if paciente.propietario.telefono != none %}
+                                         <a href="https://api.whatsapp.com/send?phone=+52{{paciente.propietario.telefono}}&amp;text=Hola, Abigail, queremos recordarte que tienes un saldo pendiente de $0.00"
                                              target="_blank">
                                              <i class="fab fa-whatsapp"></i>
-                                             {{paciente.telefono}} </a>
+                                             {{paciente.propietario.telefono}} </a>
                                          {% endif %}
 
                                      </div>

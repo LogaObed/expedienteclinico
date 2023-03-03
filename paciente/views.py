@@ -182,6 +182,24 @@ def editarDatoGeneral(request, datogeneral):
         return JsonResponse(response_data)
 
 
+def editarHeredoFamiliar(request, heredofamiliar):
+    if request.method == "POST":
+        response_data = {}
+        #
+        conheredofamiliar = AntecedenteFamiliar.objects.get(
+            propietario=heredofamiliar)
+        dtid = conheredofamiliar.id
+        busca = get_object_or_404(AntecedenteFamiliar, pk=dtid)
+        form = FormAntecedenteFamiliar(request.POST, instance=busca)
+        if form.is_valid():
+            form.save()
+            response_data['tipo'] = 'success'
+            return JsonResponse(response_data)
+    else:
+        response_data['tipo'] = 'get'
+        return JsonResponse(response_data)
+
+
 def consultaIndividualPaciente(request, dato):
     form = FormPacienteGeneral()
     datogeneral = get_object_or_404(DatosGeneral, pk=dato)

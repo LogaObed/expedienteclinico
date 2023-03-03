@@ -1,0 +1,329 @@
+<div class="col-12 col-md-12 mt-2">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <h6 class="h6 text-muted text-center">Antecedentes
+                        Personales Patológicos</h6>
+                </div>
+                <div class="col-12">
+                    <div id="patologicos">
+                        <form action="{% url 'editarheredofamiliar' pacientes.propietario.id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Enf. Prop. Infancia</small>
+                                    {{formpatologico.enf_infancia}}
+                                    <!-- <input type="text" placeholder=""
+                                    id="ppat_enfpropiasinfancia" value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_enfpropiasinfancia','ppat_enfpropiasinfancia','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Enfermedades Propias de la Infancia"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Diabetes</small>
+                                    {{formpatologico.diabetes}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_diabetes"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_diabetes','ppat_diabetes','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Diabetes"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Hipertensión</small>
+                                    {{formpatologico.hip_arterial}}
+                                    <!-- <input type="text" placeholder="" id="ppat_hipertension"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_hipertension','ppat_hipertension','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Hipertensión"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Respiratorias</small>
+                                    {{formpatologico.respiratorias}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_respiratorias"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_respiratorias','ppat_respiratorias','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Respiratorias"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Oftálmico</small>
+                                    {{formpatologico.oftalmico}}
+                                    <!-- <input type="text" placeholder="" id="ppat_oftalmico"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_oftalmico','ppat_oftalmico','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Oftálmico"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Cardiovasculares</small>
+                                    {{formpatologico.cardeovasculares}}
+                                    <!-- <input type="text" placeholder="" id="ppat_cardiovasculares"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_cardiovasculares','ppat_cardiovasculares','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Cardiovasculares"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Neurológicos</small>
+                                    {{formpatologico.neurologicos}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_neurologicos"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_neurologicos','ppat_neurologicos','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Neurológicos"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Gastro Intestinales</small>
+                                    {{formpatologico.gastro_intestinal}}
+
+                                    <!-- <input type="text" placeholder=""
+                                    id="ppat_gastrointestinales" value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_gastrointestinales','ppat_gastrointestinales','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Gastro-Intestinales"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Hepatopatías</small>
+                                    {{formpatologico.hepaticas}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_hepatopatias"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_hepatopatias','ppat_hepatopatias','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Hepatopatías"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Metabólicas</small>
+                                    {{formpatologico.metabolicas}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_metabolicas"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_metabolicas','ppat_metabolicas','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Metabólicas"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Urológicos</small>
+                                    {{formpatologico.urologicos}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_urologicos"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_urologicos','ppat_urologicos','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Urológicos"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Circulatorio</small>
+                                    {{formpatologico.circulatorio}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_circulatorio"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_circulatorio','ppat_circulatorio','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Circulatorio"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Traumáticas</small>
+                                    {{formpatologico.traumaticas}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_traumaticas"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_traumaticas','ppat_traumaticas','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Traumáticas"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Articulares</small>
+                                    {{formpatologico.articulares}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_articulares"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_articulares','ppat_articulares','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Articulares"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Dermatológicas</small>
+                                    {{formpatologico.dermatologicas}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_dermatologicas"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_dermatologicas','ppat_dermatologicas','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Dermatológicas"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Quirúrgicos</small>
+                                    {{formpatologico.quirurgicas}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_quirurgicos"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_quirurgicos','ppat_quirurgicos','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Quirúrgicos"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Transfusionales</small>
+                                    {{formpatologico.transfusionales}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_transfusionales"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_transfusionales','ppat_transfusionales','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Transfusionales"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Alergias</small>
+                                    {{formpatologico.alergias}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_alergias"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_alergias','ppat_alergias','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Alergias"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Vectores</small>
+                                    {{formpatologico.vectores}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_vectores"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_vectores','ppat_vectores','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Vectores"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Autoinmunes</small>
+                                    {{formpatologico.autoimunes}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_autoinmunes"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_autoinmunes','ppat_autoinmunes','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Autoinmunes"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Emocionales</small>
+                                    {{formpatologico.emocionales}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_emocionales"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_emocionales','ppat_emocionales','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Emocionales"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Adicciones</small>
+                                    {{formpatologico.adicciones}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_adicciones"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_adicciones','ppat_adicciones','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Adicciones"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Hosp. Previas</small>
+                                    {{formpatologico.hosp_previas}}
+
+                                    <!-- <input type="text" placeholder=""
+                                    id="ppat_hospitalizaciones" value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_hospitalizaciones','ppat_hospitalizaciones','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Hospitalizaciones Previas"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Pesticidas</small>
+                                    {{formpatologico.pesticidas}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_pesticidas"
+                                    value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_pesticidas','ppat_pesticidas','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Pesticidas"> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Dx.Ca</small>
+                                    {{formpatologico.dx_ca}}
+
+                                    <!-- <input type="text" placeholder="" id="ppat_dxca" value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur=""
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Dx.CA."> -->
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Otros</small>
+                                    {{formpatologico.otros}}
+                                    <!-- <input type="text" placeholder="" id="ppat_otros" value=""
+                                    class="form-control form-control-sm text-center"
+                                    onblur="guardacampoConsulta('historia','ppat_otros','ppat_otros','idhistoria','4475','resHistoria','7148');"
+                                    data-toggle="tooltip" data-placement="left" title=""
+                                    data-original-title="Otros"> -->
+                                </div>
+
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

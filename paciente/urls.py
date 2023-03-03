@@ -9,4 +9,5 @@ urlpatterns = [
     path('editar/<int:dato>', views.editarPaciente,name='editarpaciente'),
     path('editar-preferencia/<int:prefe>', views.editarPreferencia,name='editarprefe'),
     path('editar-datos-generales/<int:datogeneral>', views.editarDatoGeneral,name='editardatogeneral'),
+    path('editar-heredo-familiar/<int:heredofamiliar>', views.editarHeredoFamiliar,name='editarheredofamiliar'),
 ]

@@ -16,12 +16,12 @@
             {% for paciente in pacientes %}
             <div class="row mt-2" style="border-bottom-style: solid; border-width: thin; border-color: #ccc;">
                 <div class="col-4 col-md-4">
-                    <a href="{% url 'editarpaciente' paciente.id %}" target="_self">
-                        {% if paciente.foto == "" %}
+                    <a href="{% url 'editarpaciente' paciente.propietario.id %}" target="_self">
+                        {% if paciente.propietario.foto == "" %}
                         <!-- <img src="../../img/sinfoto.png" class="img-fluid z-depth-1 rounded"> -->
                         <img src="{% static 'img/' %}sinfoto.png" class="img-fluid z-depth-1 rounded">
                         {% else %}
-                        <img src="{{paciente.foto.url}}" class="img-fluid z-depth-1 rounded">
+                        <img src="{{paciente.propietario.foto.url}}" class="img-fluid z-depth-1 rounded">
                         {% endif %}
                         <div class="spinner-grow text-secondary" role="status">
                             <span class="sr-only">Loading...</span>
@@ -30,17 +30,17 @@
                 </div>
 
                 <div class="col-8 col-md-8 ">
-                    <a href="{% url 'editarpaciente' paciente.id %}" target="_self" class="text-dark">
+                    <a href="{% url 'editarpaciente' paciente.propietario.id %}" target="_self" class="text-dark">
 
                         <b>
-                            {{paciente.nombre}} {{paciente.apellido}}
+                            {{paciente.propietario.nombre}} {{paciente.propietario.apellido}}
                         </b>
 
                     </a>
                     <br>
 
-                    {% if paciente.telefono != none %}
-                    <a href="https://api.whatsapp.com/send?phone=+52{{paciente.telefono }}&amp;text=Felíz cumpleaños, Obed, hoy es tu gran día y solo quiero desearte felicidad y alegría"
+                    {% if paciente.propietario.telefono != none %}
+                    <a href="https://api.whatsapp.com/send?phone=+52{{paciente.propietario.telefono }}&amp;text=Felíz cumpleaños, Obed, hoy es tu gran día y solo quiero desearte felicidad y alegría"
                         target="_blank" class="text-dark">
                         <small>
                             <i class="fas fa-birthday-cake text-secondary"></i>
@@ -59,23 +59,23 @@
                     {% endif %}
 
                     <small>
-                        {% if paciente.telefono != none %}
-                        <a href="tel:+52{{paciente.telefono}}" class="text-dark mr-3">
+                        {% if paciente.propietario.telefono != none %}
+                        <a href="tel:+52{{paciente.propietario.telefono}}" class="text-dark mr-3">
                             <i class="fas fa-phone-volume text-info mr-2"></i>
-                            {{paciente.telefono}} </a>
+                            {{paciente.propietario.telefono}} </a>
                         {% endif %}
 
-                        {% if paciente.telefono != none %}
-                        <a href="https://api.whatsapp.com/send?phone=+52{{paciente.telefono}}&amp;text=Felíz cumpleaños, Obed, hoy es tu gran día y solo quiero desearte felicidad y alegría"
+                        {% if paciente.propietario.telefono != none %}
+                        <a href="https://api.whatsapp.com/send?phone=+52{{paciente.propietario.telefono}}&amp;text=Felíz cumpleaños, Obed, hoy es tu gran día y solo quiero desearte felicidad y alegría"
                             target="_blank" class="text-dark mr-3">
                             <i class="fab fa-whatsapp text-success mr-2"></i>
-                            {{paciente.telefono}} </a>
+                            {{paciente.propietario.telefono}} </a>
                         {% endif %}
                         <br>
-                        {% if paciente.email != none %}
-                        <a href="mailto:{{paciente.email}}" class="text-dark">
+                        {% if paciente.propietario.email != none %}
+                        <a href="mailto:{{paciente.propietario.email}}" class="text-dark">
                             <i class="far fa-envelope text-info mr-2"></i>
-                            {{paciente.email}} </a>
+                            {{paciente.propietario.email}} </a>
                         {% endif %}
 
                     </small>

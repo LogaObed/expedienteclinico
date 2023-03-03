@@ -26,7 +26,7 @@ class FormPacienteGeneral(ModelForm):
             'ocupacion': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Ocupación', 'data-placement': 'left'}),
             'region': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Religión', 'data-placement': 'left'}),
             'clave_app': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Clave de la APP', 'data-placement': 'left'}),
-            'cp': NumberInput(attrs={'min':'0','onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Código Postal', 'data-placement': 'left'}),
+            'cp': NumberInput(attrs={'min': '0', 'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Código Postal', 'data-placement': 'left'}),
             'celular': NumberInput(attrs={'type': 'tel', 'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Teléfono Celular', 'data-placement': 'left'}),
             'telefono': NumberInput(attrs={'type': 'tel', 'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Teléfono Principal', 'data-placement': 'left'}),
         }
@@ -60,28 +60,34 @@ class FormNota(ModelForm):
 
 
 class FormAntecedenteFamiliar(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs.update(
+                {'class': 'form-control form-control-sm text-center', 'onblur': 'guardarheredofamiliar();', 'onchange': 'guardarheredofamiliar();', 'data-toggle': 'tooltip', 'data-placement': 'left', 'title': ''})
+            # form.field.widget.attrs['onblur'] = 'guardarheredofamiliar();'
+
     class Meta:
         exclude = ['propietario']
         model = AntecedenteFamiliar
         widgets = {
-            'hermanos': NumberInput(attrs={'min':'0','class':'form-control form-control-sm text-center','onblur':'guardarheredofamiliar();','data-placement':'left'}),
-            'diabetes': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
-            'hip_arterial': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
-            'cardiopatias': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
-            'hepatopatias': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
-            'urologicos': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
-            'neurologicos': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
-            'respiratorios': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
-            'cancer': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
-            'alergias': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
-            'metabolicas': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
-            'sanguineas': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
-            'articulares': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
-            'inmunologicas': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
-            'malformaciones': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
-            'dermatologicas': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
-            'otros': TextInput(attrs={'onblur': 'guardarheredofamiliar();', 'class': 'form-control form-control-sm text-center'}),
-
+            'hermanos': NumberInput(attrs={'min': '0',  'data-original-title': 'No. Hermanos'}),
+            'diabetes': TextInput(attrs={'data-original-title': 'Diabetes'}),
+            'hip_arterial': TextInput(attrs={'data-original-title': 'Hipertensión Arterial'}),
+            'cardiopatias': TextInput(attrs={'data-original-title': 'Cardiopatías'}),
+            'hepatopatias': TextInput(attrs={'data-original-title': 'Hepatopatías'}),
+            'urologicos': TextInput(attrs={'data-original-title': 'Urológicos'}),
+            'neurologicos': TextInput(attrs={'data-original-title': 'Neurológicas'}),
+            'respiratorios': TextInput(attrs={'data-original-title': 'Respiratorias'}),
+            'cancer': TextInput(attrs={'data-original-title': 'Cancer'}),
+            'alergias': TextInput(attrs={'data-original-title': 'Alérgicas'}),
+            'metabolicas': TextInput(attrs={'data-original-title': 'Metabólicas'}),
+            'sanguineas': TextInput(attrs={'data-original-title': 'Sanguíneas'}),
+            'articulares': TextInput(attrs={'data-original-title': 'Articulares'}),
+            'inmunologicas': TextInput(attrs={'data-original-title': 'Inmunológicas'}),
+            'malformaciones': TextInput(attrs={'data-original-title': 'Malformaciones'}),
+            'dermatologicas': TextInput(attrs={'data-original-title': 'Dermatológicas'}),
+            'otros': TextInput(attrs={'data-original-title': 'Otros'}),
         }
 
 
@@ -95,9 +101,19 @@ class FormAntecedentePersonal(ModelForm):
 
 
 class FormAntecedentePatologico(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs.update(
+                {'class': 'form-control form-control-sm text-center', 'onblur': 'guardarAntecetentePatologico();', 'onchange': 'guardarAntecetentePatologico();', 'data-toggle': 'tooltip', 'data-placement': 'left', 'title': ''})
+            # form.field.widget.attrs['onblur'] = 'guardarAntecetentePatologico();'
+
     class Meta:
         model = AntecedentePatologico
         exclude = ['propietario']
+        widgets = {
+            'diabetes': TextInput(attrs={'data-original-title': 'Diabetes'}),
+        }
 
 
 class FormAntecedenteAlimenticio(ModelForm):
