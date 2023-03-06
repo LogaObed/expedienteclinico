@@ -15,41 +15,53 @@ class FormNuevoPaciente(ModelForm):
 
 
 class FormPacienteGeneral(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs.update({'autocomplete': 'off', 'onblur': 'guardardatosgenerales();', 'onchange': 'guardardatosgenerales();',
+                                           'class': 'form-control form-control-sm text-left', 'data-toggle': 'tooltip', 'data-placement': 'left'})
+
     class Meta:
         model = DatosGeneral
         exclude = ['propietario']
         widgets = {
-            'domicilio': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Domicilio', 'data-placement': 'left'}),
-            'ciudad': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Ciudad', 'data-placement': 'left'}),
-            'estado': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Estado', 'data-placement': 'left'}),
-            'lugar_nacimiento': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Lugar de Nacimiento', 'data-placement': 'left'}),
-            'ocupacion': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Ocupación', 'data-placement': 'left'}),
-            'region': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Religión', 'data-placement': 'left'}),
-            'clave_app': TextInput(attrs={'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Clave de la APP', 'data-placement': 'left'}),
-            'cp': NumberInput(attrs={'min': '0', 'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Código Postal', 'data-placement': 'left'}),
-            'celular': NumberInput(attrs={'type': 'tel', 'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Teléfono Celular', 'data-placement': 'left'}),
-            'telefono': NumberInput(attrs={'type': 'tel', 'onblur': 'guardardatosgenerales();', 'class': 'form-control form-control-sm text-left', 'placeholder': 'Teléfono Principal', 'data-placement': 'left'}),
+            'domicilio': TextInput(attrs={'placeholder': 'Domicilio', 'title': 'Domicilio'}),
+            'ciudad': TextInput(attrs={'placeholder': 'Ciudad', 'title': 'Ciudad'}),
+            'estado': TextInput(attrs={'placeholder': 'Estado', 'title': 'Estado'}),
+            'lugar_nacimiento': TextInput(attrs={'placeholder': 'Lugar de Nacimiento', 'title': 'Lugar de Nacimiento'}),
+            'ocupacion': TextInput(attrs={'placeholder': 'Ocupación', 'title': 'Ocupación'}),
+            'region': TextInput(attrs={'placeholder': 'Religión', 'title': 'Religión'}),
+            'clave_app': TextInput(attrs={'placeholder': 'Clave de la APP', 'title': 'Clave de la APP'}),
+            'cp': NumberInput(attrs={'min': '0', 'placeholder': 'Código Postal', 'title': 'Código Postal'}),
+            'celular': NumberInput(attrs={'type': 'tel', 'placeholder': 'Teléfono primario', 'title': 'Teléfono primario'}),
+            'telefono': NumberInput(attrs={'type': 'tel', 'placeholder': 'Teléfono secundario', 'title': 'Teléfono secundario'}),
         }
 
 
 class FormPreferencia(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs.update({'autocomplete': 'off', 'onblur': 'guardarprefe();', 'onchange': 'guardarprefe();',
+                                           'class': 'form-control form-control-sm text-left', 'data-toggle': 'tooltip', 'data-placement': 'left'})
+
     class Meta:
         model = Preferencia
         exclude = ['propietario']
         widgets = {
-            'experiencia': Textarea(attrs={'class': 'form-control form-control-sm', 'rows': '4', 'onblur': 'guardarprefe();'}),
-            'nombre_pareja': TextInput(attrs={'type': 'text', 'onblur': 'guardarprefe();', 'class': 'form-control form-control-sm'}),
-            'fecha_aniversario': DateInput(attrs={'type': 'date', 'class': 'form-control form-control-sm', 'onblur': 'guardarprefe();'}),
-            'nombre_hijos': TextInput(attrs={'type': 'text', 'onblur': 'guardarprefe();', 'class': 'form-control form-control-sm'}),
-            'fecha_hijo': DateInput(attrs={'type': 'date', 'onblur': 'guardarprefe();', 'class': 'form-control form-control-sm'}),
-            'nombre_empresa': TextInput(attrs={'type': 'text', 'onblur': 'guardarprefe();', 'class': 'form-control form-control-sm'}),
-            'fecha_empresa': DateInput(attrs={'type': 'date', 'onblur': 'guardarprefe();', 'class': 'form-control form-control-sm'}),
-            'gustos': TextInput(attrs={'type': 'text', 'onblur': 'guardarprefe();', 'class': 'form-control form-control-sm'}),
-            'pelicula_serie': TextInput(attrs={'type': 'text', 'onblur': 'guardarprefe();', 'class': 'form-control form-control-sm'}),
-            'musica': TextInput(attrs={'type': 'text', 'onblur': 'guardarprefe();', 'class': 'form-control form-control-sm'}),
-            'deportes': TextInput(attrs={'type': 'text', 'onblur': 'guardarprefe();', 'class': 'form-control form-control-sm'}),
-            'comida': TextInput(attrs={'type': 'text', 'onblur': 'guardarprefe();', 'class': 'form-control form-control-sm'}),
-            'vehiculo': TextInput(attrs={'type': 'text', 'onblur': 'guardarprefe();', 'class': 'form-control form-control-sm'}),
+            'experiencia': Textarea(attrs={'rows': '4', 'placeholder': 'Experiencia...', 'title': 'Experiencia'}),
+            'nombre_pareja': TextInput(attrs={'title': 'Nombre de Pareja', 'placeholder': 'Nombre de Pareja...', }),
+            'fecha_aniversario': DateInput(attrs={'type': 'date'}),
+            'nombre_hijos': TextInput(attrs={'title': 'Hijo', 'placeholder': 'Hijo...', }),
+            'fecha_hijo': DateInput(attrs={'type': 'date'}),
+            'nombre_empresa': TextInput(attrs={'title': 'Empresa', 'placeholder': 'Empresa...', }),
+            'fecha_empresa': DateInput(attrs={'type': 'date'}),
+            'gustos': TextInput(attrs={'title': 'Gustos y Preferencias', 'placeholder': 'Gustos y Preferencias...', }),
+            'pelicula_serie': TextInput(attrs={'title': 'Series y Películas', 'placeholder': 'Series y Películas...', }),
+            'musica': TextInput(attrs={'title': 'Música', 'placeholder': 'Música...', }),
+            'deportes': TextInput(attrs={'title': 'Deportes', 'placeholder': 'Deportes...', }),
+            'comida': TextInput(attrs={'title': 'Comida', 'placeholder': 'Comida...', }),
+            'vehiculo': TextInput(attrs={'title': 'Vehículos', 'placeholder': 'Vehículos...', }),
         }
 
 
@@ -64,7 +76,7 @@ class FormAntecedenteFamiliar(ModelForm):
         super().__init__(*args, **kwargs)
         for form in self.visible_fields():
             form.field.widget.attrs.update(
-                {'class': 'form-control form-control-sm text-center', 'onblur': 'guardarheredofamiliar();', 'onchange': 'guardarheredofamiliar();', 'data-toggle': 'tooltip', 'data-placement': 'left', 'title': ''})
+                {'autocomplete': 'off', 'class': 'form-control form-control-sm text-center', 'onblur': 'guardarheredofamiliar();', 'onchange': 'guardarheredofamiliar();', 'data-toggle': 'tooltip', 'data-placement': 'left', 'title': ''})
             # form.field.widget.attrs['onblur'] = 'guardarheredofamiliar();'
 
     class Meta:
@@ -92,11 +104,27 @@ class FormAntecedenteFamiliar(ModelForm):
 
 
 class FormAntecedentePersonal(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs.update(
+                {'autocomplete': 'off', 'class': 'form-control form-control-sm text-center', 'onblur': 'guardarNoPatologico();', 'onchange': 'guardarNoPatologico();', 'data-toggle': 'tooltip', 'data-placement': 'left', 'title': ''})
+            # form.field.widget.attrs['onblur'] = 'guardarheredofamiliar();'
+            # 'data-original-title':'Última Desparasitación'
+
     class Meta:
         model = AntecedentePersonal
         exclude = ['propietario']
         widgets = {
-            'ultima_desparacita': DateInput(attrs={'type': 'date'}),
+            'ultima_desparacita': TextInput(attrs={'data-original-title':'Última Desparasitación'}),
+            'casa': TextInput(attrs={'data-original-title': 'Casa-Habitación'}),
+            'lav_dientes': TextInput(attrs={'data-original-title': 'Lavado de dientes Diario'}),
+            'tipo_pasta': TextInput(attrs={'data-original-title': 'Tipo de Pasta Dental'}),
+            'amalgama_puente': TextInput(attrs={'data-original-title': 'Amalgamas o Puentes'}),
+            'brakets': TextInput(attrs={'data-original-title': 'Brakets'}),
+            'actividad_fisica': TextInput(attrs={'data-original-title': 'Actividad Física'}),
+            'inmunizaciones': TextInput(attrs={'data-original-title': 'Inmunizaciones'}),
+            'check_up': TextInput(attrs={'data-original-title': 'CheckUp Integral'}),
         }
 
 
@@ -105,14 +133,39 @@ class FormAntecedentePatologico(ModelForm):
         super().__init__(*args, **kwargs)
         for form in self.visible_fields():
             form.field.widget.attrs.update(
-                {'class': 'form-control form-control-sm text-center', 'onblur': 'guardarAntecetentePatologico();', 'onchange': 'guardarAntecetentePatologico();', 'data-toggle': 'tooltip', 'data-placement': 'left', 'title': ''})
+                {'class': 'form-control form-control-sm text-center', 'autocomplete': 'off', 'onblur': 'guardarAntecetentePatologico();', 'onchange': 'guardarAntecetentePatologico();', 'data-toggle': 'tooltip', 'data-placement': 'left', 'title': ''})
             # form.field.widget.attrs['onblur'] = 'guardarAntecetentePatologico();'
 
     class Meta:
         model = AntecedentePatologico
         exclude = ['propietario']
         widgets = {
+            'enf_infancia': TextInput(attrs={'data-original-title': 'Enfermedades Propias de la Infancia'}),
             'diabetes': TextInput(attrs={'data-original-title': 'Diabetes'}),
+            'hip_arterial': TextInput(attrs={'data-original-title': 'Hipertensión'}),
+            'respiratorias': TextInput(attrs={'data-original-title': 'Respiratorias'}),
+            'oftalmico': TextInput(attrs={'data-original-title': 'Oftálmico'}),
+            'cardeovasculares': TextInput(attrs={'data-original-title': 'Cardiovasculares'}),
+            'neurologicos': TextInput(attrs={'data-original-title': 'Neurológicos'}),
+            'gastro_intestinal': TextInput(attrs={'data-original-title': 'Gastro-Intestinales'}),
+            'hepaticas': TextInput(attrs={'data-original-title': 'Hepatopatías'}),
+            'metabolicas': TextInput(attrs={'data-original-title': 'Metabólicas'}),
+            'urologicos': TextInput(attrs={'data-original-title': 'Urológicos'}),
+            'circulatorio': TextInput(attrs={'data-original-title': 'Circulatorio'}),
+            'traumaticas': TextInput(attrs={'data-original-title': 'Traumáticas'}),
+            'articulares': TextInput(attrs={'data-original-title': 'Articulares'}),
+            'dermatologicas': TextInput(attrs={'data-original-title': 'Dermatológicas'}),
+            'quirurgicas': TextInput(attrs={'data-original-title': 'Quirúrgicos'}),
+            'transfusionales': TextInput(attrs={'data-original-title': 'Transfusionales'}),
+            'alergias': TextInput(attrs={'data-original-title': 'Alergias'}),
+            'vectores': TextInput(attrs={'data-original-title': 'Vectores'}),
+            'autoimunes': TextInput(attrs={'data-original-title': 'Autoinmunes'}),
+            'emocionales': TextInput(attrs={'data-original-title': 'Emocionales'}),
+            'adicciones': TextInput(attrs={'data-original-title': 'Adicciones'}),
+            'hosp_previas': TextInput(attrs={'data-original-title': 'Hospitalizaciones Previas'}),
+            'pesticidas': TextInput(attrs={'data-original-title': 'Pesticidas'}),
+            'dx_ca': TextInput(attrs={'data-original-title': 'Dx.CA.'}),
+            'otros': TextInput(attrs={'data-original-title': 'Otros'}),
         }
 
 
@@ -124,6 +177,14 @@ class FormAntecedenteAlimenticio(ModelForm):
 
 
 class FormExploracion(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs.update(
+                {'class': 'form-control form-control-sm text-center', 'autocomplete': 'off', 'onblur': '', 'onchange': '', 'data-toggle': 'tooltip', 'data-placement': 'left', 'title': ''})
     class Meta:
         model = Exploracion
         exclude = ['propietario']
+        # widgets = {
+        #     'comidas':CheckboxSelectMultiple(attrs='')
+        # }

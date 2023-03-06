@@ -133,6 +133,10 @@ consulta
 <div class="col-12 col-md-8" id="divDetallePaciente">
     <div class="accordion md-accordion" id="tableroDetallePacientes" role="tablist" aria-multiselectable="true">
         <!-- forms historial medico-->
+        <div class="form-check form-check-inline">
+            
+            {{formalimenticio.comidas|as_crispy_field}}
+        </div>
         <div class="card mt-0">
             <div class="card-header" role="tab" id="tabHistoria">
                 <a data-toggle="collapse" data-parent="#tableroDetallePacientes" href="#tableroHistoria"
@@ -158,115 +162,9 @@ consulta
                             {% include 'paciente/recursos/formpatologicos.html' %}
                             <!-- form antecentes patologicos -->
 
-                            <div class="col-12 col-md-12 mt-2">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <h6 class="h6 text-muted text-center">Antecedentes No
-                                                    Patológicos</h6>
-                                            </div>
-                                            <div class="col-12">
-                                                <div id="noPatologicos">
-                                                    <div class="row">
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Casa Habitación</small>
-                                                            <input type="text" placeholder="" id="pnopat_casa" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','pnopat_casa','pnopat_casa','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Casa-Habitación">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Lav. Dientes Diario</small>
-                                                            <input type="text" placeholder="" id="pnopat_lavadodientes"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','pnopat_lavadodientes','pnopat_lavadodientes','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Lavado de dientes Diario">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Tipo Pasta Dental</small>
-                                                            <input type="text" placeholder="" id="pnopat_pasta" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','pnopat_pasta','pnopat_pasta','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Tipo de Pasta Dental">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Amalgamas o Puentes</small>
-                                                            <input type="text" placeholder="" id="pnopat_amalgamas"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','pnopat_amalgamas','pnopat_amalgamas','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Amalgamas o Puentes">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Uso de Brakets</small>
-                                                            <input type="text" placeholder="" id="pnopat_brakets"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','pnopat_brakets','pnopat_brakets','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Brakets">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Actividad Física</small>
-                                                            <input type="text" placeholder="" id="pnopat_actfisica"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','pnopat_actfisica','pnopat_actfisica','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Actividad Física">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Inmunizaciones</small>
-                                                            <input type="text" placeholder="" id="pnopat_inmunizaciones"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','pnopat_inmunizaciones','pnopat_inmunizaciones','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Inmunizaciones">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Últ. Desparasitación</small>
-                                                            <input type="text" placeholder=""
-                                                                id="pnopat_ultimadesparasitacion" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','pnopat_ultimadesparasitacion','pnopat_ultimadesparasitacion','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Última Desparasitación">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>CheckUp</small>
-                                                            <input type="text" placeholder="" id="pnopat_checkup"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','pnopat_checkup','pnopat_checkup','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="CheckUp Integral">
-                                                        </div>
-
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- Forms antecedente no patologico  -->
+                            {% include 'paciente/recursos/formnopatologico.html' %}
+                            <!-- Forms antecedente no patologico  -->
 
                             <div class="col-12 col-md-12 mt-2">
                                 <div class="card">
@@ -687,18 +585,19 @@ consulta
             method: 'POST',
             body: new FormData(formdatosgenerales),
         }).then(response => response.json()).then(response => {
-            /*
-            if (response.tipo === "success") {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Registrado correctamente',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-                return false;
-            };
-            */
+
+            /*  if (response.tipo === "success") {
+                  Swal.fire({
+                      icon: 'success',
+                      title: 'Registrado correctamente',
+                      showConfirmButton: false,
+                      timer: 1500
+                  })
+                  return false;
+              }; */
+
         })
+
     }
 
     function guardarheredofamiliar() {
@@ -721,12 +620,44 @@ consulta
         })
 
     }
-    function guardarAntecetentePatologico(){
-        Swal.fire({
-            icon: 'success',
-            title: 'Registrado correctamente',
-            showConfirmButton: false,
-            timer: 1500
+
+    function guardarAntecetentePatologico() {
+        var action = document.getElementById('formpatologicos').action;
+        fetch(`${action}`, {
+            method: 'POST',
+            body: new FormData(formpatologicos),
+        }).then(response => response.json()).then(response => {
+
+            /*  if (response.tipo === "success") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registrado correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                return false;
+            };*/
+
+        })
+    }
+
+    function guardarNoPatologico() {
+        var action = document.getElementById('formnopatologico').action;
+        fetch(`${action}`, {
+            method: 'POST',
+            body: new FormData(formnopatologico),
+        }).then(response => response.json()).then(response => {
+
+            if (response.tipo === "success") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registrado No Patologivo ',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                return false;
+            };
+            /* */
         })
     }
 

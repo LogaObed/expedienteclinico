@@ -1,4 +1,10 @@
 from django.db import models
+from multiselectfield import MultiSelectField
+MY_CHOICES2 = ((1, 'Desayuno'),
+               (2, 'Desayuno'),
+               (3, 'Almuerzo'),
+               (4, 'Comida'),
+               (5, 'Colaciones'))
 
 # Create your models here.
 
@@ -111,7 +117,7 @@ class AntecedentePersonal(models.Model):
     amalgama_puente = models.CharField(max_length=25, blank=True, null=True)
     brakets = models.CharField(max_length=25, blank=True, null=True)
     actividad_fisica = models.CharField(max_length=25, blank=True, null=True)
-    ultima_desparacita = models.DateField(blank=True, null=True)
+    ultima_desparacita = models.CharField(max_length=25, blank=True, null=True)
     inmunizaciones = models.CharField(max_length=25, blank=True, null=True)
     check_up = models.CharField(max_length=25, blank=True, null=True)
 
@@ -178,7 +184,11 @@ class AntecedentePatologico(models.Model):
 
 class AntecedenteAlimenticio(models.Model):
     propietario = models.OneToOneField(Paciente, on_delete=models.CASCADE)
-    comidas = models.CharField(max_length=50, blank=True, null=True)
+    #  = models.CharField(max_length=50, blank=True, null=True)
+    # comidaa = MultiSelectField(choices=COMIDAS)
+    # my_field = MultiSelectField(choices=MY_CHOICES)
+    comidas = MultiSelectField(
+        choices=MY_CHOICES2, max_choices=5, max_length=5, blank=True, null=True)
     tortillas = models.CharField(max_length=25, blank=True, null=True)
     pan = models.CharField(max_length=25, blank=True, null=True)
     cereales = models.CharField(max_length=25, blank=True, null=True)

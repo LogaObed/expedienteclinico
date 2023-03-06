@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'paciente',
     'crispy_forms',
+    'multiselectfield',
     'crispy_bootstrap4',
     'contacto',
 ]

@@ -1,0 +1,66 @@
+<div class="col-12 col-md-12 mt-2">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <h6 class="h6 text-muted text-center">Antecedentes No
+                        Patológicos</h6>
+                </div>
+
+                <div class="col-12">
+                    <div id="noPatologicos">
+                        <form action="{% url 'editarnopatologicos' pacientes.propietario.id %}" method="POST"
+                            id="formnopatologico">
+                            {% csrf_token %}
+                            <div class="row">
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Casa Habitación</small>
+                                    {{formpersonal.casa}}
+                                </div>
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Lav. Dientes Diario</small>
+                                    {{formpersonal.lav_dientes}}
+                                </div>
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Tipo Pasta Dental</small>
+                                    {{formpersonal.tipo_pasta}}
+                                </div>
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Amalgamas o Puentes</small>
+                                    {{formpersonal.amalgama_puente}}
+                                </div>
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Uso de Brakets</small>
+                                    {{formpersonal.brakets}}
+
+                                </div>
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Actividad Física</small>
+                                    {{formpersonal.actividad_fisica}}
+
+                                </div>
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Inmunizaciones</small>
+                                    {{formpersonal.inmunizaciones}}
+                                </div>
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Últ. Desparasitación</small>
+                                    {{formpersonal.ultima_desparacita}}
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>CheckUp</small>
+                                    {{formpersonal.check_up}}
+                                </div>
+
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

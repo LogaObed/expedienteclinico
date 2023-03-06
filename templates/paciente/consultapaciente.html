@@ -132,6 +132,7 @@ consulta pacientes
     }
 
     function guardaNuevoPaciente() {
+        //document.getElementById('miText').disabled = true;
         var action = document.getElementById('formhola').action;
         fetch(`${action}`, {
             method: 'POST',

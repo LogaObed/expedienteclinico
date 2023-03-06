@@ -26,9 +26,10 @@ def consultaPacientes(request):
     # 2. paciente 3. personal 4. contacto
     form = FormNuevoPaciente()
     # paciente = DatosGeneral.objects.filter(tipo_usuario=2).order_by('-id')
-    paciente = DatosGeneral.objects.filter().order_by('-id')
-    # paciente = DatosGeneral.objects.select_related()
+    paciente = DatosGeneral.objects.filter(propietario__tipo_usuario__exact = 3).order_by('-id')
+    # paciente = DatosGeneral.objects.filter().order_by('-id')
     return render(request, 'paciente/consultapaciente.html', {'pacientes': paciente, 'form': form})
+    # paciente = DatosGeneral.objects.select_related()
     # return render(request, 'ejemplodivcartpaciente.html', {'pacientes': paciente, 'form': form})
 
 
@@ -191,6 +192,39 @@ def editarHeredoFamiliar(request, heredofamiliar):
         dtid = conheredofamiliar.id
         busca = get_object_or_404(AntecedenteFamiliar, pk=dtid)
         form = FormAntecedenteFamiliar(request.POST, instance=busca)
+        if form.is_valid():
+            form.save()
+            response_data['tipo'] = 'success'
+            return JsonResponse(response_data)
+    else:
+        response_data['tipo'] = 'get'
+        return JsonResponse(response_data)
+
+
+def editarPatologicos(request, patologico):
+    if request.method == "POST":
+        response_data = {}
+        consusulta = AntecedentePatologico.objects.get(
+            propietario=patologico)
+        dtid = consusulta.id
+        busca = get_object_or_404(AntecedentePatologico, pk=dtid)
+        form = FormAntecedentePatologico(request.POST, instance=busca)
+        if form.is_valid():
+            form.save()
+            response_data['tipo'] = 'success'
+            return JsonResponse(response_data)
+    else:
+        response_data['tipo'] = 'get'
+        return JsonResponse(response_data)
+    
+def editarNoPatologicos(request, patologico):
+    if request.method == "POST":
+        response_data = {}
+        consusulta = AntecedentePersonal.objects.get(
+            propietario=patologico)
+        dtid = consusulta.id
+        busca = get_object_or_404(AntecedentePersonal, pk=dtid)
+        form = FormAntecedentePersonal(request.POST, instance=busca)
         if form.is_valid():
             form.save()
             response_data['tipo'] = 'success'
