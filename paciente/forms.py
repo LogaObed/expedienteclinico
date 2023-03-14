@@ -1,6 +1,7 @@
 from django.forms import *
 from paciente.models import *
 from crispy_forms.layout import Layout, Div, Field
+from multiselectfield.forms.fields import MultiSelectFormField
 
 
 class FormNuevoPaciente(ModelForm):
@@ -43,7 +44,7 @@ class FormPreferencia(ModelForm):
         super().__init__(*args, **kwargs)
         for form in self.visible_fields():
             form.field.widget.attrs.update({'autocomplete': 'off', 'onblur': 'guardarprefe();', 'onchange': 'guardarprefe();',
-                                           'class': 'form-control form-control-sm text-left', 'data-toggle': 'tooltip', 'data-placement': 'left'})
+                                           'class': 'form-control form-control-sm', 'data-toggle': 'tooltip', 'data-placement': 'left'})
 
     class Meta:
         model = Preferencia
@@ -116,7 +117,7 @@ class FormAntecedentePersonal(ModelForm):
         model = AntecedentePersonal
         exclude = ['propietario']
         widgets = {
-            'ultima_desparacita': TextInput(attrs={'data-original-title':'Última Desparasitación'}),
+            'ultima_desparacita': TextInput(attrs={'data-original-title': 'Última Desparasitación'}),
             'casa': TextInput(attrs={'data-original-title': 'Casa-Habitación'}),
             'lav_dientes': TextInput(attrs={'data-original-title': 'Lavado de dientes Diario'}),
             'tipo_pasta': TextInput(attrs={'data-original-title': 'Tipo de Pasta Dental'}),
@@ -170,21 +171,81 @@ class FormAntecedentePatologico(ModelForm):
 
 
 class FormAntecedenteAlimenticio(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs.update(
+                {'class': 'form-control form-control-sm text-center', 'autocomplete': 'off', 'onblur': 'guardarHabitosAlimenticios();', 'onchange': 'guardarHabitosAlimenticios();', 'data-toggle': 'tooltip', 'data-placement': 'left', 'title': ''})
+            # form.field.widget.attrs['onblur'] = 'guardarAntecetentePatologico();'
+
     class Meta:
         model = AntecedenteAlimenticio
-        exclude = ['propietario']
         # fields = '__all__'
+        exclude = ['propietario']
+        widgets = {
+            'tortillas': TextInput(attrs={'data-original-title': 'Tortillas'}),
+            'pan': TextInput(attrs={'data-original-title': 'Pan'}),
+            'cereales': TextInput(attrs={'data-original-title': 'Cereal.'}),
+            'refrescos': TextInput(attrs={'data-original-title': 'Refrescos'}),
+            'jugos': TextInput(attrs={'data-original-title': 'Jugos'}),
+            'aguas_frescas': TextInput(attrs={'data-original-title': 'Aguas Frescas'}),
+            'frutas': TextInput(attrs={'data-original-title': 'Frutas'}),
+            'frutos_secos': TextInput(attrs={'data-original-title': 'Frutos Secos'}),
+            'verduras': TextInput(attrs={'data-original-title': 'Verduras'}),
+            'agua_natural': TextInput(attrs={'data-original-title': 'Agua Natural'}),
+            'golosinas': TextInput(attrs={'data-original-title': 'Golosinas'}),
+            'carnes_rojas': TextInput(attrs={'data-original-title': 'Carne Roja'}),
+            'pollo': TextInput(attrs={'data-original-title': 'Pollo'}),
+            'pescado': TextInput(attrs={'data-original-title': 'Pescado'}),
+            'mariscos': TextInput(attrs={'data-original-title': 'Mariscos'}),
+            'leche': TextInput(attrs={'data-original-title': 'Leche'}),
+            'derivados': TextInput(attrs={'data-original-title': 'Derivados'}),
+            'huevos': TextInput(attrs={'data-original-title': 'Huevo'}),
+            'arroz': TextInput(attrs={'data-original-title': 'Arroz'}),
+            'legumbres': TextInput(attrs={'data-original-title': 'Legumbres'}),
+            'miel': TextInput(attrs={'data-original-title': 'Miel'}),
+            'aceite': TextInput(attrs={'data-original-title': 'Aceite'}),
+            'sal': TextInput(attrs={'data-original-title': 'Sal'}),
+            'azucar': TextInput(attrs={'data-original-title': 'Azucar'}),
+            'cafe': TextInput(attrs={'data-original-title': 'Café'}),
+            'te': TextInput(attrs={'data-original-title': 'Té'}),
+            'sazonadores': TextInput(attrs={'data-original-title': 'Sazonadores'}),
+            'embutidos': TextInput(attrs={'data-original-title': 'Embutidos'}),
+            'enlatados': TextInput(attrs={'data-original-title': 'Enlatados'}),
+            'pastas': TextInput(attrs={'data-original-title': 'Pastas'}),
+            'sumplementos_energe': TextInput(attrs={'data-original-title': 'Suplementos y Energéticos'}),
+            'otros': TextInput(attrs={'data-original-title': 'Otros'}),
+        }
 
 
 class FormExploracion(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for form in self.visible_fields():
-            form.field.widget.attrs.update(
-                {'class': 'form-control form-control-sm text-center', 'autocomplete': 'off', 'onblur': '', 'onchange': '', 'data-toggle': 'tooltip', 'data-placement': 'left', 'title': ''})
+            form.field.widget.attrs.update({'autocomplete': 'off', 'onblur': 'guardarExploracion();', 'onchange': 'guardarExploracion();',
+                                           'class': 'form-control form-control-sm text-left', 'data-toggle': 'tooltip', 'data-placement': 'left'})
+
     class Meta:
         model = Exploracion
         exclude = ['propietario']
-        # widgets = {
-        #     'comidas':CheckboxSelectMultiple(attrs='')
-        # }
+        widgets = {
+            'cerebro': Textarea(attrs={'rows': '3', 'placeholder': 'Experiencia...', 'title': 'Experiencia'}),
+            'nervioso': Textarea(attrs={'rows': '3', 'placeholder': 'Sistema Nervioso...', 'title': 'Sistema Nervioso'}),
+            'ocular': Textarea(attrs={'rows': '3', 'placeholder': 'Sistema Ocular...', 'title': 'Sistema Ocular'}),
+            'endocrino': Textarea(attrs={'rows': '3', 'placeholder': 'Sistema Endócrino...', 'title': 'Sistema Endócrino'}),
+            'corazon': Textarea(attrs={'rows': '3', 'placeholder': 'Corazón...', 'title': 'Corazón'}),
+            'circulatorio': Textarea(attrs={'rows': '3', 'placeholder': 'Sistema Circulatorio...', 'title': 'Sistema Circulatorio'}),
+            'respiratorio': Textarea(attrs={'rows': '3', 'placeholder': 'Sistema Respiratorio...', 'title': 'Sistema Respiratorio'}),
+            'hepatico': Textarea(attrs={'rows': '3', 'placeholder': 'Sistema Hepático...', 'title': 'Sistema Hepático'}),
+            'pancreas': Textarea(attrs={'rows': '3', 'placeholder': 'Pancreas...', 'title': 'Pancreas'}),
+            'renal': Textarea(attrs={'rows': '3', 'placeholder': 'Renal...', 'title': 'Renal'}),
+            'gastro': Textarea(attrs={'rows': '3', 'placeholder': 'Gastro...', 'title': 'Gastro'}),
+            'oseoarticular': Textarea(attrs={'rows': '3', 'placeholder': 'Osteoarticular...', 'title': 'Osteoarticular'}),
+            'tendo': Textarea(attrs={'rows': '3', 'placeholder': 'Tendo...', 'title': 'Tendo'}),
+            'reproductivo': Textarea(attrs={'rows': '3', 'placeholder': 'Sistema Reproductor...', 'title': 'Sistema Reproductor'}),
+            'inmunologico': Textarea(attrs={'rows': '3', 'placeholder': 'Sistema Inmunológico...', 'title': 'Sistema Inmunológico'}),
+            'extremidades': Textarea(attrs={'rows': '3', 'placeholder': 'Extremidades...', 'title': 'Extremidades'}),
+            'piel_tejido': Textarea(attrs={'rows': '3', 'placeholder': 'Piel y Tegumentos...', 'title': 'Piel y Tegumentos'}),
+            'otros': Textarea(attrs={'rows': '3', 'placeholder': 'Otros...', 'title': 'Otros'}),
+
+        }

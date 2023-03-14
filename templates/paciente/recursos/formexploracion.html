@@ -1,4 +1,5 @@
 {% load static %}
+
 <div class="card mt-0">
     <div class="card-header" role="tab" id="tabExploracion">
         <a data-toggle="collapse" data-parent="#tableroDetallePacientes" href="#tableroExploracion"
@@ -15,197 +16,182 @@
                 <div id="resExploracion" style="display: none;"></div>
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-12 mb-lg-2 text-center">
-                                Exploración <a href="../reportes/exploracion.php?v=7148" target="_blank"><i
-                                        class="fas fa-print text-muted"></i></a>
-                            </div>
+                        <form id="formexploracion" action=" {% url 'editarexploracion' pacientes.propietario.id %}"
+                            method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12 mb-lg-2 text-center">
+                                    Exploración <a href="../reportes/exploracion.php?v=7148" target="_blank"><i
+                                            class="fas fa-print text-muted"></i></a>
+                                </div>
 
 
-                            <div class="col-3 col-lg-1 col-md-2 mt-1 text-center">
-                                <img src="{% static 'img/' %}organosEvolucion/cerebro.png" width="100%" alt="Cerebro">
-                                <small style="font-size: 10px;">Cerebro</small>
-                            </div>
-                            <div class="col-9 col-lg-5 col-md-10 mt-1">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder=""
-                                    id="cuatro"
-                                    onblur="guardacampoConsulta('exploracion','cuatro','cuatro','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
+                                <div class="col-3 col-lg-1 col-md-2 mt-1 text-center">
+                                    <img src="{% static 'img/' %}organosEvolucion/cerebro.png" width="100%"
+                                        alt="Cerebro">
+                                    <small style="font-size: 10px;">Cerebro</small>
+                                </div>
+                                <div class="col-9 col-lg-5 col-md-10 mt-1">
+                                    {{formexploracion.cerebro}}
+                                </div>
 
 
-                            <div class="col-3 col-lg-1 col-md-2 mt-1 text-center">
-                                <img src="{% static 'img/' %}organosEvolucion/sNervioso.svg" width="100%"
-                                    alt="Sistema Nervioso">
-                                <small style="font-size: 10px;">S.Nervioso</small>
-                            </div>
-                            <div class="col-9 col-lg-5 col-md-10 mt-1">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder=""
-                                    id="cinco"
-                                    onblur="guardacampoConsulta('exploracion','cinco','cinco','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
+                                <div class="col-3 col-lg-1 col-md-2 mt-1 text-center">
+                                    <img src="{% static 'img/' %}organosEvolucion/sNervioso.svg" width="100%"
+                                        alt="Sistema Nervioso">
+                                    <small style="font-size: 10px;">S.Nervioso</small>
+                                </div>
+                                <div class="col-9 col-lg-5 col-md-10 mt-1">
+                                    {{formexploracion.nervioso}}
+                                </div>
 
 
-                            <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
-                                <img src="{% static 'img/' %}organosEvolucion/sVisual.svg" width="100%" alt="Vista">
-                                <small style="font-size: 10px;">S. Ocular</small>
-                            </div>
-                            <div class="col-8 col-lg-5 col-md-10 mt-1">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder="" id="seis"
-                                    onblur="guardacampoConsulta('exploracion','seis','seis','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
+                                <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
+                                    <img src="{% static 'img/' %}organosEvolucion/sVisual.svg" width="100%" alt="Vista">
+                                    <small style="font-size: 10px;">S. Ocular</small>
+                                </div>
+                                <div class="col-8 col-lg-5 col-md-10 mt-1">
+                                    {{formexploracion.ocular}}
+                                </div>
 
-                            <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
-                                <img src="{% static 'img/' %}organosEvolucion/sMetabolico.svg" width="100%" alt="Metabólico">
-                                <small style="font-size: 10px;">S. Endócrino</small>
-                            </div>
-                            <div class="col-8 col-lg-5 col-md-10 mt-1">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder=""
-                                    id="siete"
-                                    onblur="guardacampoConsulta('exploracion','siete','siete','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
+                                <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
+                                    <img src="{% static 'img/' %}organosEvolucion/sMetabolico.svg" width="100%"
+                                        alt="Metabólico">
+                                    <small style="font-size: 10px;">S. Endócrino</small>
+                                </div>
+                                <div class="col-8 col-lg-5 col-md-10 mt-1">
+                                    {{formexploracion.endocrino}}
+                                </div>
 
-                            <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
-                                <img src="{% static 'img/' %}organosEvolucion/corazon.svg" width="100%" alt="Corazón">
-                                <small style="font-size: 10px;">Corazón</small>
-                            </div>
-                            <div class="col-8 col-lg-5 col-md-10 mt-1">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder="" id="dos"
-                                    onblur="guardacampoConsulta('exploracion','dos','dos','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
+                                <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
+                                    <img src="{% static 'img/' %}organosEvolucion/corazon.svg" width="100%"
+                                        alt="Corazón">
+                                    <small style="font-size: 10px;">Corazón</small>
+                                </div>
+                                <div class="col-8 col-lg-5 col-md-10 mt-1">
+                                    {{formexploracion.corazon}}
+                                </div>
 
-                            <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
-                                <img src="{% static 'img/' %}organosEvolucion/sVascular.png" width="100%"
-                                    alt="Sistema Vascular">
-                                <small style="font-size: 10px;">S. Circulatorio</small>
-                            </div>
-                            <div class="col-8 col-lg-5 col-md-10 mt-1">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder="" id="tres"
-                                    onblur="guardacampoConsulta('exploracion','tres','tres','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
+                                <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
+                                    <img src="{% static 'img/' %}organosEvolucion/sVascular.png" width="100%"
+                                        alt="Sistema Vascular">
+                                    <small style="font-size: 10px;">S. Circulatorio</small>
+                                </div>
+                                <div class="col-8 col-lg-5 col-md-10 mt-1">
+                                    {{formexploracion.circulatorio}}
+                                </div>
 
 
-                            <div class="col-4 col-lg-1 col-md-2 text-center">
-                                <img src="{% static 'img/' %}organosEvolucion/pulmones.png" width="100%" alt="Pulmones">
-                                <small style="font-size: 10px;">S. Respiratorio</small>
-                            </div>
-                            <div class="col-8 col-lg-5 col-md-10">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder="" id="uno"
-                                    onblur="guardacampoConsulta('exploracion','uno','uno','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
+                                <div class="col-4 col-lg-1 col-md-2 text-center">
+                                    <img src="{% static 'img/' %}organosEvolucion/pulmones.png" width="100%"
+                                        alt="Pulmones">
+                                    <small style="font-size: 10px;">S. Respiratorio</small>
+                                </div>
+                                <div class="col-8 col-lg-5 col-md-10">
+                                    {{formexploracion.respiratorio}}
+                                </div>
 
-                            <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
-                                <img src="{% static 'img/' %}organosEvolucion/sHepatico.png" width="100%"
-                                    alt="Sistema Hepático">
-                                <small style="font-size: 10px;">S. Hepático</small>
-                            </div>
-                            <div class="col-8 col-lg-5 col-md-10 mt-1">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder="" id="ocho"
-                                    onblur="guardacampoConsulta('exploracion','ocho','ocho','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
+                                <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
+                                    <img src="{% static 'img/' %}organosEvolucion/sHepatico.png" width="100%"
+                                        alt="Sistema Hepático">
+                                    <small style="font-size: 10px;">S. Hepático</small>
+                                </div>
+                                <div class="col-8 col-lg-5 col-md-10 mt-1">
+                                    {{formexploracion.hepatico}}
+                                </div>
 
-                            <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
-                                <img src="{% static 'img/' %}organosEvolucion/pancreas.png" width="100%" alt="Pancreas">
-                                <small style="font-size: 10px;">Pancreas</small>
-                            </div>
-                            <div class="col-8 col-lg-5 col-md-10 mt-1">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder="" id="diez"
-                                    onblur="guardacampoConsulta('exploracion','diez','diez','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
+                                <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
+                                    <img src="{% static 'img/' %}organosEvolucion/pancreas.png" width="100%"
+                                        alt="Pancreas">
+                                    <small style="font-size: 10px;">Pancreas</small>
+                                </div>
+                                <div class="col-8 col-lg-5 col-md-10 mt-1">
+                                    {{formexploracion.pancreas}}
+                                </div>
 
-                            <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
-                                <img src="{% static 'img/' %}organosEvolucion/sRenal.png" width="100%" alt="Sistema Renal">
-                                <small style="font-size: 10px;">Renal</small>
-                            </div>
-                            <div class="col-8 col-lg-5 col-md-10 mt-1">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder=""
-                                    id="nueve"
-                                    onblur="guardacampoConsulta('exploracion','nueve','nueve','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
+                                <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
+                                    <img src="{% static 'img/' %}organosEvolucion/sRenal.png" width="100%"
+                                        alt="Sistema Renal">
+                                    <small style="font-size: 10px;">Renal</small>
+                                </div>
+                                <div class="col-8 col-lg-5 col-md-10 mt-1">
+                                    {{formexploracion.renal}}
+                                </div>
 
-                            <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
-                                <img src="{% static 'img/' %}organosEvolucion/gastroIntestinal.png" width="100%"
-                                    alt="Gastrointestinal">
-                                <small style="font-size: 10px;">Gastro.</small>
-                            </div>
-                            <div class="col-8 col-lg-5 col-md-10 mt-1">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder=""
-                                    id="nueve"
-                                    onblur="guardacampoConsulta('exploracion','catorce','catorce','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
+                                <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
+                                    <img src="{% static 'img/' %}organosEvolucion/gastroIntestinal.png" width="100%"
+                                        alt="Gastrointestinal">
+                                    <small style="font-size: 10px;">Gastro.</small>
+                                </div>
+                                <div class="col-8 col-lg-5 col-md-10 mt-1">
+                                    {{formexploracion.gastro}}
+                                </div>
 
-                            <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
-                                <img src="{% static 'img/' %}organosEvolucion/sOseo.png" width="100%" alt="OsteoArticular">
-                                <small style="font-size: 10px;">Osteoarticular</small>
-                            </div>
-                            <div class="col-8 col-lg-5 col-md-10 mt-1">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder="" id="once"
-                                    onblur="guardacampoConsulta('exploracion','once','once','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
+                                <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
+                                    <img src="{% static 'img/' %}organosEvolucion/sOseo.png" width="100%"
+                                        alt="OsteoArticular">
+                                    <small style="font-size: 10px;">Osteoarticular</small>
+                                </div>
+                                <div class="col-8 col-lg-5 col-md-10 mt-1">
+                                    {{formexploracion.oseoarticular}}
+                                </div>
 
-                            <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
-                                <img src="{% static 'img/' %}organosEvolucion/tendoMuscular.png" width="100%"
-                                    alt="Tendo Muscular">
-                                <small style="font-size: 10px;">Tendo.</small>
-                            </div>
-                            <div class="col-8 col-lg-5 col-md-10 mt-1">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder="" id="doce"
-                                    onblur="guardacampoConsulta('exploracion','doce','doce','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
+                                <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
+                                    <img src="{% static 'img/' %}organosEvolucion/tendoMuscular.png" width="100%"
+                                        alt="Tendo Muscular">
+                                    <small style="font-size: 10px;">Tendo.</small>
+                                </div>
+                                <div class="col-8 col-lg-5 col-md-10 mt-1">
+                                    {{formexploracion.tendo}}
+                                </div>
 
-                            <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
-                                <img src="{% static 'img/' %}organosEvolucion/sReproductor.png" width="100%" alt="Reproductor">
-                                <small style="font-size: 10px;">S. Reproductor</small>
-                            </div>
-                            <div class="col-8 col-lg-5 col-md-10 mt-1">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder=""
-                                    id="trece"
-                                    onblur="guardacampoConsulta('exploracion','trece','trece','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
+                                <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
+                                    <img src="{% static 'img/' %}organosEvolucion/sReproductor.png" width="100%"
+                                        alt="Reproductor">
+                                    <small style="font-size: 10px;">S. Reproductor</small>
+                                </div>
+                                <div class="col-8 col-lg-5 col-md-10 mt-1">
+                                    {{formexploracion.reproductivo}}
+                                </div>
 
-                            <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
-                                <img src="{% static 'img/' %}organosEvolucion/sInmune.png" width="100%" alt="S. Inmunológico">
-                                <small style="font-size: 10px;">Inmunológico</small>
-                            </div>
-                            <div class="col-8 col-lg-5 col-md-10 mt-1">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder=""
-                                    id="inmunologico"
-                                    onblur="guardacampoConsulta('exploracion','inmunologico','inmunologico','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
+                                <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
+                                    <img src="{% static 'img/' %}organosEvolucion/sInmune.png" width="100%"
+                                        alt="S. Inmunológico">
+                                    <small style="font-size: 10px;">Inmunológico</small>
+                                </div>
+                                <div class="col-8 col-lg-5 col-md-10 mt-1">
+                                    {{formexploracion.inmunologico}}
+                                </div>
 
-                            <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
-                                <img src="{% static 'img/' %}organosEvolucion/extremidades.png" width="100%"
-                                    alt="Extremidades">
-                                <small style="font-size: 10px;">Extremidades</small>
-                            </div>
-                            <div class="col-8 col-lg-5 col-md-10 mt-1">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder=""
-                                    id="quince"
-                                    onblur="guardacampoConsulta('exploracion','quince','quince','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
+                                <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
+                                    <img src="{% static 'img/' %}organosEvolucion/extremidades.png" width="100%"
+                                        alt="Extremidades">
+                                    <small style="font-size: 10px;">Extremidades</small>
+                                </div>
+                                <div class="col-8 col-lg-5 col-md-10 mt-1">
+                                    {{formexploracion.extremidades}}
+                                </div>
 
-                            <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
-                                <img src="{% static 'img/' %}organosEvolucion/piel.png" width="100%" alt="Piel">
-                                <small style="font-size: 10px;">Piel y Tegumentos</small>
-                            </div>
-                            <div class="col-8 col-lg-5 col-md-10 mt-1">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder="Piel"
-                                    id="diesiseis"
-                                    onblur="guardacampoConsulta('exploracion','diesiseis','diesiseis','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
+                                <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
+                                    <img src="{% static 'img/' %}organosEvolucion/piel.png" width="100%" alt="Piel">
+                                    <small style="font-size: 10px;">Piel y Tegumentos</small>
+                                </div>
+                                <div class="col-8 col-lg-5 col-md-10 mt-1">
+                                    {{formexploracion.piel_tejido}}
+                                </div>
 
-                            <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
+                                <div class="col-4 col-lg-1 col-md-2 mt-1 text-center">
 
-                                <img src="{% static 'img/' %}organosEvolucion/otros.png" width="100%" alt="Otros">
+                                    <img src="{% static 'img/' %}organosEvolucion/otros.png" width="100%" alt="Otros">
 
-                                <small style="font-size: 10px;">Otros</small>
+                                    <small style="font-size: 10px;">Otros</small>
+                                </div>
+                                <div class="col-8 col-lg-5 col-md-10 mt-1">
+                                    {{formexploracion.otros}}
+                                </div>
+
                             </div>
-                            <div class="col-8 col-lg-5 col-md-10 mt-1">
-                                <textarea class="form-control form-control-sm" rows="3" placeholder=""
-                                    id="diesisiete"
-                                    onblur="guardacampoConsulta('exploracion','diesisiete','diesisiete','idexploracion','366','resExploracion','7148');"></textarea>
-                            </div>
-
-                        </div>
+                        </form>
                     </div>
                 </div>
 

@@ -1,0 +1,210 @@
+<div class="col-12 col-md-12 mt-2">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                {% load crispy_forms_tags %}
+                <div class="col-12">
+                    <h6 class="h6 text-muted text-center">Hábitos
+                        Alimenticios</h6>
+                </div>
+                <div class="col-12">
+                    <form id="formhalimenticio" action="{% url 'editaralimenticio' pacientes.propietario.id %}" method="POST">
+                       {% csrf_token %}
+                        <div id="habitosAlimenticios">
+
+                            <div class="row">
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    {{formalimenticio.comidas|as_crispy_field}}
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Tortillas</small>
+                                    {{formalimenticio.tortillas}}
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Pan</small>
+                                    {{formalimenticio.pan}}
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Cereales</small>
+                                    {{formalimenticio.cereales}}
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Refrescos</small>
+                                    {{formalimenticio.refrescos}}
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Jugos</small>
+                                    {{formalimenticio.jugos}}
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Aguas Frescas</small>
+                                    {{formalimenticio.aguas_frescas}}
+
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Frutas</small>
+                                    {{formalimenticio.frutas}}
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Frutos Secos</small>
+                                    {{formalimenticio.frutos_secos}}
+                                </div>
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Verduras</small>
+                                    {{formalimenticio.verduras}}
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Agua Natural</small>
+                                    {{formalimenticio.agua_natural}}
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Golosinas</small>
+                                    {{formalimenticio.golosinas}}
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Carnes Rojas</small>
+                                    {{formalimenticio.carnes_rojas}}
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Pollo</small>
+                                    {{formalimenticio.pollo}}
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Pescado</small>
+                                    {{formalimenticio.pescado}}
+
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Mariscos</small>
+                                    {{formalimenticio.mariscos}}
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Leche</small>
+                                    {{formalimenticio.leche}}
+
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Derivados</small>
+                                    {{formalimenticio.derivados}}
+
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Huevo</small>
+                                    {{formalimenticio.huevos}}
+
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Arroz</small>
+                                    {{formalimenticio.arroz}}
+
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Legumbres</small>
+                                    {{formalimenticio.legumbres}}
+
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Miel</small>
+                                    {{formalimenticio.miel}}
+
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Aceite</small>
+                                    {{formalimenticio.aceite}}
+
+                                </div>
+
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Sal</small>
+                                    {{formalimenticio.sal}}
+
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Azucar</small>
+                                    {{formalimenticio.azucar}}
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Café</small>
+                                    {{formalimenticio.cafe}}
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Té</small>
+                                    {{formalimenticio.te}}
+
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+
+                                    <small>Sazonadores</small>
+                                    {{formalimenticio.sazonadores}}
+
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Embutidos</small>
+                                    {{formalimenticio.embutidos}}
+
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Enlatados</small>
+                                    {{formalimenticio.enlatados}}
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Pastas</small>
+                                    {{formalimenticio.pastas}}
+
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Suplementos y Energéticos</small>
+                                    {{formalimenticio.sumplementos_energe}}
+                                </div>
+
+                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
+                                    <small>Otros</small>
+                                    {{formalimenticio.otros}}
+
+                                </div>
+
+
+
+                            </div>
+
+                            <div id="resHabitos"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

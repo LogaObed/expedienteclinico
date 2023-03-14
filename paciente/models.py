@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.signals import post_save
 from multiselectfield import MultiSelectField
 MY_CHOICES2 = ((1, 'Desayuno'),
                (2, 'Desayuno'),
@@ -188,7 +189,7 @@ class AntecedenteAlimenticio(models.Model):
     # comidaa = MultiSelectField(choices=COMIDAS)
     # my_field = MultiSelectField(choices=MY_CHOICES)
     comidas = MultiSelectField(
-        choices=MY_CHOICES2, max_choices=5, max_length=5, blank=True, null=True)
+        choices=MY_CHOICES2, max_choices=6, max_length=6, blank=True, null=True)
     tortillas = models.CharField(max_length=25, blank=True, null=True)
     pan = models.CharField(max_length=25, blank=True, null=True)
     cereales = models.CharField(max_length=25, blank=True, null=True)
@@ -250,3 +251,40 @@ class Exploracion(models.Model):
 
     def __str__(self):
         return f'{self.propietario}'
+
+def create_paciente(sender, instance,created,**kwargs):
+    if created:
+        # Guardar datos generales
+        datosdeneral = DatosGeneral()
+        datosdeneral.propietario = instance
+        datosdeneral.save()
+        # Guardar preferencia
+        preferencia = Preferencia()
+        preferencia.propietario = instance
+        preferencia.save()
+        # Guardar notapaciente
+        notapaciente = NotaPaciente()
+        notapaciente.propietario = instance
+        notapaciente.save()
+        # Guardar antecedentepersonal
+        antecedentepersonal = AntecedentePersonal()
+        antecedentepersonal.propietario = instance
+        antecedentepersonal.save()
+        # Guardar antecedentefamiliar
+        antecedentefamiliar = AntecedenteFamiliar()
+        antecedentefamiliar.propietario = instance
+        antecedentefamiliar.save()
+        # Guardar antecedentepatologico
+        antecedentepatologico = AntecedentePatologico()
+        antecedentepatologico.propietario = instance
+        antecedentepatologico.save()
+        # Guardar AntecedenteAlimenticio
+        antecedentealimenticio = AntecedenteAlimenticio()
+        antecedentealimenticio.propietario = instance
+        antecedentealimenticio.save()
+        # Guardar exploracion
+        exploracion = Exploracion()
+        exploracion.propietario = instance
+        exploracion.save()
+
+post_save.connect(create_paciente,sender=Paciente)

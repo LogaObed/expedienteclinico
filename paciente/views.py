@@ -26,7 +26,8 @@ def consultaPacientes(request):
     # 2. paciente 3. personal 4. contacto
     form = FormNuevoPaciente()
     # paciente = DatosGeneral.objects.filter(tipo_usuario=2).order_by('-id')
-    paciente = DatosGeneral.objects.filter(propietario__tipo_usuario__exact = 3).order_by('-id')
+    paciente = DatosGeneral.objects.filter(
+        propietario__tipo_usuario__exact=2).order_by('-id')
     # paciente = DatosGeneral.objects.filter().order_by('-id')
     return render(request, 'paciente/consultapaciente.html', {'pacientes': paciente, 'form': form})
     # paciente = DatosGeneral.objects.select_related()
@@ -43,44 +44,6 @@ def nuevoPaciente(request):
         form = FormNuevoPaciente(request.POST)
         if form.is_valid():
             form.save()
-            # dato = Paciente.objects.all().order_by('-id')[:1]
-            contulataPropietario = Paciente.objects.latest('id')
-            idpropietario = contulataPropietario.id
-            # DatosGeneral(propietario=idpropietario)
-            # DatosGeneral(propietario=Paciente(id=idpropietario))
-            propie = Paciente.objects.get(pk=idpropietario)
-            # datos generales
-            datosdeneral = DatosGeneral()
-            datosdeneral.propietario = propie
-            datosdeneral.save()
-            # preferencia
-            preferencia = Preferencia()
-            preferencia.propietario = propie
-            preferencia.save()
-            # notapaciente
-            notapaciente = NotaPaciente()
-            notapaciente.propietario = propie
-            notapaciente.save()
-            # antecedentepersonal
-            antecedentepersonal = AntecedentePersonal()
-            antecedentepersonal.propietario = propie
-            antecedentepersonal.save()
-            # antecedentefamiliar
-            antecedentefamiliar = AntecedenteFamiliar()
-            antecedentefamiliar.propietario = propie
-            antecedentefamiliar.save()
-            # antecedentepatologico
-            antecedentepatologico = AntecedentePatologico()
-            antecedentepatologico.propietario = propie
-            antecedentepatologico.save()
-            # AntecedenteAlimenticio
-            antecedentealimenticio = AntecedenteAlimenticio()
-            antecedentealimenticio.propietario = propie
-            antecedentealimenticio.save()
-            # exploracion
-            exploracion = Exploracion()
-            exploracion.propietario = propie
-            exploracion.save()
             # return redirect('consultapaciente')
             response_data['tipo'] = 'success'
             return JsonResponse(response_data)
@@ -94,6 +57,7 @@ def nuevoPaciente(request):
 
 def editarPaciente(request, dato):
     userdata = get_object_or_404(Paciente, pk=dato)
+    # return HttpResponse(userdata.preferencia.experiencia)
     if request.method == 'GET':
         paciente = Paciente.objects.filter(id=dato)
         form = FormNuevoPaciente(instance=userdata)
@@ -216,7 +180,8 @@ def editarPatologicos(request, patologico):
     else:
         response_data['tipo'] = 'get'
         return JsonResponse(response_data)
-    
+
+
 def editarNoPatologicos(request, patologico):
     if request.method == "POST":
         response_data = {}
@@ -225,6 +190,40 @@ def editarNoPatologicos(request, patologico):
         dtid = consusulta.id
         busca = get_object_or_404(AntecedentePersonal, pk=dtid)
         form = FormAntecedentePersonal(request.POST, instance=busca)
+        if form.is_valid():
+            form.save()
+            response_data['tipo'] = 'success'
+            return JsonResponse(response_data)
+    else:
+        response_data['tipo'] = 'get'
+        return JsonResponse(response_data)
+
+
+def editaHalimenticio(request, habito):
+    if request.method == "POST":
+        response_data = {}
+        consusulta = AntecedenteAlimenticio.objects.get(
+            propietario=habito)
+        dtid = consusulta.id
+        busca = get_object_or_404(AntecedenteAlimenticio, pk=dtid)
+        form = FormAntecedenteAlimenticio(request.POST, instance=busca)
+        if form.is_valid():
+            form.save()
+            response_data['tipo'] = 'success'
+            return JsonResponse(response_data)
+    else:
+        response_data['tipo'] = 'get'
+        return JsonResponse(response_data)
+
+
+def editaExploracion(request, exploracion):
+    if request.method == "POST":
+        response_data = {}
+        consusulta = Exploracion.objects.get(
+            propietario=exploracion)
+        dtid = consusulta.id
+        busca = get_object_or_404(Exploracion, pk=dtid)
+        form = FormExploracion(request.POST, instance=busca)
         if form.is_valid():
             form.save()
             response_data['tipo'] = 'success'

@@ -24,8 +24,6 @@ consulta
         <!-- Cuerpo Experiencia paciene  -->
         <div class="card">
             <!-- Alergias -->
-
-
             <div class="card-header" role="tab" id="tabAlergias">
                 <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroAlergias"
                     aria-expanded="false" aria-controls="tableroAlergias">
@@ -133,10 +131,7 @@ consulta
 <div class="col-12 col-md-8" id="divDetallePaciente">
     <div class="accordion md-accordion" id="tableroDetallePacientes" role="tablist" aria-multiselectable="true">
         <!-- forms historial medico-->
-        <div class="form-check form-check-inline">
-            
-            {{formalimenticio.comidas|as_crispy_field}}
-        </div>
+
         <div class="card mt-0">
             <div class="card-header" role="tab" id="tabHistoria">
                 <a data-toggle="collapse" data-parent="#tableroDetallePacientes" href="#tableroHistoria"
@@ -165,375 +160,11 @@ consulta
                             <!-- Forms antecedente no patologico  -->
                             {% include 'paciente/recursos/formnopatologico.html' %}
                             <!-- Forms antecedente no patologico  -->
-
-                            <div class="col-12 col-md-12 mt-2">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <h6 class="h6 text-muted text-center">Hábitos
-                                                    Alimenticios</h6>
-                                            </div>
-                                            <div class="col-12">
-                                                <div id="habitosAlimenticios">
-
-                                                    <div class="row">
-
-                                                        <div class="col-4 col-lg-2 col-md-3 mt-1">
-                                                            <label>
-                                                                <input type="checkbox" id="desayuno"
-                                                                    onclick="setComidas('desayuno');">
-                                                                <small class="text-muted">Desayuno</small>
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="col-4 col-lg-2 col-md-3 mt-1">
-                                                            <label>
-                                                                <input type="checkbox" id="almuerzo"
-                                                                    onclick="setComidas('almuerzo');">
-                                                                <small class="text-muted">Almuerzo</small>
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="col-4 col-lg-2 col-md-3 mt-1">
-                                                            <label>
-                                                                <input type="checkbox" id="mcomida"
-                                                                    onclick="setComidas('mcomida');">
-                                                                <small class="text-muted">Comida</small>
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="col-4 col-lg-2 col-md-3 mt-1">
-                                                            <label>
-                                                                <input type="checkbox" id="cena"
-                                                                    onclick="setComidas('cena');">
-                                                                <small class="text-muted">Cena</small>
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="col-8 col-lg-2 col-md-3 mt-1">
-                                                            <label>
-                                                                <input type="checkbox" id="colaciones"
-                                                                    onclick="setComidas('colaciones');">
-                                                                <small class="text-muted">Colaciones</small>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Tortillas</small>
-                                                            <input type="text" placeholder="" id="habal_tortillas"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_tortillas','habal_tortillas','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Tortillas">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Pan</small>
-                                                            <input type="text" placeholder="" id="habal_pan" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_pan','habal_pan','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Pan">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Cereales</small>
-                                                            <input type="text" placeholder="" id="habal_cereal" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_cereal','habal_cereal','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Cereal">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Refrescos</small>
-                                                            <input type="text" placeholder="" id="habal_refresco"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_refresco','habal_refresco','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Refrescos">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Jugos</small>
-                                                            <input type="text" placeholder="" id="habal_jugos" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_jugos','habal_jugos','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Jugos">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Aguas Frescas</small>
-                                                            <input type="text" placeholder="" id="habal_aguafresca"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_aguafresca','habal_aguafresca','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Aguas Frescas">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Frutas</small>
-                                                            <input type="text" placeholder="" id="habal_frutas" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_frutas','habal_frutas','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Frutas">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Frutos Secos</small>
-                                                            <input type="text" placeholder="" id="habal_frutosSecos"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_frutosSecos','habal_frutosSecos','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Frutos Secos">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Verduras</small>
-                                                            <input type="text" placeholder="" id="habal_verduras"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_verduras','habal_verduras','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Verduras">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Agua Natural</small>
-                                                            <input type="text" placeholder="" id="habal_aguas" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_aguas','habal_aguas','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Agua Natural">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Golosinas</small>
-                                                            <input type="text" placeholder="" id="habal_golosinas"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_golosinas','habal_golosinas','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Golosinas">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Carnes Rojas</small>
-                                                            <input type="text" placeholder="" id="habal_carneroja"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_carneroja','habal_carneroja','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Carne Roja">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Pollo</small>
-                                                            <input type="text" placeholder="" id="habal_pollo" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_pollo','habal_pollo','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Pollo">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Pescado</small>
-                                                            <input type="text" placeholder="" id="habal_pescado"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_pescado','habal_pescado','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Pescado">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Mariscos</small>
-                                                            <input type="text" placeholder="Mariscos" id="habal_marisco"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_marisco','habal_marisco','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Mariscos">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Leche</small>
-                                                            <input type="text" placeholder="" id="habal_leche" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_leche','habal_leche','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Leche">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Derivados</small>
-                                                            <input type="text" placeholder="" id="habal_derivados"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_derivados','habal_derivados','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Derivados">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Huevo</small>
-                                                            <input type="text" placeholder="" id="habal_huevo" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_huevo','habal_huevo','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Huevo">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Arroz</small>
-                                                            <input type="text" placeholder="" id="habal_arroz" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_arroz','habal_arroz','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Arroz">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Legumbres</small>
-                                                            <input type="text" placeholder="" id="habal_frijol" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_frijol','habal_frijol','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Legumbres">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Miel</small>
-                                                            <input type="text" placeholder="" id="habal_miel" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_miel','habal_miel','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Miel">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Aceite</small>
-                                                            <input type="text" placeholder="" id="habal_aceite" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_aceite','habal_aceite','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Aceite">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Sal</small>
-                                                            <input type="text" placeholder="" id="habal_sal" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_sal','habal_sal','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Sal">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Azucar</small>
-                                                            <input type="text" placeholder="" id="habal_azucar" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_azucar','habal_azucar','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Azucar">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Café</small>
-                                                            <input type="text" placeholder="" id="habal_cafe" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_cafe','habal_cafe','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Café">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Té</small>
-                                                            <input type="text" placeholder="" id="habal_te" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_te','habal_te','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Té">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Sazonadores</small>
-                                                            <input type="text" placeholder="" id="habal_knorsuiza"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_knorsuiza','habal_knorsuiza','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Sazonadores">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Embutidos</small>
-                                                            <input type="text" placeholder="" id="habal_embutidos"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_embutidos','habal_embutidos','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Embutidos">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Enlatados</small>
-                                                            <input type="text" placeholder="" id="habal_enlatados"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_enlatados','habal_enlatados','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Enlatados">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Pastas</small>
-                                                            <input type="text" placeholder="" id="habal_pastas" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_pastas','habal_pastas','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Pastas">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Suplementos y Energéticos</small>
-                                                            <input type="text" placeholder="" id="habal_suplementos"
-                                                                value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_suplementos','habal_suplementos','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Suplementos y Energéticos">
-                                                        </div>
-
-                                                        <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                                            <small>Otros</small>
-                                                            <input type="text" placeholder="" id="habal_otras" value=""
-                                                                class="form-control form-control-sm text-center"
-                                                                onblur="guardacampoConsulta('historia','habal_otras','habal_otras','idhistoria','4475','resHistoria','7148');"
-                                                                data-toggle="tooltip" data-placement="left" title=""
-                                                                data-original-title="Otros">
-                                                        </div>
+                            <!-- Forms antecedente Habitos alimenticios  -->
+                            {% include 'paciente/recursos/formhabitosalim.html' %}
+                            <!-- Forms antecedente Habitos alimenticios  -->
 
 
-
-                                                    </div>
-
-                                                    <div id="resHabitos"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -647,8 +278,29 @@ consulta
             method: 'POST',
             body: new FormData(formnopatologico),
         }).then(response => response.json()).then(response => {
+            /*
+                        if (response.tipo === "success") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Registrado No Patologivo ',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            return false;
+                        };
+                         */
+        })
+    }
 
-            if (response.tipo === "success") {
+    function guardarHabitosAlimenticios() {
+
+
+        var action = document.getElementById('formhalimenticio').action;
+        fetch(`${action}`, {
+            method: 'POST',
+            body: new FormData(formhalimenticio),
+        }).then(response => response.json()).then(response => {
+            /*  if (response.tipo === "success") {
                 Swal.fire({
                     icon: 'success',
                     title: 'Registrado No Patologivo ',
@@ -656,9 +308,33 @@ consulta
                     timer: 1500
                 })
                 return false;
-            };
-            /* */
+            };    */
+
         })
+
+
+    }
+
+    function guardarExploracion() {
+
+        var action = document.getElementById('formexploracion').action;
+        fetch(`${action}`, {
+            method: 'POST',
+            body: new FormData(formexploracion),
+        }).then(response => response.json()).then(response => {
+            /*  if (response.tipo === "success") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registrado Exploracion ',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                return false;
+            };
+
+         */
+        })
+
     }
 
     function eliminardatosgenerales() {
