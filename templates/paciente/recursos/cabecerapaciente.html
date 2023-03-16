@@ -2,8 +2,8 @@
 
 <div id="divModalJitsi"></div>
 
-<div class="modal fade right" id="modalGoogle" tabindex="-1" role="dialog" aria-labelledby="mGoogle"
-    aria-hidden="true" data-backdrop="true">
+<div class="modal fade right" id="modalGoogle" tabindex="-1" role="dialog" aria-labelledby="mGoogle" aria-hidden="true"
+    data-backdrop="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -21,10 +21,10 @@
 </div>
 <div class="card mt-0">
     <div class="card-header" role="tab" id="tabcitaHoy">
-        <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroFoto"
-            aria-expanded="false" aria-controls="tableroFichaIdentificacion">
+        <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroFoto" aria-expanded="false"
+            aria-controls="tableroFichaIdentificacion">
             <h5 class="mb-0 h6 text-muted text-left">
-                Paciente 
+                Paciente
             </h5>
         </a>
     </div>
@@ -35,10 +35,9 @@
                     <div class="col-4 col-md-3">
                         <div class="row">
                             <div class="col-12" id="divFoto">
-                                {% if pacientes.propietario.foto != ""  %}
-                                <img src="{{pacientes.propietario.foto.url}}" alt="sindato"
-                                    class="img-fluid z-depth-1 rounded" onclick="activaEdicionDeFoto();"
-                                    data-toggle="tooltip" data-placement="top" title=""
+                                {% if paciente.foto != ""  %}
+                                <img src="{{paciente.foto.url}}" alt="sindato" class="img-fluid z-depth-1 rounded"
+                                    onclick="activaEdicionDeFoto();" data-toggle="tooltip" data-placement="top" title=""
                                     data-original-title="Click en la foto para iniciar la modificación">
                                 {% else %}
                                 <i class="fas fa-image text-muted fa-4x" onclick="activaEdicionDeFoto();"
@@ -53,7 +52,7 @@
                         <h6 class="h6 text-muted" id="txtPacienteNombres" onclick="cargaEdicionNombre();"
                             data-toggle="tooltip" data-placement="right" title=""
                             data-original-title="Click en el Nombre para iniciar la Modificación">
-                            {{pacientes.propietario.apellido}} {{pacientes.propietario.nombre}}</h6>
+                            {{paciente.apellido}} {{paciente.nombre}}</h6>
                         <div class="row" id="divEditaPacienteNombres" style="display: none;">
                             <div class="col-12">
                                 <input type="text" id="editaPacientePaterno" class="form-control form-control-sm"
@@ -96,43 +95,53 @@
                         <br>
                         <small class="text-muted">
                             <img src="{% static 'img/' %}ico/sangre.png" width="17px;"> <span id="divSangreFicha">
-                                <span class="text-danger">AB+</span><i class="fas fa-edit ml-1"
-                                    style="cursor:pointer;" onclick="modificaSangre();"></i>
+                                <span class="text-danger">AB+</span><i class="fas fa-edit ml-1" style="cursor:pointer;"
+                                    onclick="modificaSangre();"></i>
                             </span>
                         </small>
                         <small text-primary="">
 
                             <i class="fas fa-head-side-cough ml-2 text-primary"></i>
                             <span class="text-danger"></span> </small>
-
+                        {% if paciente.telefono != None %}
                         <small class="text-muted">
-                            {% if pacientes.propietario.telefono != None %}
                             <span id="divCargaCelularFicha"><br><a
-                                    href="https://api.whatsapp.com/send?phone={{pacientes.propietario.telefono}}&amp;text=Hola, Jose Armando"
+                                    href="https://api.whatsapp.com/send?phone={{paciente.telefono}}&amp;text=Hola, Jose Armando"
                                     target="_blank"><span class="text-success"><i class="fab fa-whatsapp"></i>
-                                    </span><span
-                                        class="text-muted">{{pacientes.propietario.telefono}}</span></a></span>
-                            {% endif %}
+                                    </span><span class="text-muted">{{paciente.telefono}}</span></a></span>
                         </small>
-
-
+                        {% endif %}
+    
+                        {% if paciente.datosgeneral.telefono != None %}
+                        <small class="text-muted">
+                            <a href="tel:7443178537" target="_blank" class="text-muted">
+                                <i class="fas fa-phone-volume ml-2 text-info"></i>{{paciente.datosgeneral.telefono}}</a>
+                        </small>
+                        <br>
+                        {% endif %}
+                        {% if paciente.datosgeneral.celular != None %}
+                        <small class="text-muted">
+                            <a href="tel:7443178537" target="_blank" class="text-muted">
+                                <i class="fas fa-phone-volume ml-2 text-info"></i>{{paciente.datosgeneral.celular}}</a>
+                        </small>
+                        {% endif %}
 
                         <br>
                         <small class="text-muted">
 
-                            {% if  pacientes.propietario.email != None %}
-                            <a href="mailto:{{pacientes.propietario.email}}" target="_blank" class="text-muted">
-                                <i class="far fa-envelope text-info"></i> {{pacientes.propietario.email}}
+                            {% if  paciente.email != None %}
+                            <a href="mailto:{{paciente.email}}" target="_blank" class="text-muted">
+                                <i class="far fa-envelope text-info"></i> {{paciente.email}}
                             </a>
                             {% endif %}
 
                         </small>
-
-
-
-
-
-
+                        <br>
+                        {% if paciente.datosgeneral.domicilio != None %}
+                        <small class="text-muted">
+                            <i class="fas fa-house-user text-secondary"></i> {{paciente.datosgeneral.domicilio}}
+                        </small>
+                        {% endif %}
                     </div>
 
                     <div class="col-12 mt-1" id="divCargaFoto" style="display: none;">
@@ -153,23 +162,24 @@
 
             <div class="row mt-2">
                 <div class="col-12 col-md-6">
-                    <p class="text-muted" id="txtCumple"
-                        onclick="cargaEdicion('txtCumple','divEditaNacimiento','editaNacimiento');">
+                    {% now "Y-m-d" as cumpleano %}
+                    {% if paciente.datosgeneral.fecha_nacimiento != None and paciente.datosgeneral.fecha_nacimiento|date:"Y-m-d" == cumpleano %}
+                    <p class="text-muted" id="txtCumple">
                         <small id="cumpleTexto" data-toggle="tooltip" data-placement="top" title=""
                             data-original-title="click para modificar la fecha de nacimiento">
                             <div class="spinner-grow text-secondary" role="status">
                                 <span class="sr-only">Cumpleaños...</span>
                             </div>
-
                             <i class="fas fa-birthday-cake text-secondary"></i>
+                            {{paciente.datosgeneral.fecha_nacimiento }}
 
-                            26 de Febrero
                         </small>
                     </p>
+                    {% endif %}
 
                     <div class="col-12 mt-1" id="divEditaNacimiento" style="display: none;">
-                        <input type="date" id="editaNacimiento" class="form-control form-control-sm"
-                            value="2023-02-26" data-toggle="tooltip" data-placement="top" title=""
+                        <input type="date" id="editaNacimiento" class="form-control form-control-sm" value="2023-02-26"
+                            data-toggle="tooltip" data-placement="top" title=""
                             onblur="cierraEditaEdad('paciente','fechanac','editaNacimiento','idpaciente','6890','res1');"
                             data-original-title="Fecha de Nacimiento">
 
@@ -184,8 +194,7 @@
                         </label>
                         <label>
                             <input type="radio" name="sexo" id="F" onclick="setSexo('F');">
-                            <img src="{% static 'img/' %}ficha/mujerDes.svg" width="30px"
-                                style="opacity:0.2;"></label>
+                            <img src="{% static 'img/' %}ficha/mujerDes.svg" width="30px" style="opacity:0.2;"></label>
                         <label>
                             <input type="radio" name="sexo" id="I" onclick="setSexo('I');">
                             <img src="{% static 'img/' %}ficha/indefinidoDes.svg?id=2" width="30px"

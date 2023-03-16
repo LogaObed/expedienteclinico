@@ -10,7 +10,7 @@
     </a>
 </div>
 <div id="tableroExperiencia" class="collapse" role="tabpanel" data-parent="#tableroFichaIdentificacion">
-    <form action="{% url 'editarprefe' pacientes.propietario.id %}" method="POST" id="formpreferencia">
+    <form action="{% url 'editarprefe' paciente.id %}" method="POST" id="formpreferencia">
         {% csrf_token %}
         <div class="card-body">
             <div class="row">

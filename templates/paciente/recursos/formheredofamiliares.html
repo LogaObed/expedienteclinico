@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-12">
                     <div id="heredoFamiliares">
-                        <form id="formheredo" action="{% url 'editarheredofamiliar' pacientes.propietario.id %}"
+                        <form id="formheredo" action="{% url 'editarheredofamiliar' paciente.id %}"
                             method="POST">
                             {% csrf_token %}
                             <div class="row">

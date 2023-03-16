@@ -16,7 +16,7 @@
                 <div id="resExploracion" style="display: none;"></div>
                 <div class="card">
                     <div class="card-body">
-                        <form id="formexploracion" action=" {% url 'editarexploracion' pacientes.propietario.id %}"
+                        <form id="formexploracion" action=" {% url 'editarexploracion' paciente.id %}"
                             method="POST">
                             {% csrf_token %}
                             <div class="row">

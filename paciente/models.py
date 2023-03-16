@@ -252,7 +252,8 @@ class Exploracion(models.Model):
     def __str__(self):
         return f'{self.propietario}'
 
-def create_paciente(sender, instance,created,**kwargs):
+
+def create_paciente(sender, instance, created, **kwargs):
     if created:
         # Guardar datos generales
         datosdeneral = DatosGeneral()
@@ -287,4 +288,5 @@ def create_paciente(sender, instance,created,**kwargs):
         exploracion.propietario = instance
         exploracion.save()
 
-post_save.connect(create_paciente,sender=Paciente)
+
+post_save.connect(create_paciente, sender=Paciente)

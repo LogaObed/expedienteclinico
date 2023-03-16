@@ -9,7 +9,7 @@
 
                 <div class="col-12">
                     <div id="noPatologicos">
-                        <form action="{% url 'editarnopatologicos' pacientes.propietario.id %}" method="POST"
+                        <form action="{% url 'editarnopatologicos' paciente.id %}" method="POST"
                             id="formnopatologico">
                             {% csrf_token %}
                             <div class="row">

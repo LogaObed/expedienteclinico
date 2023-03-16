@@ -12,11 +12,11 @@
             {% for paciente in pacientes %}
             <tr>
                 <td style="padding-left: 0; padding-right: 0;padding-top: 4px; padding-bottom: 1px;">
-                    <a href="{% url 'editarpaciente' paciente.propietario.id %}" target="_self">
-                        {% if paciente.propietario.foto == "" %}
+                    <a href="{% url 'editarpaciente' paciente.id %}" target="_self">
+                        {% if paciente.foto == "" %}
                         <i class="fas fa-image text-muted fa-4x"></i>
                         {% else %}
-                        <img src="{{paciente.propietario.foto.url}}" alt="" class="img-fluid z-depth-1 rounded">
+                        <img src="{{paciente.foto.url}}" alt="" class="img-fluid z-depth-1 rounded">
                         {% endif %}
                     </a>
                 </td>
@@ -25,35 +25,35 @@
                     <div class="row">
                         <div class="col-12 col-md-4" style="cursor: pointer;">
                             <!--<a href="../ficha/index.php?p=IkBzQP01yhXWw61id0S9og==&v=6866" target="_self">-->
-                            {{paciente.propietario.nombre}} {{paciente.propietario.apellido}}
+                            {{paciente.nombre}} {{paciente.apellido}}
                             <!--</a>-->
 
                             <br>
-                            {% if paciente.propietario.telefono != none %}
-                            <a href="https://api.whatsapp.com/send?phone=+52{{paciente.propietario.telefono}}&amp;text=Hola, Obed, te contactamos de Clínica Cambrón"
+                            {% if paciente.telefono != none %}
+                            <a href="https://api.whatsapp.com/send?phone=+52{{paciente.telefono}}&amp;text=Hola, Obed, te contactamos de Clínica Cambrón"
                                 target="_blank">
                                 <i class="fab fa-whatsapp"></i>
-                                {{paciente.propietario.telefono}} </a>
+                                {{paciente.telefono}} </a>
                             {% endif %}
                         </div>
 
-                        {% if paciente.ciudad != none %} {{paciente.ciudad}} {% endif %}
+                        {% if paciente.datosgeneral.ciudad != none %} {{paciente.datosgeneral.ciudad}} {% endif %}
 
-                        {% if paciente.estado != none %} {{paciente.estado}} {% endif %}
+                        {% if paciente.datosgeneral.estado != none %} {{paciente.datosgeneral.estado}} {% endif %}
 
                         <div class="col-12 col-md-8">
-                            {% if paciente.propietario.email != none %}
+                            {% if paciente.email != none %}
                             <a href="mailto:{{paciente.email}} ">
                                 <i class="far fa-envelope"></i>
-                                {{paciente.propietario.email}} </a>
+                                {{paciente.email}} </a>
                             {% endif %}
                         </div>
 
                         <div class="col-12 col-md-4">
-                            {% if paciente.telefono != none %}
-                            <a href="tel:+52{{paciente.telefono}}">
+                            {% if paciente.datosgeneral.telefono != none %}
+                            <a href="tel:+52{{paciente.datosgeneral.telefono}}">
                                 <i class="fas fa-phone-volume"></i>
-                                {{paciente.telefono}} </a>
+                                {{paciente.datosgeneral.telefono}} </a>
                             {% endif %}
                         </div>
 

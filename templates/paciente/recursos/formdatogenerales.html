@@ -11,7 +11,7 @@
 
     <div id="tableroDatosGenerales" class="collapse" role="tabpanel" data-parent="#tableroFichaIdentificacion">
         <div class="card-body">
-            <form action="{% url 'editardatogeneral' pacientes.propietario.id %}" method="POST" id="formdatosgenerales">
+            <form action="{% url 'editardatogeneral' paciente.id %}" method="POST" id="formdatosgenerales">
                 {% csrf_token %}
                 <div id="divTableroDatosGenerales">
                     <div id="resDatosPaciente" style="display: none;"></div>

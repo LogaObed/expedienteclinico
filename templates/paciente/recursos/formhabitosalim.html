@@ -8,7 +8,7 @@
                         Alimenticios</h6>
                 </div>
                 <div class="col-12">
-                    <form id="formhalimenticio" action="{% url 'editaralimenticio' pacientes.propietario.id %}" method="POST">
+                    <form id="formhalimenticio" action="{% url 'editaralimenticio' paciente.id %}" method="POST">
                        {% csrf_token %}
                         <div id="habitosAlimenticios">
 
