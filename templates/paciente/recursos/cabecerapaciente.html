@@ -95,7 +95,7 @@
                         <br>
                         <small class="text-muted">
                             <img src="{% static 'img/' %}ico/sangre.png" width="17px;"> <span id="divSangreFicha">
-                                <span class="text-danger">AB+</span><i class="fas fa-edit ml-1" style="cursor:pointer;"
+                                <span class="text-danger">{{paciente.tipo_sangre.nombre}}</span><i class="fas fa-edit ml-1" style="cursor:pointer;"
                                     onclick="modificaSangre();"></i>
                             </span>
                         </small>
@@ -111,7 +111,7 @@
                                     </span><span class="text-muted">{{paciente.telefono}}</span></a></span>
                         </small>
                         {% endif %}
-    
+
                         {% if paciente.datosgeneral.telefono != None %}
                         <small class="text-muted">
                             <a href="tel:7443178537" target="_blank" class="text-muted">
@@ -175,6 +175,12 @@
 
                         </small>
                     </p>
+                    {% elif paciente.datosgeneral.fecha_nacimiento != None %}
+                    <small id="cumpleTexto" data-toggle="tooltip" data-placement="top" title=""
+                        data-original-title="click para modificar la fecha de nacimiento">
+                        <i class="fas fa-birthday-cake text-secondary"></i>
+                        {{paciente.datosgeneral.fecha_nacimiento }}
+                    </small>
                     {% endif %}
 
                     <div class="col-12 mt-1" id="divEditaNacimiento" style="display: none;">
@@ -188,19 +194,22 @@
 
                 <div class="col-12 col-md-12 text-left text-muted">
                     <div id="divcargaSexo">
+
                         <label>
-                            <input type="radio" name="sexo" id="M" onclick="setSexo('M');" checked="">
-                            <img src="{% static 'img/' %}ficha/hombre.svg?id=1" width="30px">
+                            <input type="radio" name="sexo" id="M" onclick="setSexo('M');">
+                            <img src="" id="imgm" alt="" width="30px">                        
                         </label>
                         <label>
-                            <input type="radio" name="sexo" id="F" onclick="setSexo('F');">
-                            <img src="{% static 'img/' %}ficha/mujerDes.svg" width="30px" style="opacity:0.2;"></label>
+                            <input type="radio" name="sexo" id="F" onclick="setSexo('F');" checked="">
+                            <img src="" id="imgf" alt="" width="30px">                           
+                        </label>
                         <label>
                             <input type="radio" name="sexo" id="I" onclick="setSexo('I');">
-                            <img src="{% static 'img/' %}ficha/indefinidoDes.svg?id=2" width="30px"
-                                style="opacity:0.2;"></label>
+                            <img src="" id="imgi" alt="" width="30px">                        
+                        </label>
+
                     </div>
-                    <div id="resSexo"></div>
+
                     <div id="resPatologiaBase"><span style="font-size: 14px;">
                             <img src="{% static 'img/' %}ico/padecimiento.svg" height="18px">Patología
                             Base Sin Agregados</span></div>

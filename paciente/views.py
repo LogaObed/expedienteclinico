@@ -81,6 +81,7 @@ def editarPaciente(request, dato):
     if request.method == 'GET':
         paciente = Paciente.objects.get(id=dato)
         form = FormNuevoPaciente(instance=userdata)
+        formSangre = FormTipoSangre(instance=userdata)
         # datos generales
         cnsgeneral = DatosGeneral.objects.get(propietario=dato)
         dtid = cnsgeneral.id
@@ -123,7 +124,7 @@ def editarPaciente(request, dato):
         exploracionid = cnexporacion.id
         dtexploracion = get_object_or_404(Exploracion, pk=exploracionid)
         formexploracion = FormExploracion(instance=dtexploracion)
-        return render(request, 'paciente/editarpaciente.html', {'paciente': paciente, 'formexploracion': formexploracion, 'formpatologico': formpatologico, 'formalimenticio': formalimenticio, 'formfamiliar': formfamiliar, 'formpersonal': formpersonal, 'formnota': formnota, 'formpref': formpref, 'formgeneral': formgeneral, 'form': form})
+        return render(request, 'paciente/editarpaciente.html', {'formSangre':formSangre,'paciente': paciente, 'formexploracion': formexploracion, 'formpatologico': formpatologico, 'formalimenticio': formalimenticio, 'formfamiliar': formfamiliar, 'formpersonal': formpersonal, 'formnota': formnota, 'formpref': formpref, 'formgeneral': formgeneral, 'form': form})
     else:
         form = FormNuevoPaciente(request.POST, instance=userdata)
         if form.is_valid():
@@ -252,6 +253,27 @@ def editaExploracion(request, exploracion):
         response_data['tipo'] = 'get'
         return JsonResponse(response_data)
 
+def editarSexo(request, id):
+    modelo = Paciente.objects.get(id=id)
+    datos = {
+        # 'nombre': modelo.nombre,
+        # 'descripcion': modelo.descripcion,
+        # # Agregue aquí todos los campos del modelo que desea editar
+    }
+    return JsonResponse(datos)
+
+def edtirarSangre(request,sangre):
+    if request.method == "POST":
+        response_data = {}
+        busca = get_object_or_404(Paciente, pk=sangre)
+        form = FormTipoSangre(request.POST, instance=busca)
+        if form.is_valid():
+            form.save()
+            response_data['tipo'] = 'success'
+            return JsonResponse(response_data)
+    else:
+        response_data['tipo'] = 'get'
+        return JsonResponse(response_data)
 
 def consultaIndividualPaciente(request, dato):
     form = FormPacienteGeneral()
@@ -282,3 +304,4 @@ def consultaDatoGeneral(request, dato, propietario):
     # datogeneral = get_object_or_404(DatosGeneral, pk=dato)
     # form = FormPaciente(instance=datogeneral)
     # return render(request, 'consultapaciente.html', {'form': form})
+

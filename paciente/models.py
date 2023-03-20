@@ -11,21 +11,21 @@ MY_CHOICES2 = ((1, 'Desayuno'),
 
 
 class TipoUsuario(models.Model):
-    nombre = models.CharField(max_length=50, blank=True, null=True)
+    nombre = models.CharField(max_length=10, blank=True, null=True)
 
     def __str__(self):
         return f'Tipo usuario: {self.nombre} id: {self.id}'
 
 
 class TipoSangre(models.Model):
-    nombre = models.CharField(max_length=50, blank=True, null=True)
+    nombre = models.CharField(max_length=8, blank=True, null=True)
 
     def __str__(self):
-        return f'Tipo sangre: {self.nombre}'
+        return f'{self.nombre}'
 
 
 class TipoSexo(models.Model):
-    nombre = models.CharField(max_length=50, blank=True, null=True)
+    nombre = models.CharField(max_length=8, blank=True, null=True)
 
     def __str__(self):
         return f'Tipo Sexo: {self.nombre}'
@@ -188,8 +188,13 @@ class AntecedenteAlimenticio(models.Model):
     #  = models.CharField(max_length=50, blank=True, null=True)
     # comidaa = MultiSelectField(choices=COMIDAS)
     # my_field = MultiSelectField(choices=MY_CHOICES)
-    comidas = MultiSelectField(
-        choices=MY_CHOICES2, max_choices=6, max_length=6, blank=True, null=True)
+    # comidas = MultiSelectField(
+    #     choices=MY_CHOICES2, max_choices=6, max_length=6, blank=True, null=True)
+    desayuno = models.BooleanField(default=False)
+    almuerzo = models.BooleanField(default=False)
+    comida = models.BooleanField(default=False)
+    cena = models.BooleanField(default=False)
+    colaciones = models.BooleanField(default=False)
     tortillas = models.CharField(max_length=25, blank=True, null=True)
     pan = models.CharField(max_length=25, blank=True, null=True)
     cereales = models.CharField(max_length=25, blank=True, null=True)

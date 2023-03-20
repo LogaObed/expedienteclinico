@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% load static %}
 {% block titulo %}
 consulta
@@ -9,7 +10,9 @@ consulta
 {% block cuerpo %}
 {% load crispy_forms_tags %}
 <div class="col-12 col-md-4" id="divFichaPaciente">
+
     <!-- paciente cabecera -->
+    {% include 'paciente/recursos/modalTipoSangre.html' %}
     {% include 'paciente/recursos/cabecerapaciente.html' %}
     <!-- paciente cabecera -->
     <div class="accordion md-accordion" id="tableroFichaIdentificacion" role="tablist" aria-multiselectable="true">
@@ -187,8 +190,47 @@ consulta
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
+
+    function modificaSangre() {
+        $('#mGoogle').html('Tipo de Sangre');
+        $('#modalGoogle').modal('toggle');
+        /*
+        $.ajax({
+          type: "POST",
+          url: 'cambiaSangre.php',
+          data: {
+            id: '6898'
+          }
+        }).done(function (msg) {
+          $('#modalGoogleBody').html(msg);
+
+        });
+        */
+    }
 </script>
 <script>
+    function setSexo() {
+        let imgm = document.querySelector('#imgm'),
+            imgf = document.querySelector('#imgf'),
+            imgi = document.querySelector('#imgi');
+        if (document.getElementById("M").checked) {
+            imgm.src = `{% static 'img/' %}ficha/hombre.svg`;
+            imgf.src = `{% static 'img/' %}ficha/mujerDes.svg`;
+            imgi.src = `{% static 'img/' %}ficha/indefinidoDes.svg`;
+            //StyleSheet
+        } else if (document.getElementById("F").checked) {
+            imgf.src = `{% static 'img/' %}ficha/mujer.svg`;
+            imgm.src = `{% static 'img/' %}ficha/hombreDes.svg`;
+            imgi.src = `{% static 'img/' %}ficha/indefinidoDes.svg`;
+            //StyleSheet
+        } else if (document.getElementById("I").checked) {
+            imgi.src = `{% static 'img/' %}ficha/indefinido.svg`;
+            imgm.src = `{% static 'img/' %}ficha/hombreDes.svg`;
+            imgf.src = `{% static 'img/' %}ficha/mujerDes.svg`;
+            //StyleSheet
+        }
+    }
+
     function guardarprefe() {
         var action = document.getElementById('formpreferencia').action;
         fetch(`${action}`, {
@@ -226,6 +268,27 @@ consulta
                   })
                   return false;
               }; */
+
+        })
+
+    }
+
+    function guardarSangre() {
+
+        var action = document.getElementById('formsangre').action;
+        fetch(`${action}`, {
+            method: 'POST',
+            body: new FormData(formsangre),
+        }).then(response => response.json()).then(response => {
+           /* if (response.tipo === "success") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registrado correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                return false;
+            };  */
 
         })
 

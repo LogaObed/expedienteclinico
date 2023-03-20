@@ -1,0 +1,74 @@
+<div class="modal fade right" id="modalGoogle" tabindex="-1" role="dialog" aria-labelledby="mGoogle" aria-hidden="true"
+    data-backdrop="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mGoogle">Búsqueda en Google</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="modalGoogleBody">
+                    <form action="{% url 'editarsangre' paciente.id %}" id="formsangre" method="POST">
+                        {% csrf_token %}
+                        <fieldset>
+                            {% for radio in formSangre.tipo_sangre %}
+                            {% if radio.choice_label != 'S/D' %}
+                            <div class="form-check form-check-inline">
+                                <label for="{{ radio.id_for_label }}">
+                                    <span class="radio">{{ radio.tag }}</span>
+                                    {{ radio.choice_label }}
+                                </label>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </fieldset>
+                    </form>
+                    <!-- <label class="mr-2">
+                        <input type="radio" name="sangre" value="A+" onclick="setSangre('A+');"> A+
+                    </label>
+                    <label class="mr-2">
+                        <input type="radio" name="sangre" value="A-" onclick="setSangre('A-');"> A-
+                    </label>
+                    <label class="mr-2">
+                        <input type="radio" name="sangre" value="B+" onclick="setSangre('B+');"> B+
+                    </label>
+                    <label class="mr-2">
+                        <input type="radio" name="sangre" value="B-" onclick="setSangre('B-');"> B-
+                    </label>
+                    <label class="mr-2">
+                        <input type="radio" name="sangre" value="AB+" onclick="setSangre('AB+');"> AB+
+                    </label>
+                    <label class="mr-2">
+                        <input type="radio" name="sangre" value="AB-" onclick="setSangre('AB-');"> AB-
+                    </label>
+                    <label class="mr-2">
+                        <input type="radio" name="sangre" value="O+" onclick="setSangre('O+');"> O+
+                    </label>
+                    <label class="mr-2">
+                        <input type="radio" name="sangre" value="O-" onclick="setSangre('O-');"> O-
+                    </label> -->
+                    <div id="errorSangre"></div>
+                    <script type="text/javascript">
+                        function setSangre(sangre) {
+                            $.ajax({
+                                type: "POST",
+                                url: 'guardaSangre.php',
+                                data: {
+                                    id: '6898',
+                                    sangre: sangre
+                                }
+                            }).done(function (msg) {
+                                $('#errorSangre').html(msg);
+                                cargaSangreFicha('6898');
+                                $('#modalGoogle').modal('toggle');
+                            });
+                        }
+                    </script>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

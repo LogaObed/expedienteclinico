@@ -2,6 +2,7 @@ from django.forms import *
 from paciente.models import *
 from crispy_forms.layout import Layout, Div, Field
 from multiselectfield.forms.fields import MultiSelectFormField
+from django import forms
 
 
 class FormNuevoPaciente(ModelForm):
@@ -248,4 +249,13 @@ class FormExploracion(ModelForm):
             'piel_tejido': Textarea(attrs={'rows': '3', 'placeholder': 'Piel y Tegumentos...', 'title': 'Piel y Tegumentos'}),
             'otros': Textarea(attrs={'rows': '3', 'placeholder': 'Otros...', 'title': 'Otros'}),
 
+        }
+
+
+class FormTipoSangre(ModelForm):
+    class Meta:
+        model = Paciente
+        fields = ['tipo_sangre']
+        widgets ={
+            'tipo_sangre':RadioSelect(attrs={'class':'form-check-input','onblur': 'guardarSangre();', 'onchange': 'guardarSangre();'})
         }

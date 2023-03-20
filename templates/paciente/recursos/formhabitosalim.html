@@ -9,13 +9,30 @@
                 </div>
                 <div class="col-12">
                     <form id="formhalimenticio" action="{% url 'editaralimenticio' paciente.id %}" method="POST">
-                       {% csrf_token %}
+                        {% csrf_token %}
                         <div id="habitosAlimenticios">
 
-                            <div class="row">
-                                <div class="col-6 col-lg-2 col-md-3 mt-1 text-center">
-                                    {{formalimenticio.comidas|as_crispy_field}}
-
+                            <div class="row" style="justify-content: center;">
+                                <div class="form-check form-check-inline ms-3">
+                                    {{formalimenticio.desayuno}}
+                                     <label class="form-check-label" for="id_desayuno"> Desayuno</label>
+                                </div>
+                                <div class="form-check form-check-inline ms-3 ">
+                                    {{formalimenticio.almuerzo}}
+                                     <label class="form-check-label" for="id_almuerzo"> Almuerzo</label>
+                                </div>
+                       
+                                <div class="form-check form-check-inline ms-3">
+                                    {{formalimenticio.comida}}
+                                     <label class="form-check-label" for="id_comida"> Comida</label>
+                                </div>
+                                <div class="form-check form-check-inline ms-3 ">
+                                    {{formalimenticio.cena}}
+                                     <label class="form-check-label" for="id_cena"> Cena</label>
+                                </div>
+                                <div class="form-check form-check-inline ms-3 ">
+                                    {{formalimenticio.colaciones}}
+                                     <label class="form-check-label" for="id_colaciones"> Colaciones</label>
                                 </div>
                             </div>
 
