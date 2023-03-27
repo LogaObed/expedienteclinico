@@ -68,9 +68,20 @@ class FormPreferencia(ModelForm):
 
 
 class FormNota(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs.update({'autocomplete': 'off', 'onblur': 'guardarnotas();', 'onchange': 'guardarnotas();',
+                                           'class': 'form-control form-control-sm text-left', 'data-toggle': 'tooltip', 'data-placement': 'left'})
     class Meta:
         model = NotaPaciente
         exclude = ['propietario']
+        widgets = {
+            'alergias': Textarea(attrs={'rows': '4', 'placeholder': 'Alergias del Paciente ...', 'title': 'Alergias'}),
+            'expectativas': Textarea(attrs={'rows': '4', 'placeholder': 'Expectativas del Paciente ...', 'title': 'Expectativas'}),
+            'pade_actual': Textarea(attrs={'rows': '4', 'placeholder': 'Padecimiento Actual ...', 'title': 'Padecimiento Actual'}),
+            'observaciones': Textarea(attrs={'rows': '4', 'placeholder': 'Observaciones del Paciente ...', 'title': 'Observaciones'}),
+        }
 
 
 class FormAntecedenteFamiliar(ModelForm):
@@ -258,4 +269,11 @@ class FormTipoSangre(ModelForm):
         fields = ['tipo_sangre']
         widgets ={
             'tipo_sangre':RadioSelect(attrs={'class':'form-check-input','onblur': 'guardarSangre();', 'onchange': 'guardarSangre();'})
+        }
+class FormTipoSexo(ModelForm):
+    class Meta:
+        model = Paciente
+        fields = ['tipo_sexo']
+        widgets ={
+            'tipo_sexo':RadioSelect(attrs={'class':'form-check-input','onblur': 'guardarSexo();', 'onchange': 'guardarSexo();'})
         }

@@ -12,7 +12,8 @@ from crispy_forms.utils import render_crispy_form
 def inicio(request):
     return render(request, 'index.html')
 
-def editarPacienteAjax(request,dato):
+
+def editarPacienteAjax(request, dato):
     # response_data = {}
     if request.method == 'GET':
         userdata = get_object_or_404(Paciente, pk=dato)
@@ -33,7 +34,7 @@ def editarPacienteAjax(request,dato):
         #     ctx.update(csrf(request))
         #     form_html = render_crispy_form(form, context=ctx)
         #     return {'success': False, 'form_html': form_html}
-            
+
 
 def consultaPacientesajax(request):
     # 2. paciente 3. personal 4. contacto
@@ -82,6 +83,7 @@ def editarPaciente(request, dato):
         paciente = Paciente.objects.get(id=dato)
         form = FormNuevoPaciente(instance=userdata)
         formSangre = FormTipoSangre(instance=userdata)
+        formSexo = FormTipoSexo(instance=userdata)
         # datos generales
         cnsgeneral = DatosGeneral.objects.get(propietario=dato)
         dtid = cnsgeneral.id
@@ -124,7 +126,7 @@ def editarPaciente(request, dato):
         exploracionid = cnexporacion.id
         dtexploracion = get_object_or_404(Exploracion, pk=exploracionid)
         formexploracion = FormExploracion(instance=dtexploracion)
-        return render(request, 'paciente/editarpaciente.html', {'formSangre':formSangre,'paciente': paciente, 'formexploracion': formexploracion, 'formpatologico': formpatologico, 'formalimenticio': formalimenticio, 'formfamiliar': formfamiliar, 'formpersonal': formpersonal, 'formnota': formnota, 'formpref': formpref, 'formgeneral': formgeneral, 'form': form})
+        return render(request, 'paciente/editarpaciente.html', {'formSexo': formSexo, 'formSangre': formSangre, 'paciente': paciente, 'formexploracion': formexploracion, 'formpatologico': formpatologico, 'formalimenticio': formalimenticio, 'formfamiliar': formfamiliar, 'formpersonal': formpersonal, 'formnota': formnota, 'formpref': formpref, 'formgeneral': formgeneral, 'form': form})
     else:
         form = FormNuevoPaciente(request.POST, instance=userdata)
         if form.is_valid():
@@ -253,16 +255,37 @@ def editaExploracion(request, exploracion):
         response_data['tipo'] = 'get'
         return JsonResponse(response_data)
 
-def editarSexo(request, id):
-    modelo = Paciente.objects.get(id=id)
-    datos = {
-        # 'nombre': modelo.nombre,
-        # 'descripcion': modelo.descripcion,
-        # # Agregue aquí todos los campos del modelo que desea editar
-    }
-    return JsonResponse(datos)
 
-def edtirarSangre(request,sangre):
+def edtirarSexo(request, sexo):
+    if request.method == "POST":
+        response_data = {}
+        busca = get_object_or_404(Paciente, pk=sexo)
+        form = FormTipoSexo(request.POST, instance=busca)
+        if form.is_valid():
+            form.save()
+            response_data['tipo'] = 'success'
+            return JsonResponse(response_data)
+    else:
+        response_data['tipo'] = 'get'
+        return JsonResponse(response_data)
+
+def edtirarNotas(request, notas):
+    if request.method == "POST":
+        response_data = {}
+        consusulta = NotaPaciente.objects.get(propietario=notas)
+        dtid = consusulta.id
+        busca = get_object_or_404(NotaPaciente, pk=dtid)
+        form = FormNota(request.POST, instance=busca)
+        if form.is_valid():
+            form.save()
+            response_data['tipo'] = 'success'
+            return JsonResponse(response_data)
+    else:
+        response_data['tipo'] = 'get'
+        return JsonResponse(response_data)
+
+
+def edtirarSangre(request, sangre):
     if request.method == "POST":
         response_data = {}
         busca = get_object_or_404(Paciente, pk=sangre)
@@ -274,6 +297,7 @@ def edtirarSangre(request,sangre):
     else:
         response_data['tipo'] = 'get'
         return JsonResponse(response_data)
+
 
 def consultaIndividualPaciente(request, dato):
     form = FormPacienteGeneral()
@@ -304,4 +328,3 @@ def consultaDatoGeneral(request, dato, propietario):
     # datogeneral = get_object_or_404(DatosGeneral, pk=dato)
     # form = FormPaciente(instance=datogeneral)
     # return render(request, 'consultapaciente.html', {'form': form})
-

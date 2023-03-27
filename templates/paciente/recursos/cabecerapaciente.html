@@ -194,22 +194,35 @@
 
                 <div class="col-12 col-md-12 text-left text-muted">
                     <div id="divcargaSexo">
-
-                        <label>
-                            <input type="radio" name="sexo" id="M" onclick="setSexo('M');">
-                            <img src="" id="imgm" alt="" width="30px">                        
-                        </label>
-                        <label>
-                            <input type="radio" name="sexo" id="F" onclick="setSexo('F');" checked="">
-                            <img src="" id="imgf" alt="" width="30px">                           
-                        </label>
-                        <label>
-                            <input type="radio" name="sexo" id="I" onclick="setSexo('I');">
-                            <img src="" id="imgi" alt="" width="30px">                        
-                        </label>
-
+                        <form action="{% url 'editarsexo' paciente.id %}" id="formsexo" method="POST">
+                            {% csrf_token %}
+                            <fieldset>
+                                {% for radio in formSexo.tipo_sexo %}
+                                {% if radio.choice_label != 'ninguno' %}
+                                <div class="form-check form-check-inline">
+                                    <label for="{{ radio.id_for_label }}">
+                                        <span class="radio">{{ radio.tag }}</span>
+                                        {% if radio.choice_label == 'M' and radio.choice_label == paciente.tipo_sexo.nombre %} 
+                                        <img src="{% static 'img/' %}ficha/hombre.svg" width="30px" alt="">
+                                        {% elif radio.choice_label == 'M' %}
+                                        <img src="{% static 'img/' %}ficha/hombreDes.svg" width="30px" alt="" style="opacity:0.2;">
+                                        {% elif radio.choice_label == 'F' and radio.choice_label == paciente.tipo_sexo.nombre %} 
+                                        <img src="{% static 'img/' %}ficha/mujer.svg" width="30px" alt="">  
+                                        {% elif radio.choice_label == 'F' %} 
+                                        <img src="{% static 'img/' %}ficha/mujerDes.svg" width="30px" alt="" style="opacity:0.2;">  
+                                        {% elif radio.choice_label == 'I' and radio.choice_label == paciente.tipo_sexo.nombre %} 
+                                        <img src="{% static 'img/' %}ficha/indefinido.svg" width="30px" alt="">         
+                                        {% elif radio.choice_label == 'I' %} 
+                                        <img src="{% static 'img/' %}ficha/indefinidoDes.svg" width="30px" alt="" style="opacity:0.2;">         
+                                        {% endif %}
+                                            
+                                    </label>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </fieldset>
+                        </form>
                     </div>
-
                     <div id="resPatologiaBase"><span style="font-size: 14px;">
                             <img src="{% static 'img/' %}ico/padecimiento.svg" height="18px">Patología
                             Base Sin Agregados</span></div>

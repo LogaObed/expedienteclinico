@@ -25,110 +25,7 @@ consulta
             {% include 'paciente/recursos/formpreferencia.html' %}
         </div>
         <!-- Cuerpo Experiencia paciene  -->
-        <div class="card">
-            <!-- Alergias -->
-            <div class="card-header" role="tab" id="tabAlergias">
-                <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroAlergias"
-                    aria-expanded="false" aria-controls="tableroAlergias">
-                    <h5 class="mb-0 h6 text-muted text-left">
-                        <i class="fas fa-head-side-cough text-danger"></i>Alergias <small class="text-danger"
-                            id="divCargaAlergias"></small>
-                    </h5>
-                </a>
-            </div>
-            <div id="tableroAlergias" class="collapse" role="tabpanel" data-parent="#tableroFichaIdentificacion">
-                <div class="card-body">
-                    <textarea class="form-control form-control-sm" rows="4" placeholder="Alergias del Paciente ..."
-                        id="alergias"
-                        onblur="guardaAlergias('historia','ppat_alergias','alergias','idpaciente','6890','resDatosPaciente')"></textarea>
-
-                </div>
-            </div>
-            <!-- Alergias -->
-
-        </div>
-        <div class="card">
-            <!-- espextativas -->
-            <div class="card-header" role="tab" id="tabEspectativas">
-                <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroEspectativas"
-                    aria-expanded="false" aria-controls="tableroEspectativas">
-                    <h5 class="mb-0 h6 text-muted text-left" id="textoEspectativas">
-                        <i class="fas fa-hospital-user text-success"></i>
-                        Expectativas del Paciente
-                    </h5>
-                </a>
-            </div>
-
-            <div id="tableroEspectativas" class="collapse" role="tabpanel" data-parent="#tableroFichaIdentificacion">
-                <div class="card-body">
-                    <textarea class="form-control form-control-sm" rows="4" placeholder="Expectativas del Paciente ..."
-                        id="editaEspectativas"
-                        onblur="guardacampo('historia','espectativa','editaEspectativas','idpaciente','6890','res1')"></textarea>
-
-                </div>
-            </div>
-            <!-- espectativas -->
-        </div>
-
-        <div class="card">
-            <!-- pdecimeint -->
-            <div class="card-header" role="tab" id="tabPadecimiento">
-                <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroPadecimiento"
-                    aria-expanded="false" aria-controls="tableroPadecimiento">
-                    <h5 class="mb-0 h6 text-muted text-left">
-                        <img src="{% static 'img/' %}ico/padecimiento.svg" height="18px">Padecimiento
-                        Actual
-                    </h5>
-                </a>
-            </div>
-
-            <div id="tableroPadecimiento" class="collapse" role="tabpanel" data-parent="#tableroFichaIdentificacion">
-                <div class="card-body">
-                    <textarea class="form-control form-control-sm" rows="8" placeholder="Padecimiento Actual ..."
-                        id="editaPadecimiento"
-                        onblur="guardacampo('historia','padecimientoactual','editaPadecimiento','idhistoria','4364','res1')"></textarea>
-
-                </div>
-            </div>
-            <!-- pdecimeint -->
-
-        </div>
-        <div class="card">
-
-            <!-- observaciones -->
-            <div class="card-header" role="tab" id="tabObservaciones">
-                <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroObservaciones"
-                    aria-expanded="false" aria-controls="tableroObservaciones">
-                    <h5 class="mb-0 h6 text-muted text-left">
-                        <i class="fas fa-notes-medical text-primary"></i>Observaciones del
-                        Paciente
-                    </h5>
-                </a>
-            </div>
-
-            <div id="tableroObservaciones" class="collapse" role="tabpanel" data-parent="#tableroFichaIdentificacion">
-                <div class="card-body">
-                    <textarea class="form-control form-control-sm" rows="4" placeholder="Observaciones del Paciente ..."
-                        id="editaObservaciones"
-                        onblur="guardacampo('paciente','observaciones','editaObservaciones','idpaciente','6890','res1')"></textarea>
-
-                </div>
-            </div>
-            <!-- observaciones -->
-
-
-        </div>
-        <div class="card">
-
-            <div class="card-header" role="tab" id="tabLigas">
-                <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroLigas"
-                    aria-expanded="false" aria-controls="tableroLigas">
-                    <h5 class="mb-0 h6 text-muted text-left" onclick="cargaLigas('6890','');">
-                        <i class="far fa-folder text-info mr-2"></i>Documentos
-                    </h5>
-                </a>
-            </div>
-        </div>
+        {% include 'paciente/recursos/notapaciente.html' %}
     </div>
 </div>
 <div class="col-12 col-md-8" id="divDetallePaciente">
@@ -210,25 +107,45 @@ consulta
 </script>
 <script>
     function setSexo() {
-        let imgm = document.querySelector('#imgm'),
-            imgf = document.querySelector('#imgf'),
-            imgi = document.querySelector('#imgi');
-        if (document.getElementById("M").checked) {
+        let imgm = document.querySelector('#id_tipo_sexo_2'),
+            imgf = document.querySelector('#id_tipo_sexo_3'),
+            imgi = document.querySelector('#id_tipo_sexo_4');
+        if (document.getElementById("id_tipo_sexo_2").checked) {
             imgm.src = `{% static 'img/' %}ficha/hombre.svg`;
             imgf.src = `{% static 'img/' %}ficha/mujerDes.svg`;
             imgi.src = `{% static 'img/' %}ficha/indefinidoDes.svg`;
             //StyleSheet
-        } else if (document.getElementById("F").checked) {
+        } else if (document.getElementById("id_tipo_sexo_3").checked) {
             imgf.src = `{% static 'img/' %}ficha/mujer.svg`;
             imgm.src = `{% static 'img/' %}ficha/hombreDes.svg`;
             imgi.src = `{% static 'img/' %}ficha/indefinidoDes.svg`;
             //StyleSheet
-        } else if (document.getElementById("I").checked) {
+        } else if (document.getElementById("id_tipo_sexo_").checked) {
             imgi.src = `{% static 'img/' %}ficha/indefinido.svg`;
             imgm.src = `{% static 'img/' %}ficha/hombreDes.svg`;
             imgf.src = `{% static 'img/' %}ficha/mujerDes.svg`;
             //StyleSheet
         }
+    }
+
+    function guardarnotas() {
+        var action = document.getElementById('formnotas').action;
+        fetch(`${action}`, {
+            method: 'POST',
+            body: new FormData(formnotas),
+        }).then(response => response.json()).then(response => {
+           /*  if (response.tipo === "success") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registrado correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                return false;
+            };
+
+            */
+        })
     }
 
     function guardarprefe() {
@@ -280,7 +197,28 @@ consulta
             method: 'POST',
             body: new FormData(formsangre),
         }).then(response => response.json()).then(response => {
-           /* if (response.tipo === "success") {
+            /* if (response.tipo === "success") {
+                 Swal.fire({
+                     icon: 'success',
+                     title: 'Registrado correctamente',
+                     showConfirmButton: false,
+                     timer: 1500
+                 })
+                 return false;
+             };  */
+
+        })
+
+    }
+
+    function guardarSexo() {
+
+        var action = document.getElementById('formsexo').action;
+        fetch(`${action}`, {
+            method: 'POST',
+            body: new FormData(formsexo),
+        }).then(response => response.json()).then(response => {
+            /* if (response.tipo === "success") {
                 Swal.fire({
                     icon: 'success',
                     title: 'Registrado correctamente',
@@ -288,8 +226,9 @@ consulta
                     timer: 1500
                 })
                 return false;
-            };  */
-
+            };
+   
+          */
         })
 
     }

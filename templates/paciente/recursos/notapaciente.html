@@ -1,0 +1,94 @@
+{% load static %}
+<form action="{% url 'editarnotas' paciente.id %}" id="formnotas" method="POST">
+    {% csrf_token %}
+    <div class="card">
+        <!-- Alergias -->
+        <div class="card-header" role="tab" id="tabAlergias">
+            <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroAlergias"
+                aria-expanded="false" aria-controls="tableroAlergias">
+                <h5 class="mb-0 h6 text-muted text-left">
+                    <i class="fas fa-head-side-cough text-danger"></i>Alergias <small class="text-danger"
+                        id="divCargaAlergias"></small>
+                </h5>
+            </a>
+        </div>
+        <div id="tableroAlergias" class="collapse" role="tabpanel" data-parent="#tableroFichaIdentificacion">
+            <div class="card-body">
+                {{formnota.alergias}}
+            </div>
+        </div>
+        <!-- Alergias -->
+
+    </div>
+    <div class="card">
+        <!-- espextativas -->
+        <div class="card-header" role="tab" id="tabEspectativas">
+            <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroEspectativas"
+                aria-expanded="false" aria-controls="tableroEspectativas">
+                <h5 class="mb-0 h6 text-muted text-left" id="textoEspectativas">
+                    <i class="fas fa-hospital-user text-success"></i>
+                    Expectativas del Paciente
+                </h5>
+            </a>
+        </div>
+
+        <div id="tableroEspectativas" class="collapse" role="tabpanel" data-parent="#tableroFichaIdentificacion">
+            <div class="card-body">
+                {{formnota.expectativas}}
+            </div>
+        </div>
+        <!-- espectativas -->
+    </div>
+    <div class="card">
+        <!-- pdecimeint -->
+        <div class="card-header" role="tab" id="tabPadecimiento">
+            <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroPadecimiento"
+                aria-expanded="false" aria-controls="tableroPadecimiento">
+                <h5 class="mb-0 h6 text-muted text-left">
+                    <img src="{% static 'img/' %}ico/padecimiento.svg" height="18px">Padecimiento
+                    Actual
+                </h5>
+            </a>
+        </div>
+
+        <div id="tableroPadecimiento" class="collapse" role="tabpanel" data-parent="#tableroFichaIdentificacion">
+            <div class="card-body">
+                {{formnota.pade_actual}}
+
+            </div>
+        </div>
+        <!-- pdecimeint -->
+
+    </div>
+    <div class="card">
+
+        <!-- observaciones -->
+        <div class="card-header" role="tab" id="tabObservaciones">
+            <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroObservaciones"
+                aria-expanded="false" aria-controls="tableroObservaciones">
+                <h5 class="mb-0 h6 text-muted text-left">
+                    <i class="fas fa-notes-medical text-primary"></i>Observaciones del
+                    Paciente
+                </h5>
+            </a>
+        </div>
+
+        <div id="tableroObservaciones" class="collapse" role="tabpanel" data-parent="#tableroFichaIdentificacion">
+            <div class="card-body">
+                {{formnota.observaciones}}
+
+            </div>
+        </div>
+        <!-- observaciones -->
+    </div>
+    <div class="card">
+        <div class="card-header" role="tab" id="tabLigas">
+            <a data-toggle="collapse" data-parent="#tableroFichaIdentificacion" href="#tableroLigas"
+                aria-expanded="false" aria-controls="tableroLigas">
+                <h5 class="mb-0 h6 text-muted text-left" onclick="cargaLigas('6890','');">
+                    <i class="far fa-folder text-info mr-2"></i>Documentos
+                </h5>
+            </a>
+        </div>
+    </div>
+</form>
